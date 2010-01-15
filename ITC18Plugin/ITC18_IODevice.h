@@ -420,7 +420,7 @@ class IOChannel_ITC18_AsychOut : public IOChannel_ITC18 {
 								  shared_ptr<mITC18_IODevice> _device);
         ~IOChannel_ITC18_AsychOut(); 
         virtual void setup(shared_ptr<mITC18_IODevice> _device, int chan_index);
-        virtual bool notify(const Data& data);		// e.g. ascyh outs
+        virtual bool notify(const Datum& data);		// e.g. ascyh outs
        
         
 };
@@ -437,7 +437,7 @@ class IOChannel_ITC18_AsychOutWord : public IOChannel_ITC18_AsychOut  {
 								  IOCapability* _capability, 
 								  shared_ptr<mITC18_IODevice> _device);
 		~IOChannel_ITC18_AsychOutWord(); 
-		virtual bool notify(const Data& data);		// override
+		virtual bool notify(const Datum& data);		// override
 };
 
 
@@ -462,7 +462,7 @@ class IOChannel_ITC18_AsychOut_pulsed : public IOChannel_ITC18_AsychOut {
 										 bool doPulseHigh);
 		~IOChannel_ITC18_AsychOut_pulsed();
 		virtual void setup(shared_ptr<mITC18_IODevice> _device, int chan_index);
-        virtual bool notify(const Data& data);	// called to start the pulse (data contains duration in US)
+        virtual bool notify(const Datum& data);	// called to start the pulse (data contains duration in US)
 		virtual int	 flushChannel();		// called to STOP the pulse (effectively scheduled at time of start)
         virtual void shutdown();            // use this to cause the pulse to stop 
 
@@ -587,7 +587,7 @@ class mITC18_IODevice : public IODevice {
 			virtual bool stopDeviceIO(); 
 			virtual bool startDeviceIOchannels();
             virtual bool updateChannel(int channel_index);					// input channels 
-			virtual bool updateChannel(int channel_index, Data data);		// output channels
+			virtual bool updateChannel(int channel_index, Datum data);		// output channels
 			bool		setAsychLinesHigh(short asychLinesToSetHigh);
 			bool		setAsychLinesLow(short asychLinesToSetLow);
 			bool		setAsychLinesToSpecifiedPattern(short desiredAsychLinePattern);
@@ -620,8 +620,8 @@ class mWaveform : public LinkedListNode<mWaveform>, public Lockable {
         long sampleIntervalUS;
         int sum, n, nn, nsamples, nsamplesInVector;
         MonkeyWorksTime timeLastUS;
-        //Data *waveformVector;
-        //Data waveformPackage;
+        //Datum *waveformVector;
+        //Datum waveformPackage;
         
         long tempBufferSize;
 		std::vector<double> waveformVector_temp;
@@ -637,7 +637,7 @@ class mWaveform : public LinkedListNode<mWaveform>, public Lockable {
 				  int TTLtriggerPort); 
         ~mWaveform();
         void            newData(double dataV, MonkeyWorksTime timeUS);
-        Data           getWaveformPackage();
+        Datum           getWaveformPackage();
         MonkeyWorksTime getStartTime(){return (startTimeUS);}
         MonkeyWorksTime getEndTime(){return (endTimeUS);}
 };

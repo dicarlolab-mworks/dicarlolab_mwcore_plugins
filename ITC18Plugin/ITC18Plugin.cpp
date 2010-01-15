@@ -16,7 +16,7 @@ Plugin *getPlugin(){
 }
 
 
-void ITC18Plugin::registerComponents(shared_ptr<mwComponentRegistry> registry) {
+void ITC18Plugin::registerComponents(shared_ptr<ComponentRegistry> registry) {
 	registry->registerFactory(std::string("iodevice/itc18"),
 							  (ComponentFactory *)(new mITC18_IODeviceFactory()));
 	registry->registerFactory(std::string("iochannel/itc18_triggered_analog_snippet"),

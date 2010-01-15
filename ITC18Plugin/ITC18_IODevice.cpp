@@ -1052,7 +1052,7 @@ bool mITC18_IODevice::updateChannel(int channel_index){
 // this method is called by the base class after an asych notiofication object has been attached to the variable
 // outputs will run using this method
 //  e.g. the notify method in the notification object will call this with the channel index and the data
-bool mITC18_IODevice::updateChannel(int channel_index, Data data){	
+bool mITC18_IODevice::updateChannel(int channel_index, Datum data){	
 	
 	// call the notify method for this ITC18 channel
 	if (VERBOSE_IO_DEVICE > 2) {
@@ -2414,7 +2414,7 @@ void IOChannel_ITC18_input::postDataElement(short stemp, MonkeyWorksTime timeUS)
     long timeMS = (long)(timeUS/1000.);
     double data = (double)stemp;
     if (VERBOSE_IO_DEVICE_DATA) mprintf("ITC18 channel:flushChannel: generic value about to be posted. Value = %d  Posted time = %d ms",stemp,timeMS);
-    update((Data)data,timeUS);		// Base class function (post the data to the event stream)
+    update((Datum)data,timeUS);		// Base class function (post the data to the event stream)
 }
 
 
@@ -2513,7 +2513,7 @@ void IOChannel_ITC18_ADC::postDataElement(short stemp, MonkeyWorksTime timeUS) {
     double dataV = (multiplierToGetMV*((double)(stemp)))/1000.;	// output in volts
 	
     if (VERBOSE_IO_DEVICE_DATA) mprintf("ITC18 channel:flushChannel: value about to be posted from ADC hardware port: %d   Value: %d ITCunits = %f volts.  Posted time: %d ms", getHardwarePort(), stemp, dataV, timeMS);
-    this->update((Data)dataV,timeUS);		// Base class function (post the data to the event stream)
+    this->update((Datum)dataV,timeUS);		// Base class function (post the data to the event stream)
 	
     // Warn for clipping on analog channels
 	shared_ptr<Clock> clock = Clock::instance();
@@ -2799,7 +2799,7 @@ void IOChannel_ITC18_TTL::postDataElement(short stemp, MonkeyWorksTime timeUS) {
     long timeMS = (long)(timeUS/1000.);
     bool dataBoolean = (bool)(stemp);  
     if (VERBOSE_IO_DEVICE_DATA) mprintf("ITC18 channel:flushChannel: value about to be posted from TTL hardward port: %d  Value = %d (digital). Posted time = %d ms", getHardwarePort(), dataBoolean, timeMS);
-    update((Data)dataBoolean,timeUS);		// Base class function (post the data to the event stream)
+    update((Datum)dataBoolean,timeUS);		// Base class function (post the data to the event stream)
 }
 
 bool IOChannel_ITC18_TTL::validate(IOChannelIncompatibility *  incompatibility) {
@@ -2947,14 +2947,14 @@ void IOChannel_ITC18_AsychOut::setupNotification(shared_ptr<mITC18_IODevice> _de
 	
 }
 
-bool IOChannel_ITC18_AsychOut::notify(const Data& data) {
+bool IOChannel_ITC18_AsychOut::notify(const Datum& data) {
 	
 	// go update this digital channel (1 bit)
 	// TODO -- do some type checking on data at time of channel request checking
 	return (setAsychOutputOneBit((bool)data));	// will set this channels hardware port
 }
 
-bool IOChannel_ITC18_AsychOutWord::notify(const Data& data) {
+bool IOChannel_ITC18_AsychOutWord::notify(const Datum& data) {
 	
 	// go update this word channel (8 bit)
 	// TODO -- do some type checking on data at time of channel request checking
@@ -3045,7 +3045,7 @@ void IOChannel_ITC18_AsychOut_pulsed::setupPulsing(shared_ptr<IODevice> _device,
 }
 
 
-bool IOChannel_ITC18_AsychOut_pulsed::notify(const Data& data) {
+bool IOChannel_ITC18_AsychOut_pulsed::notify(const Datum& data) {
     
     if (VERBOSE_IO_DEVICE) mprintf(M_IODEVICE_MESSAGE_DOMAIN,"IOChannel_ITC18_AsychOut_pulsed::notify."); 
     // in the following case, the value of the Data has just been changed.
@@ -3228,7 +3228,7 @@ void mWaveform::newData(double dataV, MonkeyWorksTime timeUS) {
     unlock();
 }    
 
-Data mWaveform::getWaveformPackage() {
+Datum mWaveform::getWaveformPackage() {
     
 	lock();
 	if (VERBOSE_IO_DEVICE) {
@@ -3242,15 +3242,15 @@ Data mWaveform::getWaveformPackage() {
 		 */
 	}
 	
-	Data waveformPackage(M_DICTIONARY, 5);
+	Datum waveformPackage(M_DICTIONARY, 5);
 	waveformPackage.addElement(WAVEFORM_LINKED_HARDWARE_PORT,(long)TTLtriggerPort);    
-    waveformPackage.addElement(WAVEFORM_SPIKE_TIME_KEY,(Data)spikeTimeUS);
+    waveformPackage.addElement(WAVEFORM_SPIKE_TIME_KEY,(Datum)spikeTimeUS);
 	
     // assemble final package
-	waveformPackage.addElement(WAVEFORM_TIME_OF_FIRST_ELEMENT_KEY,(Data)timeOfFirstElementInWaveformUS);
+	waveformPackage.addElement(WAVEFORM_TIME_OF_FIRST_ELEMENT_KEY,(Datum)timeOfFirstElementInWaveformUS);
     waveformPackage.addElement(WAVEFORM_SAMPLING_INTERVAL_KEY,sampleIntervalUS);
     
-	Data waveformVector(M_LIST, nsamplesInVector);
+	Datum waveformVector(M_LIST, nsamplesInVector);
     for (int i=0; i<nsamplesInVector;i++) {
         waveformVector.setElement(i,waveformVector_temp[i]);
     }

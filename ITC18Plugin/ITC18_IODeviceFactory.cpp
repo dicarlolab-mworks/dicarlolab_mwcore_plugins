@@ -13,7 +13,7 @@ using namespace mw;
 
 
 boost::shared_ptr<mw::Component> mITC18_IODeviceFactory::createObject(std::map<std::string, std::string> parameters,
-																	  mwComponentRegistry *reg) {
+																	  ComponentRegistry *reg) {
 	
 	shared_ptr<Scheduler> scheduler = Scheduler::instance();
 	boost::shared_ptr <mw::Component> new_itc18 = boost::shared_ptr<mw::Component>(new mITC18_IODevice(scheduler));
@@ -21,7 +21,7 @@ boost::shared_ptr<mw::Component> mITC18_IODeviceFactory::createObject(std::map<s
 }
 
 shared_ptr<mw::Component> ITC18_TriggeredAnalogSnippetChannelRequestFactory::createObject(std::map<std::string, std::string> parameters,
-																	  mwComponentRegistry *reg) {
+																	  ComponentRegistry *reg) {
 	REQUIRE_ATTRIBUTES(parameters,
 					   "capability",
 					   "data_interval",
@@ -45,8 +45,8 @@ shared_ptr<mw::Component> ITC18_TriggeredAnalogSnippetChannelRequestFactory::cre
 	
 	string capability = parameters.find("capability")->second;                                                 
 	
-	Data data_interval(reg->getNumber(parameters.find("data_interval")->second));
-	Data update_interval(reg->getNumber(parameters.find("update_interval")->second));
+	Datum data_interval(reg->getNumber(parameters.find("data_interval")->second));
+	Datum update_interval(reg->getNumber(parameters.find("update_interval")->second));
 	
 	string direction_string = parameters.find("direction")->second;
 	direction_string = to_lower_copy(direction_string);                                       
@@ -56,9 +56,9 @@ shared_ptr<mw::Component> ITC18_TriggeredAnalogSnippetChannelRequestFactory::cre
 	synchrony_string = to_lower_copy(synchrony_string);
 	IODataSynchronyType synchrony_type = M_HARDWARE_TIMED_SYNCHRONOUS_IO;
 	
-	Data range_min(reg->getNumber(parameters.find("range_min")->second));
-	Data range_max(reg->getNumber(parameters.find("range_max")->second)); 
-	Data resolution(reg->getNumber(parameters.find("resolution")->second));  
+	Datum range_min(reg->getNumber(parameters.find("range_min")->second));
+	Datum range_max(reg->getNumber(parameters.find("range_max")->second)); 
+	Datum resolution(reg->getNumber(parameters.find("resolution")->second));  
 	
 	shared_ptr<Variable> variable = reg->getVariable(parameters.find("variable")->second);
 	
@@ -66,9 +66,9 @@ shared_ptr<mw::Component> ITC18_TriggeredAnalogSnippetChannelRequestFactory::cre
 	type_string = to_lower_copy(type_string);
 	IODataType data_type =M_ANALOG_SNIPPET_DATA;
 	
-	Data ttl_linked_port(reg->getNumber(parameters.find("TTL_trigger_port")->second));
-	Data pre_window(reg->getNumber(parameters.find("pre_trigger_interval")->second)); 
-	Data post_window(reg->getNumber(parameters.find("post_trigger_interval")->second));  
+	Datum ttl_linked_port(reg->getNumber(parameters.find("TTL_trigger_port")->second));
+	Datum pre_window(reg->getNumber(parameters.find("pre_trigger_interval")->second)); 
+	Datum post_window(reg->getNumber(parameters.find("post_trigger_interval")->second));  
 	
 	//checkAttribute(capability, parameters.find("reference_id")->second,	"watch", parameters.find("capability")->second);                                                        
 	
