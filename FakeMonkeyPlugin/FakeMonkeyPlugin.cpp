@@ -21,7 +21,7 @@ Plugin *getPlugin(){
 }
 
 
-void mFakeMonkeyPlugin::registerComponents(shared_ptr<mwComponentRegistry> registry) {
+void mFakeMonkeyPlugin::registerComponents(shared_ptr<ComponentRegistry> registry) {
 	registry->registerFactory(std::string("iochannel/spike"),
 							  (ComponentFactory *)(new mFakeMonkeySpikeChannelFactory()));
 	

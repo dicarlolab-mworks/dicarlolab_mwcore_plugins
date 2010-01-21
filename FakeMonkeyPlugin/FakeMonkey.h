@@ -61,7 +61,7 @@ public:
 	virtual bool shutdown();
 	
 	void addChild(std::map<std::string, std::string> parameters,
-				  mwComponentRegistry *reg,
+				  ComponentRegistry *reg,
 				  shared_ptr<mw::Component> child);
 	
 	void startSaccading();

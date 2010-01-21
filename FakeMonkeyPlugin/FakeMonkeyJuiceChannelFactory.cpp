@@ -12,7 +12,7 @@
 #include "MonkeyWorksCore/ConstantVariable.h"
 
 shared_ptr<mw::Component> mFakeMonkeyJuiceChannelFactory::createObject(std::map<std::string, std::string> parameters,
-																	mwComponentRegistry *reg) {
+																	ComponentRegistry *reg) {
 	const char *JUICE_VARIABLE = "variable";
 	
 	REQUIRE_ATTRIBUTES(parameters, JUICE_VARIABLE);

@@ -15,7 +15,7 @@ using namespace mw;
 
 class mFakeMonkeyJuiceNotification : public VariableNotification {
 public:
-	virtual void notify(const Data& data, MonkeyWorksTime timeUS);	
+	virtual void notify(const Datum& data, MonkeyWorksTime timeUS);	
 };
 
 #endif

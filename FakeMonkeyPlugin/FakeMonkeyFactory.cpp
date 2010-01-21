@@ -12,7 +12,7 @@
 #include "MonkeyWorksCore/Scheduler.h"
 
 shared_ptr<mw::Component> mFakeMonkeyFactory::createObject(std::map<std::string, std::string> parameters,
-												 mwComponentRegistry *reg) {
+												 ComponentRegistry *reg) {
 	shared_ptr <Scheduler> scheduler = Scheduler::instance();
 
 	if(scheduler == 0) {

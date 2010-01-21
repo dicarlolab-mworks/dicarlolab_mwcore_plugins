@@ -8,12 +8,12 @@
  */
 
 #include "FakeMonkeySaccadeToLocationFactory.h"
-#include "MonkeyWorksCore/ComponentRegistry_new.h"
+#include "MonkeyWorksCore/ComponentRegistry.h"
 #include "FakeMonkey.h"
 #include "FakeMonkeySaccadeToLocation.h"
 
 shared_ptr<mw::Component> mFakeMonkeySaccadeToLocationFactory::createObject(std::map<std::string, std::string> parameters,
-																		 mwComponentRegistry *reg) {
+																		 ComponentRegistry *reg) {
 	REQUIRE_ATTRIBUTES(parameters, "fake_monkey", "h", "v");
 	
 	shared_ptr<Variable> h = reg->getVariable(parameters.find("h")->second);	

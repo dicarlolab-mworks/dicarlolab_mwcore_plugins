@@ -12,7 +12,7 @@
 #include "MonkeyWorksCore/ConstantVariable.h"
 
 shared_ptr<mw::Component> mFakeMonkeySpikeChannelFactory::createObject(std::map<std::string, std::string> parameters,
-																	mwComponentRegistry *reg) {
+																	ComponentRegistry *reg) {
 	
 	const char *SPIKE_VARIABLE = "variable";
 	

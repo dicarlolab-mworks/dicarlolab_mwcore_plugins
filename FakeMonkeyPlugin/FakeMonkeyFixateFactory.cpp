@@ -8,12 +8,12 @@
  */
 
 #include "FakeMonkeyFixateFactory.h"
-#include "MonkeyWorksCore/ComponentRegistry_new.h"
+#include "MonkeyWorksCore/ComponentRegistry.h"
 #include "FakeMonkey.h"
 #include "FakeMonkeyFixate.h"
 
 shared_ptr<mw::Component> mFakeMonkeyFixateFactory::createObject(std::map<std::string, std::string> parameters,
-															  mwComponentRegistry *reg) {
+															  ComponentRegistry *reg) {
 	const char *DURATION = "duration";
 	const char *FAKE_MONKEY = "fake_monkey";
 	

@@ -78,7 +78,7 @@ bool mFakeMonkey::attachPhysicalDevice(){                                      /
 }
 
 void mFakeMonkey::addChild(std::map<std::string, std::string> parameters,
-						   mwComponentRegistry *reg,
+						   ComponentRegistry *reg,
 						   shared_ptr<mw::Component> child) {
 	shared_ptr<mFakeMonkeyEyeMovementChannel> eye_movement_channel = dynamic_pointer_cast<mFakeMonkeyEyeMovementChannel,mw::Component>(child);	
 	if(eye_movement_channel != 0) {
@@ -190,7 +190,7 @@ void mFakeMonkey::spike(){
 	for(vector<shared_ptr<Variable> >::const_iterator spike_var_iterator = spike_variables.begin();
 		spike_var_iterator != spike_variables.end();
 		++spike_var_iterator) {
-		(*spike_var_iterator)->setValue(Data(1L), spike_time);
+		(*spike_var_iterator)->setValue(Datum(1L), spike_time);
 	}
 	
 	float delay = sampler();

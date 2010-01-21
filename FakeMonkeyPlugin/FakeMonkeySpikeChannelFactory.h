@@ -11,12 +11,12 @@
 #define FAKE_MONKEY_SPIKE_CHANNEL_FACTORY_H
 
 #include "MonkeyWorksCore/ComponentFactory.h"
-#include "MonkeyWorksCore/ComponentRegistry_new.h"
+#include "MonkeyWorksCore/ComponentRegistry.h"
 using namespace mw;
 
 class mFakeMonkeySpikeChannelFactory : public ComponentFactory {
 	virtual shared_ptr<mw::Component> createObject(std::map<std::string, std::string> parameters,
-												mwComponentRegistry *reg);
+												ComponentRegistry *reg);
 };
 
 #endif

@@ -9,7 +9,7 @@
 
 #include "FakeMonkeyFixate.h"
 #include "MonkeyWorksCore/GenericVariable.h"
-#include "MonkeyWorksCore/ComponentRegistry_new.h"
+#include "MonkeyWorksCore/ComponentRegistry.h"
 #include "FakeMonkey.h"
 
 mFakeMonkeyFixate::mFakeMonkeyFixate(const shared_ptr<mFakeMonkey> &_monkey, 

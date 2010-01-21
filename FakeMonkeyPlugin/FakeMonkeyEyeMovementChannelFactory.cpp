@@ -12,7 +12,7 @@
 #include "MonkeyWorksCore/ConstantVariable.h"
 
 shared_ptr<mw::Component> mFakeMonkeyEyeMovementChannelFactory::createObject(std::map<std::string, std::string> parameters,
-																		  mwComponentRegistry *reg) {
+																		  ComponentRegistry *reg) {
 	const char *EYE_H_VARIABLE = "eye_h";
 	const char *EYE_V_VARIABLE = "eye_v";
 	const char *UPDATE_PERIOD = "update_interval";
