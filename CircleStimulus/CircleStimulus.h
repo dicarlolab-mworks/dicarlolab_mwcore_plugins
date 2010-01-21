@@ -30,7 +30,7 @@ public:
 	virtual Stimulus * frozenClone();
 	
 	virtual void drawInUnitSquare(StimulusDisplay *display);
-	virtual Data getCurrentAnnounceDrawData();
+	virtual Datum getCurrentAnnounceDrawData();
 };
 
 #endif 

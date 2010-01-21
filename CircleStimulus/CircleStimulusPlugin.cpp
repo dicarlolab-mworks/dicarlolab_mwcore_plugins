@@ -17,7 +17,7 @@ Plugin *getPlugin(){
 }
 
 
-void mCircleStimulusPlugin::registerComponents(shared_ptr<mwComponentRegistry> registry) {
+void mCircleStimulusPlugin::registerComponents(shared_ptr<ComponentRegistry> registry) {
 	registry->registerFactory(std::string("stimulus/circle"),
 							  (ComponentFactory *)(new mCircleStimulusFactory()));
 }

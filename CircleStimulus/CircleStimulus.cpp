@@ -123,9 +123,9 @@ void mCircleStimulus::drawInUnitSquare(StimulusDisplay *display) {
 	
 }
 
-Data mCircleStimulus::getCurrentAnnounceDrawData() {
+Datum mCircleStimulus::getCurrentAnnounceDrawData() {
     
-    Data announceData(PointStimulus::getCurrentAnnounceDrawData());
+    Datum announceData(PointStimulus::getCurrentAnnounceDrawData());
 	// use image for now
     announceData.addElement(STIM_TYPE,"circle");
     
