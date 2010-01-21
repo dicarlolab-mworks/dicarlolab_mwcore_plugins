@@ -30,7 +30,7 @@ public:
 	~mRectangleStimulus();
 	virtual Stimulus * frozenClone();
 	
-	virtual Data getCurrentAnnounceDrawData();
+	virtual Datum getCurrentAnnounceDrawData();
 };
 
 #endif 

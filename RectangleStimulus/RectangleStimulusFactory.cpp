@@ -10,12 +10,12 @@
 #include "RectangleStimulusFactory.h"
 #include "RectangleStimulus.h"
 #include <boost/regex.hpp>
-#include "MonkeyWorksCore/ComponentRegistry_new.h"
+#include "MonkeyWorksCore/ComponentRegistry.h"
 #include "MonkeyWorksCore/ParsedColorTrio.h"
 
 
 shared_ptr<mw::Component> mRectangleStimulusFactory::createObject(std::map<std::string, std::string> parameters,
-															mwComponentRegistry *reg) {
+															ComponentRegistry *reg) {
 	REQUIRE_ATTRIBUTES(parameters, 
 					   "tag", 
 					   "x_size", 

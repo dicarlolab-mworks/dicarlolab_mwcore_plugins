@@ -17,7 +17,7 @@ Plugin *getPlugin(){
 }
 
 
-void mRectangleStimulusPlugin::registerComponents(shared_ptr<mwComponentRegistry> registry) {
+void mRectangleStimulusPlugin::registerComponents(shared_ptr<ComponentRegistry> registry) {
 	registry->registerFactory(std::string("stimulus/rectangle"),
 							  (ComponentFactory *)(new mRectangleStimulusFactory()));
 }

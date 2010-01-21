@@ -62,9 +62,9 @@ Stimulus * mRectangleStimulus::frozenClone(){
 	return clone;
 }
 
-Data mRectangleStimulus::getCurrentAnnounceDrawData() {
+Datum mRectangleStimulus::getCurrentAnnounceDrawData() {
     
-    Data announceData(PointStimulus::getCurrentAnnounceDrawData());
+    Datum announceData(PointStimulus::getCurrentAnnounceDrawData());
 	// use image for now
     announceData.addElement(STIM_TYPE,"rectangle");
     
