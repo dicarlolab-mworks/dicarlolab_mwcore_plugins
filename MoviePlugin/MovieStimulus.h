@@ -14,7 +14,7 @@
 #include "MovieFrame.h"
 #include "MonkeyWorksCore/StimulusNode.h"
 #include "MonkeyWorksCore/Scheduler.h"
-#include "MonkeyWorksCore/ComponentRegistry_new.h"
+#include "MonkeyWorksCore/ComponentRegistry.h"
 #include "MovieStimulusFrameNotification.h"
 #include <boost/thread/mutex.hpp>
 #include <boost/enable_shared_from_this.hpp>
@@ -75,15 +75,15 @@ public:
 	
 	void callUpdateDisplay();
 	void endMovie();
-	Data getCurrentAnnounceDrawData();
+	Datum getCurrentAnnounceDrawData();
 
-	void stimDisplayUpdateNotification(const Data &data, 
+	void stimDisplayUpdateNotification(const Datum &data, 
 									   const MonkeyWorksTime time_us);
 };
 
 class mMovieStimulusFactory : public ComponentFactory {
 	virtual boost::shared_ptr<mw::Component> createObject(std::map<std::string, std::string> parameters,
-													   mwComponentRegistry *reg);
+													   ComponentRegistry *reg);
 };
 
 

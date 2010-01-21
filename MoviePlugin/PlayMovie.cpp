@@ -22,7 +22,7 @@ bool mPlayMovie::execute() {
 }
 
 shared_ptr<mw::Component> mPlayMovieFactory::createObject(std::map<std::string, std::string> parameters,
-													   mwComponentRegistry *reg) {
+													   ComponentRegistry *reg) {
 	
 	const char *MOVIE = "movie";
 	

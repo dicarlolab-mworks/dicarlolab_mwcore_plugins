@@ -90,7 +90,7 @@ void mMovieStimulus::play() {
 	
 	if (!movie_started) {
 		if(end_frame_index->getValue().getInteger() == -1) {
-			shared_ptr<Variable> temp_end_frame_index(new ConstantVariable(Data(M_INTEGER,stimulus_group->getNElements()-1)));
+			shared_ptr<Variable> temp_end_frame_index(new ConstantVariable(Datum(M_INTEGER,stimulus_group->getNElements()-1)));
 			end_frame_index = temp_end_frame_index;
 		}
 		
@@ -189,13 +189,13 @@ void mMovieStimulus::endMovie() {
 		schedule_node->kill();
 		
 		// package up the results of the movie
-		Data times_shown_report(M_LIST, 1);		
+		Datum times_shown_report(M_LIST, 1);		
 		int total_frames_shown = 0;
 		
 		for(std::vector<shared_ptr<std::vector<MonkeyWorksTime> > >::const_iterator i = times_shown.begin();
 			i != times_shown.end();
 			++i) {
-			Data times_shown_for_stim(M_LIST, 1);
+			Datum times_shown_for_stim(M_LIST, 1);
 			
 			for(std::vector<MonkeyWorksTime>::const_iterator j = (*i)->begin();
 				j != (*i)->end();
@@ -209,13 +209,13 @@ void mMovieStimulus::endMovie() {
 		
 		const bool error_occured = total_frames_shown != (end_frame_index->getValue().getInteger()-start_frame_index->getValue().getInteger()) + 1;
 		
-		Data movie_stats_report(M_DICTIONARY, 7);
+		Datum movie_stats_report(M_DICTIONARY, 7);
 		movie_stats_report.addElement("movie_tag", tag);
 		movie_stats_report.addElement("times_shown", times_shown_report);
 		movie_stats_report.addElement("frames_per_second", frames_per_second->getValue());
 		movie_stats_report.addElement("start_frame_index", start_frame_index->getValue());
 		movie_stats_report.addElement("end_frame_index", end_frame_index->getValue());
-		movie_stats_report.addElement("total_frames_shown", Data(M_INTEGER, total_frames_shown));
+		movie_stats_report.addElement("total_frames_shown", Datum(M_INTEGER, total_frames_shown));
 		movie_stats_report.addElement("error_occured", error_occured);
 		
 		movie_stats->setValue(movie_stats_report);
@@ -236,7 +236,7 @@ void mMovieStimulus::callUpdateDisplay() {
 	display->asynchronousUpdateDisplay();
 }
 
-void mMovieStimulus::stimDisplayUpdateNotification(const Data &data, const MonkeyWorksTime time_us) {
+void mMovieStimulus::stimDisplayUpdateNotification(const Datum &data, const MonkeyWorksTime time_us) {
 	boost::mutex::scoped_lock locker(movie_lock);
 	
 	if(movie_started && !movie_ended) {
@@ -268,17 +268,17 @@ void mMovieStimulus::stimDisplayUpdateNotification(const Data &data, const Monke
 	}
 }
 
-Data mMovieStimulus::getCurrentAnnounceDrawData() {
+Datum mMovieStimulus::getCurrentAnnounceDrawData() {
 	boost::mutex::scoped_lock locker(movie_lock);
 	//	mprintf("%s, announcing: %d", tag.c_str(), current_stimulus_group_index);
 	//
 	//	if(movie_playing && !movie_ended) {
-	Data announceData(M_DICTIONARY, 3);
+	Datum announceData(M_DICTIONARY, 3);
 	announceData.addElement(STIM_NAME,tag);        // char
 	announceData.addElement(STIM_ACTION,STIM_ACTION_DRAW);
 	announceData.addElement(STIM_TYPE,STIM_TYPE_MOVIE);  
-	announceData.addElement(STIM_MOVIE_PLAYING, Data(movie_started && !movie_ended));  
-	announceData.addElement(STIM_MOVIE_CURRENT_FRAME, Data((long)current_stimulus_group_index));  
+	announceData.addElement(STIM_MOVIE_PLAYING, Datum(movie_started && !movie_ended));  
+	announceData.addElement(STIM_MOVIE_CURRENT_FRAME, Datum((long)current_stimulus_group_index));  
 	return (announceData);
 }
 
@@ -293,7 +293,7 @@ void *finalFrame(const shared_ptr<mMovieStimulus> &movie){
 }
 
 shared_ptr<mw::Component> mMovieStimulusFactory::createObject(std::map<std::string, std::string> parameters,
-														   mwComponentRegistry *reg) {
+														   ComponentRegistry *reg) {
 	const char *TAG = "tag";
 	const char *STIMULUS_GROUP = "stimulus_group";
 	const char *FRAMES_PER_SECOND = "frames_per_second";
@@ -327,7 +327,7 @@ shared_ptr<mw::Component> mMovieStimulusFactory::createObject(std::map<std::stri
 	checkAttribute(error_reporting, parameters.find("reference_id")->second, ERROR_REPORTING, parameters.find(ERROR_REPORTING)->second);
 	
 	
-	boost::shared_ptr<Variable> start_frame_index = boost::shared_ptr<Variable>(new ConstantVariable(Data(M_INTEGER, 0)));	
+	boost::shared_ptr<Variable> start_frame_index = boost::shared_ptr<Variable>(new ConstantVariable(Datum(M_INTEGER, 0)));	
 	if(parameters.find(START_FRAME_INDEX) != parameters.end()) {
 		start_frame_index = reg->getVariable(parameters.find(START_FRAME_INDEX)->second);	
 		checkAttribute(start_frame_index, 
@@ -336,7 +336,7 @@ shared_ptr<mw::Component> mMovieStimulusFactory::createObject(std::map<std::stri
 					   parameters.find(START_FRAME_INDEX)->second);
 	}
 	
-	boost::shared_ptr<Variable> end_frame_index = boost::shared_ptr<Variable>(new ConstantVariable(Data(M_INTEGER, -1)));	
+	boost::shared_ptr<Variable> end_frame_index = boost::shared_ptr<Variable>(new ConstantVariable(Datum(M_INTEGER, -1)));	
 	if(parameters.find(END_FRAME_INDEX) != parameters.end()) {
 		end_frame_index = reg->getVariable(parameters.find(END_FRAME_INDEX)->second);	
 		checkAttribute(end_frame_index, 

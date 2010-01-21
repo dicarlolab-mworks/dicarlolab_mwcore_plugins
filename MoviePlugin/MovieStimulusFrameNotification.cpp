@@ -13,11 +13,11 @@ mMovieStimulusFrameNotification::mMovieStimulusFrameNotification(mMovieStimulus 
 	movie_stimulus = the_ms;
 }
 
-void mMovieStimulusFrameNotification::notify(const Data &data) {
+void mMovieStimulusFrameNotification::notify(const Datum &data) {
 	shared_ptr<Clock> clock = Clock::instance();
 	this->notify(data, clock->getCurrentTimeUS());
 }
 
-void mMovieStimulusFrameNotification::notify(const Data &data, MonkeyWorksTime time_us) {
+void mMovieStimulusFrameNotification::notify(const Datum &data, MonkeyWorksTime time_us) {
 	movie_stimulus->stimDisplayUpdateNotification(data, time_us);
 }

@@ -23,7 +23,7 @@ bool mStopMovie::execute() {
 
 
 shared_ptr<mw::Component> mStopMovieFactory::createObject(std::map<std::string, std::string> parameters,
-													   mwComponentRegistry *reg) {
+													   ComponentRegistry *reg) {
 	
 	const char *MOVIE = "movie";
 	

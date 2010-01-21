@@ -23,8 +23,8 @@ protected:
 public:
 	
 	mMovieStimulusFrameNotification(mMovieStimulus *the_ms);
-	virtual void notify(const Data& data);
-    virtual void notify(const Data& data, MonkeyWorksTime timeUS);
+	virtual void notify(const Datum& data);
+    virtual void notify(const Datum& data, MonkeyWorksTime timeUS);
 	
 };
 

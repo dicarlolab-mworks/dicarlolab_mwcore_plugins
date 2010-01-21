@@ -19,7 +19,7 @@ Plugin *getPlugin(){
 }
 
 
-void MovieStimulusPlugin::registerComponents(shared_ptr<mwComponentRegistry> registry) {
+void MovieStimulusPlugin::registerComponents(shared_ptr<ComponentRegistry> registry) {
 	registry->registerFactory(std::string("stimulus/movie"),
 							  (ComponentFactory *)(new mMovieStimulusFactory()));
 	
