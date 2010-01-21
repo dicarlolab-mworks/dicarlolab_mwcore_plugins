@@ -205,7 +205,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/zsh;
-			shellScript = "# shell script goes here\nexport FULL_NAME=${PRODUCT_NAME}.${WRAPPER_EXTENSION}\nrm -R \"${FINAL_INSTALL_DIR}/${FULL_NAME}\"\n\nexit 0\n\n\n";
+			shellScript = "rm -R \"${FINAL_INSTALL_DIR}/${PRODUCT_NAME}\"\n\nexit 0\n\n\n";
 		};
 		5C4B0B5D0DC7CAB9001BC518 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
