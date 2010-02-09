@@ -134,6 +134,10 @@ void mMovieStimulus::play() {
 
 void mMovieStimulus::stopAndRewind() {
 	boost::mutex::scoped_lock locker(movie_lock);
+
+    // If movie is already stopped, do nothing
+    if (movie_ended && !movie_started)
+        return;
 	
 	// just drew the final frame
 	movie_ended = true;
