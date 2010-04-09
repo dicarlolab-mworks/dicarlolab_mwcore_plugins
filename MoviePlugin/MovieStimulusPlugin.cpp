@@ -8,7 +8,7 @@
  */
 
 #include "MovieStimulusPlugin.h"
-//#include "MonkeyWorksCore/ComponentFactory.h"
+//#include "MWorksCore/ComponentFactory.h"
 #include "MovieStimulus.h"
 #include "PlayMovie.h"
 #include "StopMovie.h"

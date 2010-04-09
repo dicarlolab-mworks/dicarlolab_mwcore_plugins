@@ -10,8 +10,8 @@
 #ifndef FAKE_MONKEY_JUICE_CHANNEL_FACTORY_H
 #define FAKE_MONKEY_JUICE_CHANNEL_FACTORY_H
 
-#include "MonkeyWorksCore/ComponentFactory.h"
-#include "MonkeyWorksCore/ComponentRegistry.h"
+#include "MWorksCore/ComponentFactory.h"
+#include "MWorksCore/ComponentRegistry.h"
 using namespace mw;
 
 class mFakeMonkeyJuiceChannelFactory : public ComponentFactory {

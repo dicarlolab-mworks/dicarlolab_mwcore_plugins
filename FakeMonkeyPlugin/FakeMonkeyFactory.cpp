@@ -9,7 +9,7 @@
 
 #include "FakeMonkeyFactory.h"
 #include "FakeMonkey.h"
-#include "MonkeyWorksCore/Scheduler.h"
+#include "MWorksCore/Scheduler.h"
 
 shared_ptr<mw::Component> mFakeMonkeyFactory::createObject(std::map<std::string, std::string> parameters,
 												 ComponentRegistry *reg) {

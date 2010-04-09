@@ -1,6 +1,6 @@
 /*
  *  RectangleStimulusFactory.cpp
- *  MonkeyWorksCore
+ *  MWorksCore
  *
  *  Created by bkennedy on 8/26/08.
  *  Copyright 2008 MIT. All rights reserved.
@@ -10,8 +10,8 @@
 #include "RectangleStimulusFactory.h"
 #include "RectangleStimulus.h"
 #include <boost/regex.hpp>
-#include "MonkeyWorksCore/ComponentRegistry.h"
-#include "MonkeyWorksCore/ParsedColorTrio.h"
+#include "MWorksCore/ComponentRegistry.h"
+#include "MWorksCore/ParsedColorTrio.h"
 
 
 shared_ptr<mw::Component> mRectangleStimulusFactory::createObject(std::map<std::string, std::string> parameters,

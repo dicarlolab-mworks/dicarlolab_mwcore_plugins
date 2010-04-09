@@ -1,6 +1,6 @@
 /*
  *  CircleStimulusFactory.cpp
- *  MonkeyWorksCore
+ *  MWorksCore
  *
  *  Created by bkennedy on 8/26/08.
  *  Copyright 2008 MIT. All rights reserved.
@@ -10,8 +10,8 @@
 #include "CircleStimulusFactory.h"
 #include "CircleStimulus.h"
 #include <boost/regex.hpp>
-#include "MonkeyWorksCore/ComponentRegistry.h"
-#include "MonkeyWorksCore/ParsedColorTrio.h"
+#include "MWorksCore/ComponentRegistry.h"
+#include "MWorksCore/ParsedColorTrio.h"
 using namespace mw;
 
 shared_ptr<mw::Component> mCircleStimulusFactory::createObject(std::map<std::string, std::string> parameters,

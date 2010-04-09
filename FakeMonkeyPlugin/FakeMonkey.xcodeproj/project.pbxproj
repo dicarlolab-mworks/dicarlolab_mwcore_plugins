@@ -38,7 +38,7 @@
 		0ECF98E40E9C7D5E00DF3096 /* FakeMonkeyFixate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0ECF98E30E9C7D5E00DF3096 /* FakeMonkeyFixate.cpp */; };
 		0ECF99000E9C7EB200DF3096 /* FakeMonkeyFixateFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0ECF98FF0E9C7EB200DF3096 /* FakeMonkeyFixateFactory.cpp */; };
 		0EDCBB130EE9D8F800432792 /* MWLibrary.xml in Resources */ = {isa = PBXBuildFile; fileRef = 0EDCBB120EE9D8F800432792 /* MWLibrary.xml */; };
-		5C4B0A650DC79212001BC518 /* MonkeyWorksCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C4B0A630DC79212001BC518 /* MonkeyWorksCore.framework */; };
+		5C4B0A650DC79212001BC518 /* MWorksCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C4B0A630DC79212001BC518 /* MWorksCore.framework */; };
 		687C7C140E9D425100C76F25 /* FakeMonkeyJuiceNotification.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 687C7C130E9D425100C76F25 /* FakeMonkeyJuiceNotification.cpp */; };
 		688D4D1C0E9D0A2200EC8832 /* FakeMonkeySaccadeAndFixate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 688D4D1B0E9D0A2200EC8832 /* FakeMonkeySaccadeAndFixate.cpp */; };
 		688D4D1F0E9D0A3300EC8832 /* FakeMonkeySaccadeAndFixateFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 688D4D1E0E9D0A3300EC8832 /* FakeMonkeySaccadeAndFixateFactory.cpp */; };
@@ -80,7 +80,7 @@
 		0ECF98FF0E9C7EB200DF3096 /* FakeMonkeyFixateFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FakeMonkeyFixateFactory.cpp; sourceTree = "<group>"; };
 		0EDCBB120EE9D8F800432792 /* MWLibrary.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MWLibrary.xml; sourceTree = "<group>"; };
 		32DBCF630370AF2F00C91783 /* FakeMonkeyPlugin_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FakeMonkeyPlugin_Prefix.pch; sourceTree = "<group>"; };
-		5C4B0A630DC79212001BC518 /* MonkeyWorksCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MonkeyWorksCore.framework; path = /Library/Frameworks/MonkeyWorksCore.framework; sourceTree = "<absolute>"; };
+		5C4B0A630DC79212001BC518 /* MWorksCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MWorksCore.framework; path = /Library/Frameworks/MWorksCore.framework; sourceTree = "<absolute>"; };
 		687C7C120E9D425100C76F25 /* FakeMonkeyJuiceNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FakeMonkeyJuiceNotification.h; sourceTree = "<group>"; };
 		687C7C130E9D425100C76F25 /* FakeMonkeyJuiceNotification.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FakeMonkeyJuiceNotification.cpp; sourceTree = "<group>"; };
 		688D4D1A0E9D0A2200EC8832 /* FakeMonkeySaccadeAndFixate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FakeMonkeySaccadeAndFixate.h; sourceTree = "<group>"; };
@@ -91,6 +91,9 @@
 		689708DB0E5A03BB00CE38EA /* FakeMonkeyFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FakeMonkeyFactory.cpp; sourceTree = "<group>"; };
 		8D5B49B6048680CD000E48DA /* FakeMonkeyPlugin.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FakeMonkeyPlugin.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D5B49B7048680CD000E48DA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E1895A1A116FBBC100D8CBE0 /* Development_10.5_compatible.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Development_10.5_compatible.xcconfig; path = "/Library/Application Support/MWorks/Developer/Xcode/Development_10.5_compatible.xcconfig"; sourceTree = "<absolute>"; };
+		E1895A1B116FBBC100D8CBE0 /* Development.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Development.xcconfig; path = "/Library/Application Support/MWorks/Developer/Xcode/Development.xcconfig"; sourceTree = "<absolute>"; };
+		E1895A1C116FBBC100D8CBE0 /* WARNING.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = WARNING.txt; path = "/Library/Application Support/MWorks/Developer/Xcode/WARNING.txt"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,7 +101,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5C4B0A650DC79212001BC518 /* MonkeyWorksCore.framework in Frameworks */,
+				5C4B0A650DC79212001BC518 /* MWorksCore.framework in Frameworks */,
 				0E52AF5B0E93BE8B0013DFCC /* IOKit.framework in Frameworks */,
 				0E52AF5F0E93BEB20013DFCC /* AppKit.framework in Frameworks */,
 				0E52AF640E93BEDB0013DFCC /* Carbon.framework in Frameworks */,
@@ -111,6 +114,7 @@
 		089C166AFE841209C02AAC07 /* FakeMonkeyPlugin */ = {
 			isa = PBXGroup;
 			children = (
+				E1895A19116FBBC100D8CBE0 /* External Configs */,
 				08FB77AFFE84173DC02AAC07 /* Classes */,
 				32C88E010371C26100C91783 /* Other Sources */,
 				089C167CFE841241C02AAC07 /* Resources */,
@@ -218,7 +222,7 @@
 		1058C7ACFEA557BF11CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				5C4B0A630DC79212001BC518 /* MonkeyWorksCore.framework */,
+				5C4B0A630DC79212001BC518 /* MWorksCore.framework */,
 			);
 			name = "Linked Frameworks";
 			sourceTree = "<group>";
@@ -245,6 +249,16 @@
 				32DBCF630370AF2F00C91783 /* FakeMonkeyPlugin_Prefix.pch */,
 			);
 			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		E1895A19116FBBC100D8CBE0 /* External Configs */ = {
+			isa = PBXGroup;
+			children = (
+				E1895A1A116FBBC100D8CBE0 /* Development_10.5_compatible.xcconfig */,
+				E1895A1B116FBBC100D8CBE0 /* Development.xcconfig */,
+				E1895A1C116FBBC100D8CBE0 /* WARNING.txt */,
+			);
+			name = "External Configs";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -367,12 +381,12 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		0E121C710E6B1EB6007B29B8 /* Debug */ = {
+		0E121C710E6B1EB6007B29B8 /* Development (10.5 Compatible) */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				PRODUCT_NAME = FakeMonkeyPlugin.bundle;
 			};
-			name = Debug;
+			name = "Development (10.5 Compatible)";
 		};
 		0E121C720E6B1EB6007B29B8 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -381,7 +395,7 @@
 			};
 			name = Release;
 		};
-		1DEB913B08733D840010E9CD /* Debug */ = {
+		1DEB913B08733D840010E9CD /* Development (10.5 Compatible) */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
@@ -394,7 +408,7 @@
 				PRODUCT_NAME = FakeMonkeyPlugin;
 				WRAPPER_EXTENSION = bundle;
 			};
-			name = Debug;
+			name = "Development (10.5 Compatible)";
 		};
 		1DEB913C08733D840010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -410,27 +424,19 @@
 			};
 			name = Release;
 		};
-		1DEB913F08733D840010E9CD /* Debug */ = {
+		1DEB913F08733D840010E9CD /* Development (10.5 Compatible) */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E1895A1A116FBBC100D8CBE0 /* Development_10.5_compatible.xcconfig */;
 			buildSettings = {
-				APP_SUPPORT_DIR = "/Library/Application Support/MonkeyWorks";
-				ARCHS = (
-					x86_64,
-					i386,
-				);
-				FINAL_INSTALL_DIR = "$(APP_SUPPORT_DIR)/Plugins/Core Plugins";
+				FINAL_INSTALL_DIR = "$(PLUGINS_DIR)";
 				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
-				GCC_VERSION = 4.0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "$(MW_INCLUDE_DIR)";
 				LIBRARY_SEARCH_PATHS = "$(MW_LIB_DIR)";
-				MW_INCLUDE_DIR = "\"$(APP_SUPPORT_DIR)/Developer/gcc40/include\"";
-				MW_LIB_DIR = "\"$(APP_SUPPORT_DIR)/Developer/gcc40/lib\"";
 				PREBINDING = NO;
-				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.5.sdk";
 			};
-			name = Debug;
+			name = "Development (10.5 Compatible)";
 		};
 		1DEB914008733D840010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -454,13 +460,50 @@
 			};
 			name = Release;
 		};
+		E1895A24116FBC1200D8CBE0 /* Development */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E1895A1B116FBBC100D8CBE0 /* Development.xcconfig */;
+			buildSettings = {
+				FINAL_INSTALL_DIR = "$(PLUGINS_DIR)";
+				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(MW_INCLUDE_DIR)";
+				LIBRARY_SEARCH_PATHS = "$(MW_LIB_DIR)";
+				PREBINDING = NO;
+			};
+			name = Development;
+		};
+		E1895A25116FBC1200D8CBE0 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
+				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = FakeMonkeyPlugin_Prefix.pch;
+				INFOPLIST_FILE = Info.plist;
+				PRODUCT_NAME = FakeMonkeyPlugin;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Development;
+		};
+		E1895A26116FBC1200D8CBE0 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = FakeMonkeyPlugin.bundle;
+			};
+			name = Development;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
 		0E121C770E6B1ED3007B29B8 /* Build configuration list for PBXAggregateTarget "UninstallFakeMonkeyPlugin" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				0E121C710E6B1EB6007B29B8 /* Debug */,
+				E1895A26116FBC1200D8CBE0 /* Development */,
+				0E121C710E6B1EB6007B29B8 /* Development (10.5 Compatible) */,
 				0E121C720E6B1EB6007B29B8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -469,7 +512,8 @@
 		1DEB913A08733D840010E9CD /* Build configuration list for PBXNativeTarget "FakeMonkeyPlugin" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1DEB913B08733D840010E9CD /* Debug */,
+				E1895A25116FBC1200D8CBE0 /* Development */,
+				1DEB913B08733D840010E9CD /* Development (10.5 Compatible) */,
 				1DEB913C08733D840010E9CD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -478,7 +522,8 @@
 		1DEB913E08733D840010E9CD /* Build configuration list for PBXProject "FakeMonkey" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1DEB913F08733D840010E9CD /* Debug */,
+				E1895A24116FBC1200D8CBE0 /* Development */,
+				1DEB913F08733D840010E9CD /* Development (10.5 Compatible) */,
 				1DEB914008733D840010E9CD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;

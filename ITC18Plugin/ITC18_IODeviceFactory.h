@@ -7,7 +7,7 @@
  *
  */
 
-#include "MonkeyWorksCore/ComponentFactory.h"
+#include "MWorksCore/ComponentFactory.h"
 using namespace mw;
 
 class mITC18_IODeviceFactory : public ComponentFactory {

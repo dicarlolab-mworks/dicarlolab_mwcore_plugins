@@ -10,7 +10,7 @@
 #ifndef FAKE_MONKEY_FACTORY_H
 #define FAKE_MONKEY_FACTORY_H
 
-#include "MonkeyWorksCore/ComponentFactory.h"
+#include "MWorksCore/ComponentFactory.h"
 using namespace mw;
 
 class mFakeMonkeyFactory : public ComponentFactory {

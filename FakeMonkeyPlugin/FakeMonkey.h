@@ -1,6 +1,6 @@
 /*
  *  FakeMonkey.h
- *  MonkeyWorksCore
+ *  MWorksCore
  *
  *  Created by David Cox on 6/13/05.
  *  Copyright 2005 MIT. All rights reserved.
@@ -9,8 +9,8 @@
 #ifndef	FAKE_MONKEY_H_
 #define	FAKE_MONKEY_H_
 
-#include "MonkeyWorksCore/IODevice.h"
-#include "MonkeyWorksCore/ComponentFactory.h"
+#include "MWorksCore/IODevice.h"
+#include "MWorksCore/ComponentFactory.h"
 #include "FakeMonkeyEyeMovementChannel.h"
 #include "boost/random.hpp"
 #include "boost/enable_shared_from_this.hpp"
@@ -29,13 +29,13 @@ protected:
 	shared_ptr <mFakeMonkeyStatus> status;	
 	shared_ptr<float> saccade_start_h, saccade_start_v;
 	shared_ptr<float> saccade_target_h, saccade_target_v;
-	shared_ptr<MonkeyWorksTime> saccade_start_time;
+	shared_ptr<MWorksTime> saccade_start_time;
 	bool command_pending;
 	double saccade_next_target_h, saccade_next_target_v;
 	shared_ptr<ScheduleTask> movement_node;
 	
-	shared_ptr<MonkeyWorksTime> saccade_duration;
-	MonkeyWorksTime fixation_duration;
+	shared_ptr<MWorksTime> saccade_duration;
+	MWorksTime fixation_duration;
 	
 	shared_ptr<Scheduler> scheduler;
 	
@@ -70,8 +70,8 @@ public:
 	
 	void saccadeTo(const double x, 
 				   const double y, 
-				   const MonkeyWorksTime time_to_fixate_at_end_of_saccade);
-	void fixate(const MonkeyWorksTime duration);
+				   const MWorksTime time_to_fixate_at_end_of_saccade);
+	void fixate(const MWorksTime duration);
 	
 	shared_ptr<mFakeMonkey> shared_from_this() { return static_pointer_cast<mFakeMonkey>(IODevice::shared_from_this()); }
 };

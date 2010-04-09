@@ -8,8 +8,8 @@
  */
 
 #include "FakeMonkeyFixate.h"
-#include "MonkeyWorksCore/GenericVariable.h"
-#include "MonkeyWorksCore/ComponentRegistry.h"
+#include "MWorksCore/GenericVariable.h"
+#include "MWorksCore/ComponentRegistry.h"
 #include "FakeMonkey.h"
 
 mFakeMonkeyFixate::mFakeMonkeyFixate(const shared_ptr<mFakeMonkey> &_monkey, 

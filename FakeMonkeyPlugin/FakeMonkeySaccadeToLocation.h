@@ -10,7 +10,7 @@
 #ifndef FAKE_MONKEY_SACCADE_TO_LOCATION_H
 #define FAKE_MONKEY_SACCADE_TO_LOCATION_H
 
-#include "MonkeyWorksCore/TrialBuildingBlocks.h"
+#include "MWorksCore/TrialBuildingBlocks.h"
 #include "FakeMonkey.h"
 
 class mFakeMonkeySaccadeToLocation : public Action {

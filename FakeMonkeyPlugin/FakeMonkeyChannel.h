@@ -10,7 +10,7 @@
 #ifndef FAKE_MONKEY_CHANNEL_H
 #define FAKE_MONKEY_CHANNEL_H
 
-#include "MonkeyWorksCore/GenericVariable.h"
+#include "MWorksCore/GenericVariable.h"
 using namespace mw;
 
 class mFakeMonkeyChannel : public mw::Component {

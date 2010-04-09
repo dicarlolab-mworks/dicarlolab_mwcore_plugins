@@ -9,7 +9,7 @@
 
 #include "FakeMonkeyJuiceChannelFactory.h"
 #include "FakeMonkeyJuiceChannel.h"
-#include "MonkeyWorksCore/ConstantVariable.h"
+#include "MWorksCore/ConstantVariable.h"
 
 shared_ptr<mw::Component> mFakeMonkeyJuiceChannelFactory::createObject(std::map<std::string, std::string> parameters,
 																	ComponentRegistry *reg) {

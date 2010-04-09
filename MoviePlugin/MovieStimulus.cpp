@@ -1,6 +1,6 @@
 /*
  *  MovieStimulus.cpp
- *  MonkeyWorksCore
+ *  MWorksCore
  *
  *  Created by labuser on 5/16/08.
  *  Copyright 2008 MIT. All rights reserved.
@@ -8,8 +8,8 @@
  */
 
 #include "MovieStimulus.h"
-#include "MonkeyWorksCore/OpenGLContextManager.h"
-#include "MonkeyWorksCore/Experiment.h"
+#include "MWorksCore/OpenGLContextManager.h"
+#include "MWorksCore/Experiment.h"
 #include "boost/bind.hpp"
 #include "MovieStimulusFrameNotification.h"
 
@@ -114,7 +114,7 @@ void mMovieStimulus::play() {
 			// store a hash of {'stim name' => 'frame index'}
 			//    this is used to look up the stimuli when they are announced via #stimDisplayUpdate
 			// index_hash.insert(std::pair<std::string, int>(p->getCurrentAnnounceDrawData().getElement(STIM_NAME), i));
-			shared_ptr<std::vector<MonkeyWorksTime> > times(new std::vector<MonkeyWorksTime>());
+			shared_ptr<std::vector<MWorksTime> > times(new std::vector<MWorksTime>());
 			times_shown.push_back(times);
 		}		
 		
@@ -122,7 +122,7 @@ void mMovieStimulus::play() {
 		
 		schedule_node = scheduler->scheduleUS(FILELINE,
 											  0,
-											  (MonkeyWorksTime)(1/frames_per_us), 
+											  (MWorksTime)(1/frames_per_us), 
 											  (end_frame_index->getValue().getInteger()-start_frame_index->getValue().getInteger()) + 1, 
 											  boost::bind(nextUpdate, shared_ptr_to_this),
 											  M_DEFAULT_PRIORITY,
@@ -168,7 +168,7 @@ void mMovieStimulus::draw(StimulusDisplay *display) {
 			schedule_node->kill();
 			
 			// schedule the time to hide the last frame
-			const MonkeyWorksTime time_to_hide_final_frame = start_time + (1/frames_per_us)*number_of_frames_to_show;
+			const MWorksTime time_to_hide_final_frame = start_time + (1/frames_per_us)*number_of_frames_to_show;
 			
 			shared_ptr <mMovieStimulus> shared_ptr_to_this = shared_from_this();
 			
@@ -196,12 +196,12 @@ void mMovieStimulus::endMovie() {
 		Datum times_shown_report(M_LIST, 1);		
 		int total_frames_shown = 0;
 		
-		for(std::vector<shared_ptr<std::vector<MonkeyWorksTime> > >::const_iterator i = times_shown.begin();
+		for(std::vector<shared_ptr<std::vector<MWorksTime> > >::const_iterator i = times_shown.begin();
 			i != times_shown.end();
 			++i) {
 			Datum times_shown_for_stim(M_LIST, 1);
 			
-			for(std::vector<MonkeyWorksTime>::const_iterator j = (*i)->begin();
+			for(std::vector<MWorksTime>::const_iterator j = (*i)->begin();
 				j != (*i)->end();
 				++j) {
 				times_shown_for_stim.addElement(*j);
@@ -240,7 +240,7 @@ void mMovieStimulus::callUpdateDisplay() {
 	display->asynchronousUpdateDisplay();
 }
 
-void mMovieStimulus::stimDisplayUpdateNotification(const Datum &data, const MonkeyWorksTime time_us) {
+void mMovieStimulus::stimDisplayUpdateNotification(const Datum &data, const MWorksTime time_us) {
 	boost::mutex::scoped_lock locker(movie_lock);
 	
 	if(movie_started && !movie_ended) {
@@ -253,11 +253,11 @@ void mMovieStimulus::stimDisplayUpdateNotification(const Datum &data, const Monk
 				//				std::cerr << "current_stimulus_group_index = " << current_stimulus_group_index << std::endl;
 				//				std::cerr << "times_show.size() = " << times_shown.size() << std::endl;
 				if(current_stimulus_group_index < times_shown.size()) {
-					shared_ptr<std::vector<MonkeyWorksTime> > times_to_date = times_shown.at(current_stimulus_group_index);
+					shared_ptr<std::vector<MWorksTime> > times_to_date = times_shown.at(current_stimulus_group_index);
 					times_to_date->push_back(time_us);
-					//			std::map<std::string, std::vector<shared_ptr<std::vector<MonkeyWorksTime> > >::size_type>::iterator iter = index_hash.find(stim_tag);
+					//			std::map<std::string, std::vector<shared_ptr<std::vector<MWorksTime> > >::size_type>::iterator iter = index_hash.find(stim_tag);
 					//			if(iter != index_hash.end()) {			
-					//				shared_ptr<std::vector<MonkeyWorksTime> > times_to_date = times_shown.at(iter->second);
+					//				shared_ptr<std::vector<MWorksTime> > times_to_date = times_shown.at(iter->second);
 					//				times_to_date->push_back(time_us);
 					//			}
 				}

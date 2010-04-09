@@ -12,7 +12,7 @@ using namespace mw;
 
 mFakeMonkeyEyeMovementChannel::mFakeMonkeyEyeMovementChannel(const shared_ptr<Variable> &eye_h_variable,
 															 const shared_ptr<Variable> &eye_v_variable,
-															 const MonkeyWorksTime update_period_,
+															 const MWorksTime update_period_,
 															 const int samples_per_update_) {
 	eye_h = eye_h_variable;
 	eye_v = eye_v_variable;
@@ -20,16 +20,16 @@ mFakeMonkeyEyeMovementChannel::mFakeMonkeyEyeMovementChannel(const shared_ptr<Va
 	samples_per_update = samples_per_update_;
 }
 
-MonkeyWorksTime mFakeMonkeyEyeMovementChannel::getUpdatePeriod() const {
+MWorksTime mFakeMonkeyEyeMovementChannel::getUpdatePeriod() const {
 	return update_period;
 }
 
 void mFakeMonkeyEyeMovementChannel::update() {
 	boost::mutex::scoped_lock lock(*monkey_lock);
-	MonkeyWorksTime start_time = clock->getCurrentTimeUS();
+	MWorksTime start_time = clock->getCurrentTimeUS();
 
 	for(int current_sample = 0; current_sample < samples_per_update; ++current_sample) {
-		MonkeyWorksTime current_time = start_time+((current_sample*update_period)/samples_per_update);
+		MWorksTime current_time = start_time+((current_sample*update_period)/samples_per_update);
 
 		double val_h = 0;
 		double val_v = 0;
@@ -51,8 +51,8 @@ void mFakeMonkeyEyeMovementChannel::update() {
 void mFakeMonkeyEyeMovementChannel::setChannelParams(const shared_ptr <Clock> &a_clock,
 													 const shared_ptr <boost::mutex> monkey_lock_,
 													 const shared_ptr <mFakeMonkeyStatus> &status_,
-													 const shared_ptr <MonkeyWorksTime> &saccade_start_time_,
-													 const shared_ptr <MonkeyWorksTime> &saccade_duration_,
+													 const shared_ptr <MWorksTime> &saccade_start_time_,
+													 const shared_ptr <MWorksTime> &saccade_duration_,
 													 const shared_ptr <float> &saccade_start_h_,
 													 const shared_ptr <float> &saccade_start_v_,
 													 const shared_ptr <float> &saccade_target_h_,

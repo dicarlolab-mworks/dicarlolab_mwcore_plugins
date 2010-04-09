@@ -10,7 +10,7 @@
 #ifndef FAKE_MONKEY_SACCADE_AND_FIXATE_H
 #define FAKE_MONKEY_SACCADE_AND_FIXATE_H
 
-#include "MonkeyWorksCore/TrialBuildingBlocks.h"
+#include "MWorksCore/TrialBuildingBlocks.h"
 #include "FakeMonkey.h"
 
 class mFakeMonkeySaccadeAndFixate : public Action {

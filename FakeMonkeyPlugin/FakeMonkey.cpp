@@ -1,6 +1,6 @@
 /*
  *  FakeMonkey.cpp
- *  MonkeyWorksCore
+ *  MWorksCore
  *
  *  Created by David Cox on 6/13/05.
  *  Copyright 2005 MIT. All rights reserved.
@@ -52,8 +52,8 @@ mFakeMonkey::mFakeMonkey(const boost::shared_ptr<Scheduler> &a_scheduler,
 	
 	status = shared_ptr<mFakeMonkeyStatus>(new mFakeMonkeyStatus(M_FAKE_MONKEY_FIXATING));
 	
-	saccade_start_time = shared_ptr<MonkeyWorksTime>(new MonkeyWorksTime(0));
-	saccade_duration = shared_ptr<MonkeyWorksTime>(new MonkeyWorksTime(FAKE_MONKEY_MEAN_SACCADE_DURATION_US));
+	saccade_start_time = shared_ptr<MWorksTime>(new MWorksTime(0));
+	saccade_duration = shared_ptr<MWorksTime>(new MWorksTime(FAKE_MONKEY_MEAN_SACCADE_DURATION_US));
 	fixation_duration = FAKE_MONKEY_MEAN_FIXATION_DURATION_US;
 	
 	saccade_start_h = shared_ptr<float>(new float(0));
@@ -185,7 +185,7 @@ void mFakeMonkey::spike(){
 		spike_node->cancel();
 	}
 	
-	MonkeyWorksTime spike_time = scheduler->getClock()->getCurrentTimeUS();
+	MWorksTime spike_time = scheduler->getClock()->getCurrentTimeUS();
 	
 	for(vector<shared_ptr<Variable> >::const_iterator spike_var_iterator = spike_variables.begin();
 		spike_var_iterator != spike_variables.end();
@@ -351,7 +351,7 @@ bool mFakeMonkey::shutdown(){
 
 void mFakeMonkey::saccadeTo(const double x, 
 							const double y, 
-							const MonkeyWorksTime time_to_fixate_at_end_of_saccade) {	
+							const MWorksTime time_to_fixate_at_end_of_saccade) {	
 	{
 		boost::mutex::scoped_lock lock(*monkey_lock);
 		command_pending = true;
@@ -362,7 +362,7 @@ void mFakeMonkey::saccadeTo(const double x,
 	startSaccading();
 }
 
-void mFakeMonkey::fixate(const MonkeyWorksTime duration){
+void mFakeMonkey::fixate(const MWorksTime duration){
 	{
 		boost::mutex::scoped_lock lock(*monkey_lock);
 		fixation_duration = duration;

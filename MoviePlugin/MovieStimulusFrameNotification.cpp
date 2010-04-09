@@ -1,6 +1,6 @@
 /*
  *  MovieStimulusFrameNotification.cpp
- *  MonkeyWorksCore
+ *  MWorksCore
  *
  *  Created by labuser on 5/23/08.
  *  Copyright 2008 MIT. All rights reserved.
@@ -18,6 +18,6 @@ void mMovieStimulusFrameNotification::notify(const Datum &data) {
 	this->notify(data, clock->getCurrentTimeUS());
 }
 
-void mMovieStimulusFrameNotification::notify(const Datum &data, MonkeyWorksTime time_us) {
+void mMovieStimulusFrameNotification::notify(const Datum &data, MWorksTime time_us) {
 	movie_stimulus->stimDisplayUpdateNotification(data, time_us);
 }

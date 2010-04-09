@@ -10,12 +10,12 @@
 #ifndef FAKE_MONKEY_JUICE_NOTIFICATION_H
 #define FAKE_MONKEY_JUICE_NOTIFICATION_H
 
-#include "MonkeyWorksCore/VariableNotification.h"
+#include "MWorksCore/VariableNotification.h"
 using namespace mw;
 
 class mFakeMonkeyJuiceNotification : public VariableNotification {
 public:
-	virtual void notify(const Datum& data, MonkeyWorksTime timeUS);	
+	virtual void notify(const Datum& data, MWorksTime timeUS);	
 };
 
 #endif

@@ -9,6 +9,6 @@
 
 #include "FakeMonkeyJuiceNotification.h"
 
-void mFakeMonkeyJuiceNotification::notify(const Datum& data, MonkeyWorksTime timeUS) {
+void mFakeMonkeyJuiceNotification::notify(const Datum& data, MWorksTime timeUS) {
 	mprintf("YUM! Fake monkey loves his juice!");
 }

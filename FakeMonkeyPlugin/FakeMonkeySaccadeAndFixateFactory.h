@@ -10,7 +10,7 @@
 #ifndef FAKE_MONKEY_SACCADE_AND_FIXATE_FACTORY_H
 #define FAKE_MONKEY_SACCADE_AND_FIXATE_FACTORY_H
 
-#include "MonkeyWorksCore/ComponentFactory.h"
+#include "MWorksCore/ComponentFactory.h"
 using namespace mw;
 
 class mFakeMonkeySaccadeAndFixateFactory : public ComponentFactory{

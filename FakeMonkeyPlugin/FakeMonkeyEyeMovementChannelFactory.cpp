@@ -9,7 +9,7 @@
 
 #include "FakeMonkeyEyeMovementChannelFactory.h"
 #include "FakeMonkeyEyeMovementChannel.h"
-#include "MonkeyWorksCore/ConstantVariable.h"
+#include "MWorksCore/ConstantVariable.h"
 
 shared_ptr<mw::Component> mFakeMonkeyEyeMovementChannelFactory::createObject(std::map<std::string, std::string> parameters,
 																		  ComponentRegistry *reg) {
@@ -26,8 +26,8 @@ shared_ptr<mw::Component> mFakeMonkeyEyeMovementChannelFactory::createObject(std
 	shared_ptr<Variable> eye_v_variable = reg->getVariable(parameters.find(EYE_V_VARIABLE)->second);		
 	checkAttribute(eye_v_variable, parameters.find("reference_id")->second, EYE_V_VARIABLE, parameters.find(EYE_V_VARIABLE)->second);
 
-	MonkeyWorksTime update_period = reg->getNumber(parameters.find(UPDATE_PERIOD)->second);
-	MonkeyWorksTime data_sampling_period = reg->getNumber(parameters.find(DATA_SAMPLING_PERIOD)->second);
+	MWorksTime update_period = reg->getNumber(parameters.find(UPDATE_PERIOD)->second);
+	MWorksTime data_sampling_period = reg->getNumber(parameters.find(DATA_SAMPLING_PERIOD)->second);
 	
 	int samples_per_update = update_period/data_sampling_period;
 	

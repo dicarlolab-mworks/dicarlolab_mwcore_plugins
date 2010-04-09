@@ -9,7 +9,7 @@
 
 #include "CircleStimulusPlugin.h"
 #include "CircleStimulusFactory.h"
-#include "MonkeyWorksCore/ComponentFactory.h"
+#include "MWorksCore/ComponentFactory.h"
 using namespace mw;
 
 Plugin *getPlugin(){

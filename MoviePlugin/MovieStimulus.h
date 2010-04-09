@@ -1,6 +1,6 @@
 /*
  *  MovieStimulus.h
- *  MonkeyWorksCore
+ *  MWorksCore
  *
  *  Created by labuser on 5/16/08.
  *  Copyright 2008 MIT. All rights reserved.
@@ -12,9 +12,9 @@
 
 #include <vector>
 #include "MovieFrame.h"
-#include "MonkeyWorksCore/StimulusNode.h"
-#include "MonkeyWorksCore/Scheduler.h"
-#include "MonkeyWorksCore/ComponentRegistry.h"
+#include "MWorksCore/StimulusNode.h"
+#include "MWorksCore/Scheduler.h"
+#include "MWorksCore/ComponentRegistry.h"
 #include "MovieStimulusFrameNotification.h"
 #include <boost/thread/mutex.hpp>
 #include <boost/enable_shared_from_this.hpp>
@@ -42,12 +42,12 @@ protected:
 	unsigned int current_stimulus_group_index;
 	unsigned int updates_scheduled;
 	
-	std::vector<boost::shared_ptr<std::vector<MonkeyWorksTime> > > times_shown;
+	std::vector<boost::shared_ptr<std::vector<MWorksTime> > > times_shown;
 	
 	bool movie_ended;
 	bool movie_will_end;
 	bool movie_started;
-	MonkeyWorksTime start_time;
+	MWorksTime start_time;
 	
 	boost::mutex movie_lock;
 	
@@ -78,7 +78,7 @@ public:
 	Datum getCurrentAnnounceDrawData();
 
 	void stimDisplayUpdateNotification(const Datum &data, 
-									   const MonkeyWorksTime time_us);
+									   const MWorksTime time_us);
 };
 
 class mMovieStimulusFactory : public ComponentFactory {

@@ -10,7 +10,7 @@
 #ifndef PLAY_MOVIE_ACTION_H_
 #define PLAY_MOVIE_ACTION_H_
 
-#include "MonkeyWorksCore/TrialBuildingBlocks.h"
+#include "MWorksCore/TrialBuildingBlocks.h"
 #include "MovieStimulus.h"
 using namespace mw;
 

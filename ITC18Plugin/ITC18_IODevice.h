@@ -5,11 +5,11 @@
 
 
 
-#include "MonkeyWorksCore/IODevice.h"				
+#include "MWorksCore/IODevice.h"				
 #include "ITC/ITC18.h"		// Instrutech header
-#include "MonkeyWorksCore/ExpandableList.h"					
-#include "MonkeyWorksCore/Buffers.h"				
-#include "MonkeyWorksCore/ComponentFactory.h"
+#include "MWorksCore/ExpandableList.h"					
+#include "MWorksCore/Buffers.h"				
+#include "MWorksCore/ComponentFactory.h"
 #include <fstream>
 using namespace mw;
 
@@ -302,15 +302,15 @@ class IOChannel_ITC18_input : public IOChannel_ITC18 {
     protected:
         shared_ptr<ShortDataTimeStampedBufferReader	> bufferReader;
         ShortDataTimeStampedRingBuffer		*buffer; 
-  		void            bufferDatum(short data, MonkeyWorksTime timeUS); // accept a piece of data into the buffer
+  		void            bufferDatum(short data, MWorksTime timeUS); // accept a piece of data into the buffer
 		void            clearBuffer();			// remove all unserviced data from buffer
        	int				computeBufferSize();
         
 		
 		SKIP_DESC skipInput; 
-		MonkeyWorksTime timeOfDataElementAtBufferWriteHeadUS;
+		MWorksTime timeOfDataElementAtBufferWriteHeadUS;
 		
-		virtual void    postDataElement(short stemp, MonkeyWorksTime timeUS);
+		virtual void    postDataElement(short stemp, MWorksTime timeUS);
           
     public:
         IOChannel_ITC18_input(IOChannelRequest *_request, 
@@ -318,8 +318,8 @@ class IOChannel_ITC18_input : public IOChannel_ITC18 {
 							   shared_ptr<mITC18_IODevice> _device);
         ~IOChannel_ITC18_input(); 
         virtual void    setup(shared_ptr<mITC18_IODevice> _device, int chan_index);
-        virtual void    newSample(bool digitalCheck, MonkeyWorksTime time);
-        virtual void    newSample(short analogSample, MonkeyWorksTime time);
+        virtual void    newSample(bool digitalCheck, MWorksTime time);
+        virtual void    newSample(short analogSample, MWorksTime time);
         void            setSkippingMod(int numberOfReadsPerSavedRead);
         virtual int     flushChannel();			// move all data into the event stream
         
@@ -333,8 +333,8 @@ class IOChannel_ITC18_ADC : public IOChannel_ITC18_input {
     protected:
         double	multiplierToGetMV;
 		int		itc_range_tag;
-        MonkeyWorksTime lastClippingWarnTimeMS;
-		virtual void    postDataElement(short stemp, MonkeyWorksTime timeUS);
+        MWorksTime lastClippingWarnTimeMS;
+		virtual void    postDataElement(short stemp, MWorksTime timeUS);
 
     public:
         
@@ -366,7 +366,7 @@ class IOChannel_ITC18_ADC_waveform : public IOChannel_ITC18_ADC {
         ~IOChannel_ITC18_ADC_waveform();
         // waveform channel needs extra stuff, override posting
         virtual void    setup(shared_ptr<mITC18_IODevice> _device, int chan_index);
-        void            startNewWaveform(MonkeyWorksTime timeUS);
+        void            startNewWaveform(MWorksTime timeUS);
         virtual int     flushChannel();	 // override -- do NOT move all data into the event stream -- just completed waveforms and move THEM into data steam (if done)
         virtual void    stopChannelIO();
         
@@ -376,7 +376,7 @@ class IOChannel_ITC18_ADC_waveform : public IOChannel_ITC18_ADC {
 // input on TTL port
 class IOChannel_ITC18_TTL : public IOChannel_ITC18_input {      
     protected:
-		virtual void    postDataElement(short stemp, MonkeyWorksTime timeUS);
+		virtual void    postDataElement(short stemp, MWorksTime timeUS);
 	public:
         IOChannel_ITC18_TTL(IOChannelRequest* _request, 
 							 IOCapability* _capability, 
@@ -399,7 +399,7 @@ class IOChannel_ITC18_TTL_edge : public IOChannel_ITC18_TTL {
 								  shared_ptr<mITC18_IODevice> _device);
         virtual void setup(shared_ptr<mITC18_IODevice> _device, int chan_index);
         void    newSample(bool digitalValue, 
-						  MonkeyWorksTime absoluteTimeUSbasedOnITCclock);
+						  MWorksTime absoluteTimeUSbasedOnITCclock);
 		virtual void clearAllLinkedChannels();      // override
         void linkToWaveformChannel(
 					IOChannel_ITC18_ADC_waveform* _waveformChannel);
@@ -449,7 +449,7 @@ class IOChannel_ITC18_AsychOut_pulsed : public IOChannel_ITC18_AsychOut {
         bool    pulsing;
         void    setupPulsing(shared_ptr<IODevice> _device, int chan_index);
         bool    forcePulseEnd();
-        bool    pulseStart(MonkeyWorksTime durationUsec);
+        bool    pulseStart(MWorksTime durationUsec);
         bool    pulseEnd();
 		shared_ptr <UpdateIOChannelArgs>	pulseArgs;
 		shared_ptr<ScheduleTask>		pulseScheduleNode;
@@ -499,11 +499,11 @@ class mITC18_IODevice : public IODevice {
 			bool instruction_seq_running;	// true when sequence is running in itc
 			bool instructionSequenceIsNeeded;	// true if we need to build/load/run an instruciton seq
 			long num_FIFO_clears_since_itc_started;
-			MonkeyWorksTime time_since_inst_seq_started_US;  // time in US since ITC sequence last started running (reset to 0 at each start of instr seq)
-			MonkeyWorksTime globalClockTimeAtStartUS;      // clock time when the instruction sequence starts (usec)
-			MonkeyWorksTime absoluteTimeUSbasedOnITCclock; // the time that the ITC thinks it is (resynched with global clock at each start of instruction seq)
-            MonkeyWorksTime nextCheckTimeUS;               // used for checking clock drift 
-			MonkeyWorksTime fudgeTime;
+			MWorksTime time_since_inst_seq_started_US;  // time in US since ITC sequence last started running (reset to 0 at each start of instr seq)
+			MWorksTime globalClockTimeAtStartUS;      // clock time when the instruction sequence starts (usec)
+			MWorksTime absoluteTimeUSbasedOnITCclock; // the time that the ITC thinks it is (resynched with global clock at each start of instruction seq)
+            MWorksTime nextCheckTimeUS;               // used for checking clock drift 
+			MWorksTime fudgeTime;
 			double clockDriftAdjustFactor;		// multiply ITC time by this to get true time
 			short asychLinesStatus;         
 			bool  alreadyWarnedAboutDrift;
@@ -613,13 +613,13 @@ class mITC18_IODevice : public IODevice {
 class mWaveform : public LinkedListNode<mWaveform>, public Lockable {
 
     protected:
-        MonkeyWorksTime spikeTimeUS;
-        MonkeyWorksTime startTimeUS;
-        MonkeyWorksTime endTimeUS;
-		MonkeyWorksTime timeOfFirstElementInWaveformUS;
+        MWorksTime spikeTimeUS;
+        MWorksTime startTimeUS;
+        MWorksTime endTimeUS;
+		MWorksTime timeOfFirstElementInWaveformUS;
         long sampleIntervalUS;
         int sum, n, nn, nsamples, nsamplesInVector;
-        MonkeyWorksTime timeLastUS;
+        MWorksTime timeLastUS;
         //Datum *waveformVector;
         //Datum waveformPackage;
         
@@ -630,16 +630,16 @@ class mWaveform : public LinkedListNode<mWaveform>, public Lockable {
     
         
     public:
-        mWaveform(MonkeyWorksTime _spikeTimeUS, 
+        mWaveform(MWorksTime _spikeTimeUS, 
 				  long preSpikeWindowTimeUS, 
 				  long postSpikeWindowTimeUS, 
 				  long expectedSamplingIntervalUS, 
 				  int TTLtriggerPort); 
         ~mWaveform();
-        void            newData(double dataV, MonkeyWorksTime timeUS);
+        void            newData(double dataV, MWorksTime timeUS);
         Datum           getWaveformPackage();
-        MonkeyWorksTime getStartTime(){return (startTimeUS);}
-        MonkeyWorksTime getEndTime(){return (endTimeUS);}
+        MWorksTime getStartTime(){return (startTimeUS);}
+        MWorksTime getEndTime(){return (endTimeUS);}
 };
 
 

@@ -8,7 +8,7 @@
  */
 
 #include "FakeMonkeySaccadeAndFixateFactory.h"
-#include "MonkeyWorksCore/ComponentRegistry.h"
+#include "MWorksCore/ComponentRegistry.h"
 #include "FakeMonkey.h"
 #include "FakeMonkeySaccadeAndFixate.h"
 

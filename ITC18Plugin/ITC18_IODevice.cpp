@@ -85,7 +85,7 @@ using namespace mw;
  */ 
 
 // debug only 
-//MonkeyWorksTime        timeITCwasOpenedUS = 0;
+//MWorksTime        timeITCwasOpenedUS = 0;
 //ofstream outDataFile; 
 
 
@@ -1296,7 +1296,7 @@ bool mITC18_IODevice::startRunningITC18instructSequence(void) {
 		if (VERBOSE_IO_DEVICE) mprintf(" Started ITC18 instruction sequence...");
 	}
 	
-	fudgeTime = (MonkeyWorksTime)(round(full_time_slice_us*0.5));
+	fudgeTime = (MWorksTime)(round(full_time_slice_us*0.5));
 	shared_ptr<Clock> clock = Clock::instance();
 	globalClockTimeAtStartUS = clock->getCurrentTimeUS();	
 	
@@ -1306,7 +1306,7 @@ bool mITC18_IODevice::startRunningITC18instructSequence(void) {
 	// TODO -- call Instrutech to check this
 	// testing shows that the ITC takes ~1 intruction cycle to post the first data after the sequence is started.
 	num_FIFO_clears_since_itc_started = 1;
-	time_since_inst_seq_started_US = (MonkeyWorksTime)(round(((double)num_FIFO_clears_since_itc_started)*full_time_slice_us*clockDriftAdjustFactor)) + fudgeTime;
+	time_since_inst_seq_started_US = (MWorksTime)(round(((double)num_FIFO_clears_since_itc_started)*full_time_slice_us*clockDriftAdjustFactor)) + fudgeTime;
 	absoluteTimeUSbasedOnITCclock = globalClockTimeAtStartUS + time_since_inst_seq_started_US;
 	
 	nextCheckTimeUS = absoluteTimeUSbasedOnITCclock + (INTERVAL_TO_CHECK_CLOCK_DRIFT_MS*1000);  // next time to check for clock drift
@@ -1900,7 +1900,7 @@ bool mITC18_IODevice::flushITC18FIFO_all(void) {
 	// readbiggest available chunk of data all at once
 	status = ITC18_ReadFIFO(itc, numInstr*sets, pSamplesLarge);
 	shared_ptr<Clock> clock = Clock::instance();
-	MonkeyWorksTime now = clock->getCurrentTimeUS();
+	MWorksTime now = clock->getCurrentTimeUS();
 	//mprintf("FIFO flushed %d sets", sets);
 	ITC18DriverLock->unlock();
 	if (VERBOSE_IO_DEVICE > 2) mprintf("FIFO flush -- data has been read off ITC,  numInstr=%d  status=%d",numInstr, status);
@@ -1922,7 +1922,7 @@ bool mITC18_IODevice::flushITC18FIFO_all(void) {
 		// time is incremented by the time taken to complete a full instruction sequence
 		//   (note, full_time_slice_us may be a non-integral value, so we now keep track of num slices)
 		num_FIFO_clears_since_itc_started++;
-		time_since_inst_seq_started_US = (MonkeyWorksTime)(round(((double)num_FIFO_clears_since_itc_started)*full_time_slice_us*clockDriftAdjustFactor)) + fudgeTime;		
+		time_since_inst_seq_started_US = (MWorksTime)(round(((double)num_FIFO_clears_since_itc_started)*full_time_slice_us*clockDriftAdjustFactor)) + fudgeTime;		
 		absoluteTimeUSbasedOnITCclock = globalClockTimeAtStartUS + time_since_inst_seq_started_US;
 		
 		
@@ -1979,7 +1979,7 @@ bool mITC18_IODevice::flushITC18FIFO_all(void) {
 		
 		// DDC edit: put the clock comparison times closer
 		//    "now" is set immediately after the fifo read
-		MonkeyWorksTime diff = (absoluteTimeUSbasedOnITCclock - now );  		
+		MWorksTime diff = (absoluteTimeUSbasedOnITCclock - now );  		
 		
 		if (VERBOSE_IO_DEVICE > 1) {
 			shared_ptr<Clock> clock = Clock::instance();
@@ -1996,7 +1996,7 @@ bool mITC18_IODevice::flushITC18FIFO_all(void) {
 				//alreadyWarnedAboutDrift = true;
 			}
 		}	
-		nextCheckTimeUS = (MonkeyWorksTime)(round(absoluteTimeUSbasedOnITCclock + (INTERVAL_TO_CHECK_CLOCK_DRIFT_MS*1000)));
+		nextCheckTimeUS = (MWorksTime)(round(absoluteTimeUSbasedOnITCclock + (INTERVAL_TO_CHECK_CLOCK_DRIFT_MS*1000)));
 	}
 	
 	return(true);
@@ -2063,7 +2063,7 @@ bool mITC18_IODevice::flushITC18FIFO_all(void) {
  // time is incremented by the time taken to complete a full instruction sequence
  //   (note, full_time_slice_us may be a non-integral value, so we now keep track of num slices)
  num_FIFO_clears_since_itc_started++;
- time_since_inst_seq_started_US = (MonkeyWorksTime)(round(((double)num_FIFO_clears_since_itc_started)*full_time_slice_us*clockDriftAdjustFactor)) + fudgeTime;		
+ time_since_inst_seq_started_US = (MWorksTime)(round(((double)num_FIFO_clears_since_itc_started)*full_time_slice_us*clockDriftAdjustFactor)) + fudgeTime;		
  absoluteTimeUSbasedOnITCclock = globalClockTimeAtStartUS + time_since_inst_seq_started_US;
  
  
@@ -2106,7 +2106,7 @@ bool mITC18_IODevice::flushITC18FIFO_all(void) {
  if (absoluteTimeUSbasedOnITCclock >= nextCheckTimeUS) {
  ITC18_GetFIFOReadAvailable(itc, &available);
  if (available < (numInstr + 1)) {   // nothing left on itc, thus the current data are fresh!
- MonkeyWorksTime diff = (absoluteTimeUSbasedOnITCclock - clock->getCurrentTimeUS() );
+ MWorksTime diff = (absoluteTimeUSbasedOnITCclock - clock->getCurrentTimeUS() );
  if (VERBOSE_IO_DEVICE > 1) {
  mprintf("ITC clock check engaged at global time = %d ms", (long)(clock->getCurrentTimeMS()) );
  mprintf("Diff between ITC clock and global clock = %d us (+ means itc is leading) time slice = %d us", (long)diff, (long)full_time_slice_us);
@@ -2121,7 +2121,7 @@ bool mITC18_IODevice::flushITC18FIFO_all(void) {
  //alreadyWarnedAboutDrift = true;
  }
  }	
- nextCheckTimeUS = (MonkeyWorksTime)(round(absoluteTimeUSbasedOnITCclock + (INTERVAL_TO_CHECK_CLOCK_DRIFT_MS*1000)));
+ nextCheckTimeUS = (MWorksTime)(round(absoluteTimeUSbasedOnITCclock + (INTERVAL_TO_CHECK_CLOCK_DRIFT_MS*1000)));
  }
  }
  ITC18DriverLock->unlock();
@@ -2299,7 +2299,7 @@ void IOChannel_ITC18_input::setup(shared_ptr<mITC18_IODevice> _device, int chan_
 	clearBuffer();
 }
 
-void IOChannel_ITC18_input::bufferDatum(short data, MonkeyWorksTime timeUS) {
+void IOChannel_ITC18_input::bufferDatum(short data, MWorksTime timeUS) {
 	
 	if ((buffer == NULL) || (bufferReader == NULL))  {
 		merror(M_IODEVICE_MESSAGE_DOMAIN,"ITC18 channel: analog software buffer is NULL.");
@@ -2372,7 +2372,7 @@ int IOChannel_ITC18_input::flushChannel() {
 
 
 // time is supposed to be the time since the ITC started  
-void IOChannel_ITC18_input::newSample(short analogSample, MonkeyWorksTime time) {
+void IOChannel_ITC18_input::newSample(short analogSample, MWorksTime time) {
 	
 	//lock();			// JJD CHAN LOCK
     lock();
@@ -2392,7 +2392,7 @@ void IOChannel_ITC18_input::newSample(short analogSample, MonkeyWorksTime time) 
 }
 
 // time is supposed to be absolute time 
-void IOChannel_ITC18_input::newSample(bool thisDigitalCheck, MonkeyWorksTime time) {
+void IOChannel_ITC18_input::newSample(bool thisDigitalCheck, MWorksTime time) {
 	
     // downsample if needed
 	lock();			// JJD CHAN LOCK
@@ -2410,7 +2410,7 @@ void IOChannel_ITC18_input::newSample(bool thisDigitalCheck, MonkeyWorksTime tim
 }
 
 // generic version
-void IOChannel_ITC18_input::postDataElement(short stemp, MonkeyWorksTime timeUS) {  // generic version
+void IOChannel_ITC18_input::postDataElement(short stemp, MWorksTime timeUS) {  // generic version
     long timeMS = (long)(timeUS/1000.);
     double data = (double)stemp;
     if (VERBOSE_IO_DEVICE_DATA) mprintf("ITC18 channel:flushChannel: generic value about to be posted. Value = %d  Posted time = %d ms",stemp,timeMS);
@@ -2507,7 +2507,7 @@ bool IOChannel_ITC18_ADC::validate(IOChannelIncompatibility *  incompatibility) 
 
 
 // analog version
-void IOChannel_ITC18_ADC::postDataElement(short stemp, MonkeyWorksTime timeUS) {
+void IOChannel_ITC18_ADC::postDataElement(short stemp, MWorksTime timeUS) {
 	
     long timeMS = (long)(timeUS/1000.);
     double dataV = (multiplierToGetMV*((double)(stemp)))/1000.;	// output in volts
@@ -2517,7 +2517,7 @@ void IOChannel_ITC18_ADC::postDataElement(short stemp, MonkeyWorksTime timeUS) {
 	
     // Warn for clipping on analog channels
 	shared_ptr<Clock> clock = Clock::instance();
-    MonkeyWorksTime timeSinceLastWarnMS = clock->getCurrentTimeMS() - lastClippingWarnTimeMS;
+    MWorksTime timeSinceLastWarnMS = clock->getCurrentTimeMS() - lastClippingWarnTimeMS;
     if ((abs(stemp) > 32000) && (timeSinceLastWarnMS > 1000)) {
         lastClippingWarnTimeMS = clock->getCurrentTimeMS();
         mwarning(M_IODEVICE_MESSAGE_DOMAIN,"ITC channel on ADC port %d is probably clipping. Value = %f volts.  We suggest a larger range on your channel request or a lower gain on your input signal.",getHardwarePort(),dataV);
@@ -2588,7 +2588,7 @@ void IOChannel_ITC18_ADC_waveform::setup(shared_ptr<mITC18_IODevice> _device, in
 
 
 // start tracking a waveform
-void IOChannel_ITC18_ADC_waveform::startNewWaveform(MonkeyWorksTime spikeTimeUS) {
+void IOChannel_ITC18_ADC_waveform::startNewWaveform(MWorksTime spikeTimeUS) {
 	
 	//lock();			// JJD CHAN LOCK 
     // make a new one an put it on the linked list
@@ -2638,8 +2638,8 @@ int IOChannel_ITC18_ADC_waveform::flushChannel() {
 	
 	//lock();			// JJD CHAN LOCK 
 	
-    MonkeyWorksTime timeUS;
-	MonkeyWorksTime headTimeUS;
+    MWorksTime timeUS;
+	MWorksTime headTimeUS;
 	long bufferReaderLagTimeUS;
     short stemp;
     //Data wavePackage;
@@ -2795,7 +2795,7 @@ IOChannel_ITC18_TTL::IOChannel_ITC18_TTL(IOChannelRequest * _request, IOCapabili
 
 
 // digital version
-void IOChannel_ITC18_TTL::postDataElement(short stemp, MonkeyWorksTime timeUS) {
+void IOChannel_ITC18_TTL::postDataElement(short stemp, MWorksTime timeUS) {
     long timeMS = (long)(timeUS/1000.);
     bool dataBoolean = (bool)(stemp);  
     if (VERBOSE_IO_DEVICE_DATA) mprintf("ITC18 channel:flushChannel: value about to be posted from TTL hardward port: %d  Value = %d (digital). Posted time = %d ms", getHardwarePort(), dataBoolean, timeMS);
@@ -2851,7 +2851,7 @@ void IOChannel_ITC18_TTL_edge::clearAllLinkedChannels() {
 
 
 // time is supposed to be the time since the ITC started  
-void IOChannel_ITC18_TTL_edge::newSample(bool thisDigitalCheck, MonkeyWorksTime time) {
+void IOChannel_ITC18_TTL_edge::newSample(bool thisDigitalCheck, MWorksTime time) {
 	
 	//lock();			// JJD CHAN LOCK
     bool edgeReported = false;   // was anything put in the data stream?
@@ -3056,7 +3056,7 @@ bool IOChannel_ITC18_AsychOut_pulsed::notify(const Datum& data) {
     if ((long)data == 0) {  
         return forcePulseEnd();
     }
-    return (pulseStart((MonkeyWorksTime)((long)data)));
+    return (pulseStart((MWorksTime)((long)data)));
 	
 }
 
@@ -3084,7 +3084,7 @@ bool IOChannel_ITC18_AsychOut_pulsed::forcePulseEnd() {
 }
 
 // this is the method executed by scheduled pulse end
-bool IOChannel_ITC18_AsychOut_pulsed::pulseStart(MonkeyWorksTime pulseDurationUS) {
+bool IOChannel_ITC18_AsychOut_pulsed::pulseStart(MWorksTime pulseDurationUS) {
 	
     // if anything scheuduled to end (i.e. pulse already going, kill it)
     if (pulseScheduleNode != NULL) {
@@ -3113,7 +3113,7 @@ bool IOChannel_ITC18_AsychOut_pulsed::pulseStart(MonkeyWorksTime pulseDurationUS
     } 
     pulsing = true;
     long lostTimeUS = (long)(clock->getCurrentTimeUS()) - startTimeUS;
-    MonkeyWorksTime scheduledPulseTimeUS = m_max((pulseDurationUS - lostTimeUS),0); 
+    MWorksTime scheduledPulseTimeUS = m_max((pulseDurationUS - lostTimeUS),0); 
 	
     if (VERBOSE_IO_DEVICE_DATA) mprintf(M_IODEVICE_MESSAGE_DOMAIN,"IOChannel_ITC18_AsychOut_pulsed::pulseStart.  lost time: %d us   Scheduled lag time:%d us  Current time:%d ",lostTimeUS, (long)scheduledPulseTimeUS, (long)clock->getCurrentTimeMS()); 
 	
@@ -3168,7 +3168,7 @@ bool IOChannel_ITC18_AsychOut_pulsed::pulseEnd() {
 
 // ============================================================================
 
-mWaveform::mWaveform(MonkeyWorksTime _spikeTimeUS, long preSpikeWindowTimeUS, long postSpikeWindowTimeUS, long expectedSamplingIntervalUS, int _TTLtriggerPort) {
+mWaveform::mWaveform(MWorksTime _spikeTimeUS, long preSpikeWindowTimeUS, long postSpikeWindowTimeUS, long expectedSamplingIntervalUS, int _TTLtriggerPort) {
     
     spikeTimeUS = _spikeTimeUS;
     startTimeUS = _spikeTimeUS - preSpikeWindowTimeUS;
@@ -3201,7 +3201,7 @@ mWaveform::~mWaveform() {
 }
 
 // accumulate the data in the waveform object
-void mWaveform::newData(double dataV, MonkeyWorksTime timeUS) {     
+void mWaveform::newData(double dataV, MWorksTime timeUS) {     
 	
 	lock();
 	if (nsamples == 0) timeOfFirstElementInWaveformUS = timeUS;

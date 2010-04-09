@@ -10,7 +10,7 @@
 #ifndef FAKE_MONKEY_SACCADE_TO_LOCATION_FACTORY_H
 #define FAKE_MONKEY_SACCADE_TO_LOCATION_FACTORY_H
 
-#include "MonkeyWorksCore/ComponentFactory.h"
+#include "MWorksCore/ComponentFactory.h"
 using namespace mw;
 
 class mFakeMonkeySaccadeToLocationFactory : public ComponentFactory{
