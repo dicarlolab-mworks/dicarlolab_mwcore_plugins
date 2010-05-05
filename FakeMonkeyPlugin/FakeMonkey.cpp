@@ -292,7 +292,7 @@ bool mFakeMonkey::stopDeviceIO(){
 		spike_node->cancel();
 	}	
 	
-	return IODevice::stopDeviceIO();
+	return LegacyIODevice::stopDeviceIO();
 }
 
 
@@ -343,11 +343,6 @@ bool mFakeMonkey::updateChannel(int index){
 	//	channels_lock.unlock();
 	return true;
 }		
-
-bool mFakeMonkey::shutdown(){
-	
-	return true;
-}
 
 void mFakeMonkey::saccadeTo(const double x, 
 							const double y, 

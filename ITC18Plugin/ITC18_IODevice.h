@@ -5,7 +5,7 @@
 
 
 
-#include "MWorksCore/IODevice.h"				
+#include "MWorksCore/LegacyIODevice.h"				
 #include "ITC/ITC18.h"		// Instrutech header
 #include "MWorksCore/ExpandableList.h"					
 #include "MWorksCore/Buffers.h"				
@@ -447,7 +447,7 @@ class IOChannel_ITC18_AsychOut_pulsed : public IOChannel_ITC18_AsychOut {
     protected:
         bool    pulseActiveHigh, pulseActiveLow;
         bool    pulsing;
-        void    setupPulsing(shared_ptr<IODevice> _device, int chan_index);
+        void    setupPulsing(shared_ptr<LegacyIODevice> _device, int chan_index);
         bool    forcePulseEnd();
         bool    pulseStart(MWorksTime durationUsec);
         bool    pulseEnd();
@@ -469,14 +469,14 @@ class IOChannel_ITC18_AsychOut_pulsed : public IOChannel_ITC18_AsychOut {
 };
 
 
-// here we define an derived class of the IODevice class.
+// here we define an derived class of the LegacyIODevice class.
 // it contains data and functions that are specific to the ITC 18.
 //  This header and associated c code will ultimately be compiled as a plugin 
 //  that will be linked at run time. 
 // JJD July 2004
 class mITC18_IODevice;
 
-class mITC18_IODevice : public IODevice {
+class mITC18_IODevice : public LegacyIODevice {
 
            // need to keep track of who is out there 
             //  (common to all ITC18IODevice objects that are created)
@@ -598,7 +598,7 @@ class mITC18_IODevice : public IODevice {
 			int					getAnalogInputRangeTag(double requestedAnalogInRangeV);
             IOChannel_ITC18_TTL_edge  *findEdgeChannelUsingTTLport(ExpandableList<IOChannel> *channelListToCheck, int TTLhardwarePortNumber);
 
-	shared_ptr<mITC18_IODevice> shared_from_this() { return static_pointer_cast<mITC18_IODevice>(IODevice::shared_from_this()); }
+	shared_ptr<mITC18_IODevice> shared_from_this() { return dynamic_pointer_cast<mITC18_IODevice>(IODevice::shared_from_this()); }
 };
 
 

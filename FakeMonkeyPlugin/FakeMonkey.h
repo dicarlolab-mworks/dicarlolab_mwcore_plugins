@@ -9,7 +9,7 @@
 #ifndef	FAKE_MONKEY_H_
 #define	FAKE_MONKEY_H_
 
-#include "MWorksCore/IODevice.h"
+#include "MWorksCore/LegacyIODevice.h"
 #include "MWorksCore/ComponentFactory.h"
 #include "FakeMonkeyEyeMovementChannel.h"
 #include "boost/random.hpp"
@@ -20,7 +20,7 @@ using namespace mw;
 #define FAKE_MONKEY_MEAN_SACCADE_DURATION_US 50*1000
 #define FAKE_MONKEY_MEAN_SPIKING_RATE 30.0
 
-class mFakeMonkey : public IODevice {
+class mFakeMonkey : public LegacyIODevice {
 
 protected:
 
@@ -58,7 +58,6 @@ public:
 	virtual bool startDeviceIO();
 	virtual bool stopDeviceIO();
 	virtual bool updateChannel(int index);
-	virtual bool shutdown();
 	
 	void addChild(std::map<std::string, std::string> parameters,
 				  ComponentRegistry *reg,
@@ -73,7 +72,7 @@ public:
 				   const MWorksTime time_to_fixate_at_end_of_saccade);
 	void fixate(const MWorksTime duration);
 	
-	shared_ptr<mFakeMonkey> shared_from_this() { return static_pointer_cast<mFakeMonkey>(IODevice::shared_from_this()); }
+	shared_ptr<mFakeMonkey> shared_from_this() { return dynamic_pointer_cast<mFakeMonkey>(IODevice::shared_from_this()); }
 };
 
 

@@ -108,7 +108,7 @@ Lockable *mITC18_IODevice::ITC18DriverLock;
 
 
 // constructor function for ITC18_IODevice objects
-mITC18_IODevice::mITC18_IODevice(const shared_ptr<Scheduler> &a_scheduler)  : IODevice() {
+mITC18_IODevice::mITC18_IODevice(const shared_ptr<Scheduler> &a_scheduler)  : LegacyIODevice() {
 	
 	scheduler = a_scheduler;
 	// set up some defaults
@@ -468,7 +468,7 @@ short mITC18_IODevice::setupHardwarePort(IOChannel * chan) {
 bool mITC18_IODevice::validateIndividualChannel(IOChannel * tentative_channel, 
 												IOChannelIncompatibility *  incompatibility){
 	
-	bool success = IODevice::validateIndividualChannel(tentative_channel, incompatibility);    // call parent method
+	bool success = LegacyIODevice::validateIndividualChannel(tentative_channel, incompatibility);    // call parent method
     
 	// more specific validation depends on the specific type of ITC channel 
 	success = ((IOChannel_ITC18 *)tentative_channel)->validate(incompatibility); // DDC: super dangerous
@@ -3026,7 +3026,7 @@ void IOChannel_ITC18_AsychOut_pulsed::shutdown() {
 }
 
 
-void IOChannel_ITC18_AsychOut_pulsed::setupPulsing(shared_ptr<IODevice> _device, int chan_index) {	
+void IOChannel_ITC18_AsychOut_pulsed::setupPulsing(shared_ptr<LegacyIODevice> _device, int chan_index) {	
 	
 	if (VERBOSE_IO_DEVICE) mprintf(M_IODEVICE_MESSAGE_DOMAIN,"IOChannel_ITC18_AsychOut_pulsed::setupPulsing.  chan_index = %d",chan_index); 
 	
