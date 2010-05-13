@@ -18,6 +18,17 @@
 			name = UninstallMovieStimulusPlugin;
 			productName = UninstallMovieStimulusPlugin;
 		};
+		E17B9DBD119CA26F00EEBF5D /* Everything */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = E17B9DC7119CA27600EEBF5D /* Build configuration list for PBXAggregateTarget "Everything" */;
+			buildPhases = (
+			);
+			dependencies = (
+				E17B9DC1119CA27200EEBF5D /* PBXTargetDependency */,
+			);
+			name = Everything;
+			productName = Everything;
+		};
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
@@ -31,6 +42,16 @@
 		5C4B0A650DC79212001BC518 /* MWorksCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C4B0A630DC79212001BC518 /* MWorksCore.framework */; };
 		8D5B49B0048680CD000E48DA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C167DFE841241C02AAC07 /* InfoPlist.strings */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		E17B9DC0119CA27200EEBF5D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8D5B49AC048680CD000E48DA /* MovieStimulusPlugin */;
+			remoteInfo = MovieStimulusPlugin;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		089C1672FE841209C02AAC07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
@@ -54,7 +75,6 @@
 		8D5B49B6048680CD000E48DA /* MovieStimulusPlugin.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MovieStimulusPlugin.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D5B49B7048680CD000E48DA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D2F7E65807B2D6F200F64583 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
-		E1895A5B116FCCB400D8CBE0 /* Development_10.5_compatible.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Development_10.5_compatible.xcconfig; path = "/Library/Application Support/MWorks/Developer/Xcode/Development_10.5_compatible.xcconfig"; sourceTree = "<absolute>"; };
 		E1895A5C116FCCB400D8CBE0 /* Development.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Development.xcconfig; path = "/Library/Application Support/MWorks/Developer/Xcode/Development.xcconfig"; sourceTree = "<absolute>"; };
 		E1895A5D116FCCB400D8CBE0 /* WARNING.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = WARNING.txt; path = "/Library/Application Support/MWorks/Developer/Xcode/WARNING.txt"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
@@ -167,7 +187,6 @@
 		E1895A5A116FCCB400D8CBE0 /* External Configs */ = {
 			isa = PBXGroup;
 			children = (
-				E1895A5B116FCCB400D8CBE0 /* Development_10.5_compatible.xcconfig */,
 				E1895A5C116FCCB400D8CBE0 /* Development.xcconfig */,
 				E1895A5D116FCCB400D8CBE0 /* WARNING.txt */,
 			);
@@ -210,6 +229,7 @@
 			targets = (
 				8D5B49AC048680CD000E48DA /* MovieStimulusPlugin */,
 				0E121C2A0E6B1D14007B29B8 /* UninstallMovieStimulusPlugin */,
+				E17B9DBD119CA26F00EEBF5D /* Everything */,
 			);
 		};
 /* End PBXProject section */
@@ -271,6 +291,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		E17B9DC1119CA27200EEBF5D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8D5B49AC048680CD000E48DA /* MovieStimulusPlugin */;
+			targetProxy = E17B9DC0119CA27200EEBF5D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		089C167DFE841241C02AAC07 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
@@ -283,34 +311,12 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		0E121C2B0E6B1D14007B29B8 /* Development (10.5 Compatible) */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				PRODUCT_NAME = MovieStimulusPlugin.bundle;
-			};
-			name = "Development (10.5 Compatible)";
-		};
 		0E121C2C0E6B1D14007B29B8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				PRODUCT_NAME = MovieStimulusPlugin.bundle;
 			};
 			name = Release;
-		};
-		1DEB913B08733D840010E9CD /* Development (10.5 Compatible) */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
-				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = MovieStimulusPlugin_Prefix.pch;
-				INFOPLIST_FILE = Info.plist;
-				PRODUCT_NAME = MovieStimulusPlugin;
-				WRAPPER_EXTENSION = bundle;
-			};
-			name = "Development (10.5 Compatible)";
 		};
 		1DEB913C08733D840010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -325,20 +331,6 @@
 				WRAPPER_EXTENSION = bundle;
 			};
 			name = Release;
-		};
-		1DEB913F08733D840010E9CD /* Development (10.5 Compatible) */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = E1895A5B116FCCB400D8CBE0 /* Development_10.5_compatible.xcconfig */;
-			buildSettings = {
-				FINAL_INSTALL_DIR = "$(PLUGINS_DIR)";
-				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = "$(MW_INCLUDE_DIR)";
-				LIBRARY_SEARCH_PATHS = "$(MW_LIB_DIR)";
-				PREBINDING = NO;
-			};
-			name = "Development (10.5 Compatible)";
 		};
 		1DEB914008733D840010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -359,6 +351,27 @@
 				MW_LIB_DIR = "\"$(APP_SUPPORT_DIR)/Developer/gcc40/lib\"";
 				PREBINDING = NO;
 				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.5.sdk";
+			};
+			name = Release;
+		};
+		E17B9DBE119CA26F00EEBF5D /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				PRODUCT_NAME = Everything;
+			};
+			name = Development;
+		};
+		E17B9DBF119CA26F00EEBF5D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				PRODUCT_NAME = Everything;
+				ZERO_LINK = NO;
 			};
 			name = Release;
 		};
@@ -405,7 +418,6 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E1895A68116FCD0100D8CBE0 /* Development */,
-				0E121C2B0E6B1D14007B29B8 /* Development (10.5 Compatible) */,
 				0E121C2C0E6B1D14007B29B8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -415,7 +427,6 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E1895A67116FCD0100D8CBE0 /* Development */,
-				1DEB913B08733D840010E9CD /* Development (10.5 Compatible) */,
 				1DEB913C08733D840010E9CD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -425,8 +436,16 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E1895A66116FCD0100D8CBE0 /* Development */,
-				1DEB913F08733D840010E9CD /* Development (10.5 Compatible) */,
 				1DEB914008733D840010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E17B9DC7119CA27600EEBF5D /* Build configuration list for PBXAggregateTarget "Everything" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E17B9DBE119CA26F00EEBF5D /* Development */,
+				E17B9DBF119CA26F00EEBF5D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
