@@ -5,12 +5,12 @@
 
 
 
+#include <fstream>
 #include "MWorksCore/LegacyIODevice.h"				
 #include "ITC/ITC18.h"		// Instrutech header
 #include "MWorksCore/ExpandableList.h"					
 #include "MWorksCore/Buffers.h"				
 #include "MWorksCore/ComponentFactory.h"
-#include <fstream>
 using namespace mw;
 
 /**
@@ -86,7 +86,9 @@ using namespace mw;
 
 // define max
 #define m_max(a,b)	(((a) >= (b)) ? (a) : (b))
+#ifndef min
 #define min(a,b)	(((a) <= (b)) ? (a) : (b))
+#endif
 
 // valid range values (volts) -- these are the values that are allowed in the 
 //  channel request for the analog input channels -- must be exact
