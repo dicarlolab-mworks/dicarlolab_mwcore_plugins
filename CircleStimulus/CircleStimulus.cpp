@@ -65,7 +65,7 @@ Stimulus * mCircleStimulus::frozenClone(){
 
 #define TWO_PI 2*3.14159
 
-void mCircleStimulus::drawInUnitSquare(StimulusDisplay *display) {
+void mCircleStimulus::drawInUnitSquare(shared_ptr<StimulusDisplay> display) {
     
 	// draw point at desired location with desired color
 	// fill a (0,0) (1,1) box with the right color

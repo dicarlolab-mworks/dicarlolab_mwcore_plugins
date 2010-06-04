@@ -71,7 +71,7 @@ public:
 	int getNFramesToShow();
 	int getNFramesShown();
 	
-	void draw(StimulusDisplay *display);
+	void draw(shared_ptr<StimulusDisplay> display);
 	
 	void callUpdateDisplay();
 	void endMovie();

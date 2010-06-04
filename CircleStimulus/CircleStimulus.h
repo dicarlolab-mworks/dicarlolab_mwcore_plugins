@@ -29,7 +29,7 @@ public:
 	~mCircleStimulus();
 	virtual Stimulus * frozenClone();
 	
-	virtual void drawInUnitSquare(StimulusDisplay *display);
+	virtual void drawInUnitSquare(shared_ptr<StimulusDisplay> display);
 	virtual Datum getCurrentAnnounceDrawData();
 };
 

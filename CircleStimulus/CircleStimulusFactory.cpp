@@ -74,7 +74,7 @@ shared_ptr<mw::Component> mCircleStimulusFactory::createObject(std::map<std::str
 	
 	
 	
-	new_circle_stimulus->load(defaultDisplay.get());
+	new_circle_stimulus->load(defaultDisplay);
 	shared_ptr <StimulusNode> thisStimNode = shared_ptr<StimulusNode>(new StimulusNode(new_circle_stimulus));
 	reg->registerStimulusNode(tagname, thisStimNode);
 	

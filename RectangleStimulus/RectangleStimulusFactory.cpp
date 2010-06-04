@@ -72,7 +72,7 @@ shared_ptr<mw::Component> mRectangleStimulusFactory::createObject(std::map<std::
 	
 	
 	
-	new_rectangle_stimulus->load(defaultDisplay.get());
+	new_rectangle_stimulus->load(defaultDisplay);
 	shared_ptr <StimulusNode> thisStimNode = shared_ptr<StimulusNode>(new StimulusNode(new_rectangle_stimulus));
 	reg->registerStimulusNode(tagname, thisStimNode);
 	

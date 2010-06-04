@@ -149,7 +149,7 @@ void mMovieStimulus::stopAndRewind() {
 	//schedule_node->kill();	
 }
 
-void mMovieStimulus::draw(StimulusDisplay *display) {	
+void mMovieStimulus::draw(shared_ptr<StimulusDisplay> display) {	
 	boost::mutex::scoped_lock locker(movie_lock);
 	
 	// this is the first draw that the movie has recieved...schedule the display updates accordingly
