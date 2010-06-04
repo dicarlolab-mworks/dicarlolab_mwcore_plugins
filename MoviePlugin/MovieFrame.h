@@ -13,13 +13,13 @@
 #include "MWorksCore/StimulusNode.h"
 using namespace mw;
 
-class mMovieFrame {
+class MovieFrame {
 private:
 	shared_ptr <StimulusNode> frame_node;
 	MWorksTime next_frame_at;
 	std::string stim_tag;
 public:
-	mMovieFrame(const shared_ptr<StimulusNode> frame, 
+	MovieFrame(const shared_ptr<StimulusNode> frame, 
 				const MWorksTime next_frame_time);
 	shared_ptr<StimulusNode> stimNode();
 	MWorksTime nextFrameTime() const;

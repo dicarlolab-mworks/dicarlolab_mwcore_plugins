@@ -21,11 +21,11 @@ Plugin *getPlugin(){
 
 void MovieStimulusPlugin::registerComponents(shared_ptr<ComponentRegistry> registry) {
 	registry->registerFactory(std::string("stimulus/movie"),
-							  (ComponentFactory *)(new mMovieStimulusFactory()));
+							  (ComponentFactory *)(new MovieStimulusFactory()));
 	
 	registry->registerFactory(std::string("action/play_movie"),
-							  (ComponentFactory *)(new mPlayMovieFactory()));	
+							  (ComponentFactory *)(new PlayMovieFactory()));	
 
 	registry->registerFactory(std::string("action/stop_movie"),
-							  (ComponentFactory *)(new mStopMovieFactory()));	
+							  (ComponentFactory *)(new StopMovieFactory()));	
 }

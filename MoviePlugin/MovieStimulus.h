@@ -21,9 +21,9 @@
 using namespace mw;
 
 
-class mMovieStimulusFrameNotification;
+class MovieStimulusFrameNotification;
 
-class mMovieStimulus : public Stimulus, public boost::enable_shared_from_this<mMovieStimulus> {
+class MovieStimulus : public Stimulus, public boost::enable_shared_from_this<MovieStimulus> {
 	
 protected: 
 	boost::shared_ptr<Scheduler> scheduler;
@@ -37,7 +37,7 @@ protected:
 	boost::shared_ptr<Variable> error_reporting;
 	boost::shared_ptr<Variable> start_frame_index;
 	boost::shared_ptr<Variable> end_frame_index;
-	boost::shared_ptr<mMovieStimulusFrameNotification> stimDisplayUpdateNotificationObject;
+	boost::shared_ptr<MovieStimulusFrameNotification> stimDisplayUpdateNotificationObject;
 	
 	unsigned int current_stimulus_group_index;
 	unsigned int updates_scheduled;
@@ -53,7 +53,7 @@ protected:
 	
 public:
 	
-	mMovieStimulus(const boost::shared_ptr<Scheduler> &a_scheduler,
+	MovieStimulus(const boost::shared_ptr<Scheduler> &a_scheduler,
 				   const boost::shared_ptr<StimulusDisplay> &a_display,
 				   const std::string &new_tag,
 				   const boost::shared_ptr<StimulusGroup> stimulus_group,
@@ -81,7 +81,7 @@ public:
 									   const MWorksTime time_us);
 };
 
-class mMovieStimulusFactory : public ComponentFactory {
+class MovieStimulusFactory : public ComponentFactory {
 	virtual boost::shared_ptr<mw::Component> createObject(std::map<std::string, std::string> parameters,
 													   ComponentRegistry *reg);
 };

@@ -13,14 +13,14 @@
 #include "boost/bind.hpp"
 #include "MovieStimulusFrameNotification.h"
 
-void *nextUpdate(const shared_ptr<mMovieStimulus> &movie);
-void *finalFrame(const shared_ptr<mMovieStimulus> &movie);
+void *nextUpdate(const shared_ptr<MovieStimulus> &movie);
+void *finalFrame(const shared_ptr<MovieStimulus> &movie);
 
 #define STIM_TYPE_MOVIE "movie"
 #define STIM_MOVIE_PLAYING "playing"
 #define STIM_MOVIE_CURRENT_FRAME "current_frame"
 
-mMovieStimulus::mMovieStimulus(const shared_ptr<Scheduler> &a_scheduler,
+MovieStimulus::MovieStimulus(const shared_ptr<Scheduler> &a_scheduler,
 							   const shared_ptr<StimulusDisplay> &a_display,
 							   const std::string &new_tag,
 							   const shared_ptr<StimulusGroup> new_stimulus_group,
@@ -43,14 +43,14 @@ mMovieStimulus::mMovieStimulus(const shared_ptr<Scheduler> &a_scheduler,
 	updates_scheduled = 0;
 	
 	// connect this to #stimDisplayUpdate
-	stimDisplayUpdateNotificationObject = shared_ptr<mMovieStimulusFrameNotification>(new mMovieStimulusFrameNotification(this));
+	stimDisplayUpdateNotificationObject = shared_ptr<MovieStimulusFrameNotification>(new MovieStimulusFrameNotification(this));
 	stimDisplayUpdate->addNotification(stimDisplayUpdateNotificationObject);
 	
 	current_stimulus_group_index = -1;
 }
 
 // what's a frozen movie stim?  I don't know either...return a copy of the existing movie
-Stimulus * mMovieStimulus::frozenClone() {
+Stimulus * MovieStimulus::frozenClone() {
 	boost::mutex::scoped_lock locker(movie_lock);
 	
 	shared_ptr<Variable> frozen_frames_per_second(frames_per_second->frozenClone());
@@ -64,7 +64,7 @@ Stimulus * mMovieStimulus::frozenClone() {
 	//				
 	//	x << frozen_counter;
 	//	
-	return new mMovieStimulus(scheduler,
+	return new MovieStimulus(scheduler,
 							  display,
 							  tag, 
 							  stimulus_group, 
@@ -75,17 +75,17 @@ Stimulus * mMovieStimulus::frozenClone() {
 							  frozen_end_frame_index);
 }
 
-int mMovieStimulus::getNFramesToShow() {
+int MovieStimulus::getNFramesToShow() {
 	boost::mutex::scoped_lock locker(movie_lock);
 	return (end_frame_index->getValue().getInteger()-start_frame_index->getValue().getInteger()) + 1;
 }
 
-int mMovieStimulus::getNFramesShown() {
+int MovieStimulus::getNFramesShown() {
 	boost::mutex::scoped_lock locker(movie_lock);
 	return updates_scheduled;
 }
 
-void mMovieStimulus::play() {
+void MovieStimulus::play() {
 	boost::mutex::scoped_lock locker(movie_lock);
 	
 	if (!movie_started) {
@@ -118,7 +118,7 @@ void mMovieStimulus::play() {
 			times_shown.push_back(times);
 		}		
 		
-		shared_ptr <mMovieStimulus> shared_ptr_to_this = shared_from_this();
+		shared_ptr <MovieStimulus> shared_ptr_to_this = shared_from_this();
 		
 		schedule_node = scheduler->scheduleUS(FILELINE,
 											  0,
@@ -132,7 +132,7 @@ void mMovieStimulus::play() {
 	}	
 }
 
-void mMovieStimulus::stopAndRewind() {
+void MovieStimulus::stopAndRewind() {
 	boost::mutex::scoped_lock locker(movie_lock);
 
     // If movie is already stopped, do nothing
@@ -149,7 +149,7 @@ void mMovieStimulus::stopAndRewind() {
 	//schedule_node->kill();	
 }
 
-void mMovieStimulus::draw(shared_ptr<StimulusDisplay> display) {	
+void MovieStimulus::draw(shared_ptr<StimulusDisplay> display) {	
 	boost::mutex::scoped_lock locker(movie_lock);
 	
 	// this is the first draw that the movie has recieved...schedule the display updates accordingly
@@ -170,7 +170,7 @@ void mMovieStimulus::draw(shared_ptr<StimulusDisplay> display) {
 			// schedule the time to hide the last frame
 			const MWorksTime time_to_hide_final_frame = start_time + (1/frames_per_us)*number_of_frames_to_show;
 			
-			shared_ptr <mMovieStimulus> shared_ptr_to_this = shared_from_this();
+			shared_ptr <MovieStimulus> shared_ptr_to_this = shared_from_this();
 			
 			schedule_node = scheduler->scheduleUS(FILELINE,
 												  time_to_hide_final_frame - scheduler->getClock()->getCurrentTimeUS(),
@@ -186,7 +186,7 @@ void mMovieStimulus::draw(shared_ptr<StimulusDisplay> display) {
 	}
 }
 
-void mMovieStimulus::endMovie() {
+void MovieStimulus::endMovie() {
 	{
 		boost::mutex::scoped_lock locker(movie_lock);
 		
@@ -231,7 +231,7 @@ void mMovieStimulus::endMovie() {
 
 
 
-void mMovieStimulus::callUpdateDisplay() {
+void MovieStimulus::callUpdateDisplay() {
 	{
 		boost::mutex::scoped_lock locker(movie_lock);
 		++updates_scheduled;
@@ -240,7 +240,7 @@ void mMovieStimulus::callUpdateDisplay() {
 	display->asynchronousUpdateDisplay();
 }
 
-void mMovieStimulus::stimDisplayUpdateNotification(const Datum &data, const MWorksTime time_us) {
+void MovieStimulus::stimDisplayUpdateNotification(const Datum &data, const MWorksTime time_us) {
 	boost::mutex::scoped_lock locker(movie_lock);
 	
 	if(movie_started && !movie_ended) {
@@ -272,7 +272,7 @@ void mMovieStimulus::stimDisplayUpdateNotification(const Datum &data, const MWor
 	}
 }
 
-Datum mMovieStimulus::getCurrentAnnounceDrawData() {
+Datum MovieStimulus::getCurrentAnnounceDrawData() {
 	boost::mutex::scoped_lock locker(movie_lock);
 	//	mprintf("%s, announcing: %d", tag.c_str(), current_stimulus_group_index);
 	//
@@ -286,17 +286,17 @@ Datum mMovieStimulus::getCurrentAnnounceDrawData() {
 	return (announceData);
 }
 
-void *nextUpdate(const shared_ptr<mMovieStimulus> &movie){
+void *nextUpdate(const shared_ptr<MovieStimulus> &movie){
 	movie->callUpdateDisplay();
     return 0;
 }
 
-void *finalFrame(const shared_ptr<mMovieStimulus> &movie){
+void *finalFrame(const shared_ptr<MovieStimulus> &movie){
 	movie->endMovie();
     return 0;
 }
 
-shared_ptr<mw::Component> mMovieStimulusFactory::createObject(std::map<std::string, std::string> parameters,
+shared_ptr<mw::Component> MovieStimulusFactory::createObject(std::map<std::string, std::string> parameters,
 														   ComponentRegistry *reg) {
 	const char *TAG = "tag";
 	const char *STIMULUS_GROUP = "stimulus_group";
@@ -359,7 +359,7 @@ shared_ptr<mw::Component> mMovieStimulusFactory::createObject(std::map<std::stri
 		throw SimpleException("Attempt to create movie stimulus without a valid stimulus display");
 	}
 	
-	shared_ptr <mMovieStimulus> new_movie = shared_ptr<mMovieStimulus>(new mMovieStimulus(scheduler,
+	shared_ptr <MovieStimulus> new_movie = shared_ptr<MovieStimulus>(new MovieStimulus(scheduler,
 																						  display,
 																						  tagname, 
 																						  the_group,

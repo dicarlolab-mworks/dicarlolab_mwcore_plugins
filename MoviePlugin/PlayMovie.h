@@ -15,17 +15,17 @@
 using namespace mw;
 
 
-class mPlayMovie : public Action {	
+class PlayMovie : public Action {	
 protected:
-	shared_ptr<mMovieStimulus> movie;
+	shared_ptr<MovieStimulus> movie;
 	
 public:
 	
-	mPlayMovie(shared_ptr<mMovieStimulus> the_movie);
+	PlayMovie(shared_ptr<MovieStimulus> the_movie);
 	virtual bool execute();
 };
 
-class mPlayMovieFactory : public ComponentFactory {
+class PlayMovieFactory : public ComponentFactory {
 	virtual boost::shared_ptr<mw::Component> createObject(std::map<std::string, std::string> parameters,
 													   ComponentRegistry *reg);
 };

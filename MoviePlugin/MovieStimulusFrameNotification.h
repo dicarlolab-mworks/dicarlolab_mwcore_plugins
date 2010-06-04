@@ -13,16 +13,16 @@
 #include "MovieStimulus.h"
 #include "MWorksCore/GenericVariable.h"
 
-class mMovieStimulus;
+class MovieStimulus;
 
-class mMovieStimulusFrameNotification : public VariableNotification {
+class MovieStimulusFrameNotification : public VariableNotification {
 protected:
 	
-	mMovieStimulus *movie_stimulus;
+	MovieStimulus *movie_stimulus;
 	
 public:
 	
-	mMovieStimulusFrameNotification(mMovieStimulus *the_ms);
+	MovieStimulusFrameNotification(MovieStimulus *the_ms);
 	virtual void notify(const Datum& data);
     virtual void notify(const Datum& data, MWorksTime timeUS);
 	

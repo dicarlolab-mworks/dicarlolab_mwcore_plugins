@@ -14,15 +14,15 @@
 #include "MovieStimulus.h"
 using namespace mw;
 
-class mStopMovie : public Action {	
+class StopMovie : public Action {	
 protected:
-	shared_ptr<mMovieStimulus> movie;
+	shared_ptr<MovieStimulus> movie;
 public:
-	mStopMovie(shared_ptr<mMovieStimulus> the_movie);
+	StopMovie(shared_ptr<MovieStimulus> the_movie);
 	virtual bool execute();
 };
 
-class mStopMovieFactory : public ComponentFactory {
+class StopMovieFactory : public ComponentFactory {
 	virtual boost::shared_ptr<mw::Component> createObject(std::map<std::string, std::string> parameters,
 													   ComponentRegistry *reg);
 };

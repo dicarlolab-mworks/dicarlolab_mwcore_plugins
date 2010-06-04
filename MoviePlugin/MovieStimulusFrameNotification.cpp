@@ -9,15 +9,15 @@
 
 #include "MovieStimulusFrameNotification.h"
 
-mMovieStimulusFrameNotification::mMovieStimulusFrameNotification(mMovieStimulus *the_ms){
+MovieStimulusFrameNotification::MovieStimulusFrameNotification(MovieStimulus *the_ms){
 	movie_stimulus = the_ms;
 }
 
-void mMovieStimulusFrameNotification::notify(const Datum &data) {
+void MovieStimulusFrameNotification::notify(const Datum &data) {
 	shared_ptr<Clock> clock = Clock::instance();
 	this->notify(data, clock->getCurrentTimeUS());
 }
 
-void mMovieStimulusFrameNotification::notify(const Datum &data, MWorksTime time_us) {
+void MovieStimulusFrameNotification::notify(const Datum &data, MWorksTime time_us) {
 	movie_stimulus->stimDisplayUpdateNotification(data, time_us);
 }
