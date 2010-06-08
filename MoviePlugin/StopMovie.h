@@ -11,16 +11,8 @@
 #define STOP_MOVIE_ACTION_H_
 
 #include "MWorksCore/TrialBuildingBlocks.h"
-#include "MovieStimulus.h"
 using namespace mw;
 
-class StopMovie : public Action {	
-protected:
-	shared_ptr<MovieStimulus> movie;
-public:
-	StopMovie(shared_ptr<MovieStimulus> the_movie);
-	virtual bool execute();
-};
 
 class StopMovieFactory : public ComponentFactory {
 	virtual boost::shared_ptr<mw::Component> createObject(std::map<std::string, std::string> parameters,

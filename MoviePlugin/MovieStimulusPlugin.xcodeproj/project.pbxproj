@@ -34,9 +34,7 @@
 /* Begin PBXBuildFile section */
 		0E37FBA30E59C3DD008B885D /* MovieStimulusPlugin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0E37FBA10E59C3DD008B885D /* MovieStimulusPlugin.cpp */; };
 		0E3A0B530EEDA37500F5C65A /* MWLibrary.xml in Resources */ = {isa = PBXBuildFile; fileRef = 0E3A0B520EEDA37500F5C65A /* MWLibrary.xml */; };
-		0EDE104B0E58BA690031005B /* MovieFrame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0EDE10450E58BA690031005B /* MovieFrame.cpp */; };
 		0EDE104C0E58BA690031005B /* MovieStimulus.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0EDE10470E58BA690031005B /* MovieStimulus.cpp */; };
-		0EDE104D0E58BA690031005B /* MovieStimulusFrameNotification.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0EDE10490E58BA690031005B /* MovieStimulusFrameNotification.cpp */; };
 		0EDE10520E58BAD90031005B /* PlayMovie.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0EDE10510E58BAD90031005B /* PlayMovie.cpp */; };
 		0EDE10550E58BAE60031005B /* StopMovie.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0EDE10540E58BAE60031005B /* StopMovie.cpp */; };
 		5C4B0A650DC79212001BC518 /* MWorksCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C4B0A630DC79212001BC518 /* MWorksCore.framework */; };
@@ -60,12 +58,8 @@
 		0E37FBA10E59C3DD008B885D /* MovieStimulusPlugin.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MovieStimulusPlugin.cpp; sourceTree = "<group>"; };
 		0E37FBA20E59C3DD008B885D /* MovieStimulusPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieStimulusPlugin.h; sourceTree = "<group>"; };
 		0E3A0B520EEDA37500F5C65A /* MWLibrary.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MWLibrary.xml; sourceTree = "<group>"; };
-		0EDE10450E58BA690031005B /* MovieFrame.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MovieFrame.cpp; sourceTree = "<group>"; };
-		0EDE10460E58BA690031005B /* MovieFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieFrame.h; sourceTree = "<group>"; };
 		0EDE10470E58BA690031005B /* MovieStimulus.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MovieStimulus.cpp; sourceTree = "<group>"; };
 		0EDE10480E58BA690031005B /* MovieStimulus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieStimulus.h; sourceTree = "<group>"; };
-		0EDE10490E58BA690031005B /* MovieStimulusFrameNotification.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MovieStimulusFrameNotification.cpp; sourceTree = "<group>"; };
-		0EDE104A0E58BA690031005B /* MovieStimulusFrameNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieStimulusFrameNotification.h; sourceTree = "<group>"; };
 		0EDE10500E58BAD90031005B /* PlayMovie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayMovie.h; sourceTree = "<group>"; };
 		0EDE10510E58BAD90031005B /* PlayMovie.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlayMovie.cpp; sourceTree = "<group>"; };
 		0EDE10530E58BAE60031005B /* StopMovie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StopMovie.h; sourceTree = "<group>"; };
@@ -136,12 +130,8 @@
 		0EDE10440E58BA400031005B /* MovieStimuli */ = {
 			isa = PBXGroup;
 			children = (
-				0EDE10450E58BA690031005B /* MovieFrame.cpp */,
-				0EDE10460E58BA690031005B /* MovieFrame.h */,
 				0EDE10470E58BA690031005B /* MovieStimulus.cpp */,
 				0EDE10480E58BA690031005B /* MovieStimulus.h */,
-				0EDE10490E58BA690031005B /* MovieStimulusFrameNotification.cpp */,
-				0EDE104A0E58BA690031005B /* MovieStimulusFrameNotification.h */,
 				0EDE10500E58BAD90031005B /* PlayMovie.h */,
 				0EDE10510E58BAD90031005B /* PlayMovie.cpp */,
 				0EDE10530E58BAE60031005B /* StopMovie.h */,
@@ -280,9 +270,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0EDE104B0E58BA690031005B /* MovieFrame.cpp in Sources */,
 				0EDE104C0E58BA690031005B /* MovieStimulus.cpp in Sources */,
-				0EDE104D0E58BA690031005B /* MovieStimulusFrameNotification.cpp in Sources */,
 				0EDE10520E58BAD90031005B /* PlayMovie.cpp in Sources */,
 				0EDE10550E58BAE60031005B /* StopMovie.cpp in Sources */,
 				0E37FBA30E59C3DD008B885D /* MovieStimulusPlugin.cpp in Sources */,

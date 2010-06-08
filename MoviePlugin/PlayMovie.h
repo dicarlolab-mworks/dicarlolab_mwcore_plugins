@@ -11,19 +11,8 @@
 #define PLAY_MOVIE_ACTION_H_
 
 #include "MWorksCore/TrialBuildingBlocks.h"
-#include "MovieStimulus.h"
 using namespace mw;
 
-
-class PlayMovie : public Action {	
-protected:
-	shared_ptr<MovieStimulus> movie;
-	
-public:
-	
-	PlayMovie(shared_ptr<MovieStimulus> the_movie);
-	virtual bool execute();
-};
 
 class PlayMovieFactory : public ComponentFactory {
 	virtual boost::shared_ptr<mw::Component> createObject(std::map<std::string, std::string> parameters,
