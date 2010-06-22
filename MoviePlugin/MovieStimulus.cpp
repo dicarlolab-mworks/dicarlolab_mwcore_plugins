@@ -17,14 +17,10 @@ MovieStimulus::MovieStimulus(const std::string &_tag,
                              const shared_ptr<Scheduler> &_scheduler,
                              const shared_ptr<StimulusDisplay> &_display,
                              const shared_ptr<Variable> &_frames_per_second,
-                             const shared_ptr<Variable> &_statistics_reporting,
-                             const shared_ptr<Variable> &_error_reporting,
                              const shared_ptr<StimulusGroup> &_stimulus_group) :
     DynamicStimulusDriver(_scheduler,
                           _display,
-                          _frames_per_second,
-                          _statistics_reporting,
-                          _error_reporting),
+                          _frames_per_second),
     Stimulus(_tag)
 {
 	stimulus_group = _stimulus_group;
@@ -57,15 +53,11 @@ shared_ptr<mw::Component> MovieStimulusFactory::createObject(std::map<std::strin
 	const char *TAG = "tag";
 	const char *STIMULUS_GROUP = "stimulus_group";
 	const char *FRAMES_PER_SECOND = "frames_per_second";
-	const char *MOVIE_STATS = "movie_stats";
-	const char *ERROR_REPORTING = "error_reporting";
 	
 	REQUIRE_ATTRIBUTES(parameters, 
 					   TAG, 
 					   STIMULUS_GROUP,
-					   FRAMES_PER_SECOND,
-					   MOVIE_STATS,
-					   ERROR_REPORTING);
+					   FRAMES_PER_SECOND);
 	
 	std::string tagname(parameters.find(TAG)->second);
 	
@@ -76,12 +68,6 @@ shared_ptr<mw::Component> MovieStimulusFactory::createObject(std::map<std::strin
 	
 	shared_ptr<Variable> frames_per_second = reg->getVariable(parameters.find(FRAMES_PER_SECOND)->second);	
 	checkAttribute(frames_per_second, parameters.find("reference_id")->second, FRAMES_PER_SECOND, parameters[FRAMES_PER_SECOND]);
-	
-	shared_ptr<Variable> movie_stats = reg->getVariable(parameters.find(MOVIE_STATS)->second);	
-	checkAttribute(movie_stats, parameters.find("reference_id")->second, MOVIE_STATS, parameters.find(MOVIE_STATS)->second);
-	
-	shared_ptr<Variable> error_reporting = reg->getVariable(parameters.find(ERROR_REPORTING)->second);	
-	checkAttribute(error_reporting, parameters.find("reference_id")->second, ERROR_REPORTING, parameters.find(ERROR_REPORTING)->second);
 	
 	boost::shared_ptr <Scheduler> scheduler = Scheduler::instance();
 	if(scheduler == 0) {
@@ -97,8 +83,6 @@ shared_ptr<mw::Component> MovieStimulusFactory::createObject(std::map<std::strin
                                                                                        scheduler,
                                                                                        display,
                                                                                        frames_per_second,
-                                                                                       movie_stats,
-                                                                                       error_reporting,
                                                                                        the_group));
 	
 	shared_ptr <StimulusNode> thisStimNode = shared_ptr<StimulusNode>(new StimulusNode(new_movie));

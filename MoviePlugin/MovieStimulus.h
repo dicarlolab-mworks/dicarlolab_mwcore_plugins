@@ -28,8 +28,6 @@ public:
                   const boost::shared_ptr<Scheduler> &_scheduler,
                   const boost::shared_ptr<StimulusDisplay> &_display,
                   const boost::shared_ptr<Variable> &_frames_per_second,
-                  const boost::shared_ptr<Variable> &_statistics_reporting,
-                  const boost::shared_ptr<Variable> &_error_reporting,
                   const boost::shared_ptr<StimulusGroup> &_stimulus_group);
 	
 	virtual void draw(shared_ptr<StimulusDisplay> display);
