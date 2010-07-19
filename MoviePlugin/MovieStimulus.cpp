@@ -28,8 +28,10 @@ MovieStimulus::MovieStimulus(const std::string &_tag,
 
 void MovieStimulus::draw(shared_ptr<StimulusDisplay> display) {	
     int currentFrame = getFrameNumber();
-	
-    if(currentFrame < stimulus_group->getNElements()) {
+    
+    if (currentFrame < 0) {
+        // Not playing, so there's nothing to draw
+    } else if (currentFrame < stimulus_group->getNElements()) {
         // Draw the current frame
         stimulus_group->getElement(currentFrame)->draw(display);
     } else  {
