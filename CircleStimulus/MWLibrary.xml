@@ -18,7 +18,7 @@
 		x_position=""
 		y_position=""
 		rotation=""
-		contrast=""/>
+		alpha_multiplier=""/>
     </code>
   </MWElement>
 </MWElements>
