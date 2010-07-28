@@ -181,7 +181,7 @@ void mFakeMonkey::spike(){
 	boost::exponential_distribution<double> dist = boost::exponential_distribution<double>(spike_rate->getValue().getFloat() / 1000000); 	
 	variate_generator<boost::mt19937&, boost::exponential_distribution<double> > sampler = variate_generator<boost::mt19937&, boost::exponential_distribution<double> >(rng,dist);
 	
-	if(spike_node != NULL){
+	if(spike_node){
 		spike_node->cancel();
 	}
 	
@@ -234,7 +234,7 @@ void mFakeMonkey::startSaccading(){
 	*status = M_FAKE_MONKEY_SACCADING;
 	
 	
-	if(movement_node != NULL){
+	if(movement_node){
 		movement_node->cancel();
 	}
 	
@@ -260,7 +260,7 @@ void mFakeMonkey::startFixating(){
 	
 	*status = M_FAKE_MONKEY_FIXATING;
 	
-	if(movement_node != NULL){
+	if(movement_node){
 		movement_node->cancel();
 	}
 	
@@ -285,11 +285,13 @@ bool mFakeMonkey::stopDeviceIO(){
 	boost::mutex::scoped_lock lock(*monkey_lock);
 	
 	*status = M_FAKE_MONKEY_FIXATING;
-	if(movement_node != NULL){
+	if(movement_node){
 		movement_node->cancel();
+        movement_node.reset();
 	}
-	if(spike_node != NULL){
+	if(spike_node){
 		spike_node->cancel();
+        spike_node.reset();
 	}	
 	
 	return LegacyIODevice::stopDeviceIO();
