@@ -10,13 +10,12 @@
 #ifndef MOVIE_STIMULUS_H_
 #define MOVIE_STIMULUS_H_
 
-#include "MWorksCore/DynamicStimulusDriver.h"
-#include "MWorksCore/Stimulus.h"
+#include "MWorksCore/StandardDynamicStimulus.h"
 #include "MWorksCore/ComponentRegistry.h"
 using namespace mw;
 
 
-class MovieStimulus : public DynamicStimulusDriver, public Stimulus {
+class MovieStimulus : public StandardDynamicStimulus {
 	
 protected: 
 
@@ -25,12 +24,11 @@ protected:
 public:
 	
 	MovieStimulus(const std::string &_tag,
-                  const boost::shared_ptr<Scheduler> &_scheduler,
-                  const boost::shared_ptr<StimulusDisplay> &_display,
-                  const boost::shared_ptr<Variable> &_frames_per_second,
-                  const boost::shared_ptr<StimulusGroup> &_stimulus_group);
+                  shared_ptr<Variable> _frames_per_second,
+                  shared_ptr<StimulusGroup> _stimulus_group);
 	
-	virtual void draw(shared_ptr<StimulusDisplay> display);
+    virtual bool needDraw();
+    virtual void drawFrame(shared_ptr<StimulusDisplay> display, int frameNumber);
 	virtual Datum getCurrentAnnounceDrawData();
 
 };

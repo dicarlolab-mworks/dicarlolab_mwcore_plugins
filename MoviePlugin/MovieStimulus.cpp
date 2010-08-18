@@ -14,29 +14,20 @@
 #define STIM_MOVIE_CURRENT_FRAME "current_frame"
 
 MovieStimulus::MovieStimulus(const std::string &_tag,
-                             const shared_ptr<Scheduler> &_scheduler,
-                             const shared_ptr<StimulusDisplay> &_display,
-                             const shared_ptr<Variable> &_frames_per_second,
-                             const shared_ptr<StimulusGroup> &_stimulus_group) :
-    DynamicStimulusDriver(_scheduler,
-                          _display,
-                          _frames_per_second),
-    Stimulus(_tag)
+                             shared_ptr<Variable> _frames_per_second,
+                             shared_ptr<StimulusGroup> _stimulus_group) :
+    StandardDynamicStimulus(_tag, _frames_per_second)
 {
 	stimulus_group = _stimulus_group;
 }
 
-void MovieStimulus::draw(shared_ptr<StimulusDisplay> display) {	
-    int currentFrame = getFrameNumber();
-    
-    if (currentFrame < 0) {
-        // Not playing, so there's nothing to draw
-    } else if (currentFrame < stimulus_group->getNElements()) {
-        // Draw the current frame
-        stimulus_group->getElement(currentFrame)->draw(display);
-    } else  {
-        // Out of frames; end the movie
-        stop();
+bool MovieStimulus::needDraw() {
+    return StandardDynamicStimulus::needDraw() && (getFrameNumber() < stimulus_group->getNElements());
+}
+
+void MovieStimulus::drawFrame(shared_ptr<StimulusDisplay> display, int frameNumber) {	
+    if (frameNumber < stimulus_group->getNElements()) {
+        stimulus_group->getElement(frameNumber)->draw(display);
     }
 }
 
@@ -71,19 +62,7 @@ shared_ptr<mw::Component> MovieStimulusFactory::createObject(std::map<std::strin
 	shared_ptr<Variable> frames_per_second = reg->getVariable(parameters.find(FRAMES_PER_SECOND)->second);	
 	checkAttribute(frames_per_second, parameters.find("reference_id")->second, FRAMES_PER_SECOND, parameters[FRAMES_PER_SECOND]);
 	
-	boost::shared_ptr <Scheduler> scheduler = Scheduler::instance();
-	if(scheduler == 0) {
-		throw SimpleException("Attempt to create movie stimulus without a valid scheduler");
-	}
-	
-	boost::shared_ptr <StimulusDisplay> display = GlobalCurrentExperiment->getStimulusDisplay();
-	if(display == 0) {
-		throw SimpleException("Attempt to create movie stimulus without a valid stimulus display");
-	}
-	
 	shared_ptr <MovieStimulus> new_movie = shared_ptr<MovieStimulus>(new MovieStimulus(tagname,
-                                                                                       scheduler,
-                                                                                       display,
                                                                                        frames_per_second,
                                                                                        the_group));
 	
