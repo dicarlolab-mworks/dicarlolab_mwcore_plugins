@@ -33,9 +33,8 @@ void MovieStimulus::drawFrame(shared_ptr<StimulusDisplay> display, int frameNumb
 
 Datum MovieStimulus::getCurrentAnnounceDrawData() {
 	boost::mutex::scoped_lock locker(stim_lock);
-	Datum announceData = DynamicStimulusDriver::getCurrentAnnounceDrawData();
-	announceData.addElement(STIM_NAME,tag);
-	announceData.addElement(STIM_TYPE,STIM_TYPE_MOVIE);  
+	Datum announceData = StandardDynamicStimulus::getCurrentAnnounceDrawData();
+	announceData.addElement(STIM_TYPE, STIM_TYPE_MOVIE);  
 	announceData.addElement(STIM_MOVIE_PLAYING, Datum(started));  
 	announceData.addElement(STIM_MOVIE_CURRENT_FRAME, Datum((long)getFrameNumber()));  
 	return (announceData);
