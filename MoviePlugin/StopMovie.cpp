@@ -21,12 +21,9 @@ shared_ptr<mw::Component> StopMovieFactory::createObject(std::map<std::string, s
     
 	REQUIRE_ATTRIBUTES(parameters, MOVIE);
 	
-	shared_ptr <MovieStimulus> the_movie = reg->getObject<MovieStimulus>(parameters.find(MOVIE)->second);
+	shared_ptr<StimulusNode> stimNode = reg->getStimulus(parameters.find(MOVIE)->second);
+    CHECK_ATTRIBUTE(stimNode, parameters, MOVIE);
 	
-	if(the_movie == 0) {
-		throw MissingReferenceException(parameters.find("reference_id")->second, MOVIE, parameters.find(MOVIE)->second);		
-	}
-	
-	shared_ptr <StopDynamicStimulus> new_stop_movie_action = shared_ptr<StopDynamicStimulus>(new StopDynamicStimulus(the_movie));
+	shared_ptr <StopDynamicStimulus> new_stop_movie_action = shared_ptr<StopDynamicStimulus>(new StopDynamicStimulus(stimNode));
 	return new_stop_movie_action;		
 }
