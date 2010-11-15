@@ -263,7 +263,7 @@ class IOChannelRequest_TriggeredAnalogSnippetITC18 : public IOChannelRequest {
 class IOChannel_ITC18 : public IOChannel {
 
 	protected:
-		shared_ptr<mITC18_IODevice> this_device;
+		weak_ptr<mITC18_IODevice> this_device;
 		ITC18DataType	itcDataType;
 		short	hardwarePort;
 		bool	schedulable;

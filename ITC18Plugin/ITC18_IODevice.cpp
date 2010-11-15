@@ -93,15 +93,15 @@ using namespace mw;
 
 // Keep track of physical ITC18's in the world.  No matter how many ITC18_device objects
 //   are created, there is only one copy of each of these vars
-ExpandableList<IOPhysicalDeviceReference> *mITC18_IODevice::visible_ITC18_devices;
-bool mITC18_IODevice::visible_ITC18_devices_initialized;
-long mITC18_IODevice::numITC18objects;	// number of device objects
+ExpandableList<IOPhysicalDeviceReference> *mITC18_IODevice::visible_ITC18_devices = NULL;
+bool mITC18_IODevice::visible_ITC18_devices_initialized = false;
+long mITC18_IODevice::numITC18objects = 0;	// number of device objects
 
 // JJD added this lockable Sept 30, 2006
 // it is used here to make the ITC18 driver thread-safe from the outside
 //  (That is, no matter how many itc18 devices exist, or how many threads call ITC18 methods,
 //  only one call to the ITC18 driver can be made at any moment in time.)
-Lockable *mITC18_IODevice::ITC18DriverLock;
+Lockable *mITC18_IODevice::ITC18DriverLock = NULL;
 
 
 // ---------------------------------
@@ -152,8 +152,12 @@ mITC18_IODevice::mITC18_IODevice(const shared_ptr<Scheduler> &a_scheduler)  : Le
 	// so we use static vars to hold the pointers and the boolean to tell us it has been done)
 	if (!mITC18_IODevice::visible_ITC18_devices_initialized) {	
 		numITC18objects = 0;	
-		visible_ITC18_devices = new ExpandableList<IOPhysicalDeviceReference>();
-		ITC18DriverLock = new Lockable();
+        if (NULL == visible_ITC18_devices) {
+            visible_ITC18_devices = new ExpandableList<IOPhysicalDeviceReference>();
+        } 
+        if (NULL == ITC18DriverLock) {
+            ITC18DriverLock = new Lockable();
+        }
 		
 		// TODO -- needs updating ------------------------------------------
 		// go find all physical ITC18 devices ...
@@ -171,6 +175,7 @@ mITC18_IODevice::mITC18_IODevice(const shared_ptr<Scheduler> &a_scheduler)  : Le
 			shared_ptr<IOPhysicalDeviceReference> physical_device_ref(
 																	   new IOPhysicalDeviceReference(i, "ITC18_Phys_Device_0"));      
 			visible_ITC18_devices->addElement(physical_device_ref);
+            numITC18objects++;
 			
 		} else {    // ITC device could not be openned.  
 			mwarning(M_IODEVICE_MESSAGE_DOMAIN, "ITC18 device requested for experiment, but could not be opened.");
@@ -181,9 +186,6 @@ mITC18_IODevice::mITC18_IODevice(const shared_ptr<Scheduler> &a_scheduler)  : Le
 		
 		// 
 		visible_ITC18_devices_initialized =true;    
-	}
-	else {
-		numITC18objects++;
 	}
 	
 	getCapabilities();      // find the capabilities of this type of device
@@ -1241,6 +1243,8 @@ void  *mITC18_IODevice::openITC18() {
 	
 	justStartedITC18 = true;
 	
+    // Turn on the "ready" indicator light
+    ITC18_SetReadyLight(pLocal, true);
 	
 	// debug only
 	//timeITCwasOpenedUS = clock->getCurrentTimeUS();	
@@ -1266,6 +1270,7 @@ void mITC18_IODevice::closeITC18(void)
 		pLocal = itc;
 		itc = NULL;
 		ITC18DriverLock->lock();
+        ITC18_SetReadyLight(pLocal, false);  // Turn off the "ready" indicator light
 		ITC18_Close(pLocal);
 		ITC18DriverLock->unlock();
 		//DisposePtr(pLocal);  // JJD updated July 2005
@@ -2231,8 +2236,8 @@ IOChannel_ITC18_TTL_edge  *mITC18_IODevice::findEdgeChannelUsingTTLport(Expandab
 IOChannel_ITC18::IOChannel_ITC18(IOChannelRequest * _request, IOCapability * _capability, shared_ptr<mITC18_IODevice> _device) : IOChannel(_request,_capability) {
 	
 	this_device = _device;
-	itcDataType = this_device->computeITCDataType(this);
-	hardwarePort = this_device->setupHardwarePort(this);
+	itcDataType = _device->computeITCDataType(this);
+	hardwarePort = _device->setupHardwarePort(this);
 	edgeChannel = false;
 	
 	//defaults that will protect the device (i.e. not run, no data, etc.)
@@ -2435,13 +2440,13 @@ IOChannel_ITC18_ADC::IOChannel_ITC18_ADC(IOChannelRequest * _request, IOCapabili
     ad_index = input_AD;
 	
     // Analog range
-    itc_range_tag = this_device->getAnalogInputRangeTag( (this->getRequest())->getRequestedRangeMax() );
+    itc_range_tag = _device->getAnalogInputRangeTag( (this->getRequest())->getRequestedRangeMax() );
     if (itc_range_tag < 0) {
         merror(M_IODEVICE_MESSAGE_DOMAIN,
 			   "failed to get itc range tag for analog channel.");
     }
     else {
-        multiplierToGetMV = this_device->getMultiplierToGetMV(itc_range_tag);
+        multiplierToGetMV = _device->getMultiplierToGetMV(itc_range_tag);
     }
 	
     lastClippingWarnTimeMS = 0;
@@ -2955,24 +2960,32 @@ bool IOChannel_ITC18_AsychOut::notify(const Datum& data) {
 }
 
 bool IOChannel_ITC18_AsychOutWord::notify(const Datum& data) {
+    shared_ptr<mITC18_IODevice> theDevice = this_device.lock();
+    if (!theDevice) {
+        return false;
+    }
 	
 	// go update this word channel (8 bit)
 	// TODO -- do some type checking on data at time of channel request checking
 	char desiredWordIn8bitFormat = ((char)((long)data));
 	
-	return ((this_device)->setAsychOutputWord8(wordPort, desiredWordIn8bitFormat));	 
+	return ((theDevice)->setAsychOutputWord8(wordPort, desiredWordIn8bitFormat));	 
 	// this will only change the bits for the word (the other 8 bits will be left as they are)
 }
 
 
 bool IOChannel_ITC18_AsychOut::setAsychOutputOneBit(bool desiredBit) {
+    shared_ptr<mITC18_IODevice> theDevice = this_device.lock();
+    if (!theDevice) {
+        return false;
+    }
 	
     short desiredLinesToSet = pow(2.f,hardwarePort);	// mask revealing only the current port
     if (desiredBit) {
-        return(this_device->setAsychLinesHigh(desiredLinesToSet));
+        return(theDevice->setAsychLinesHigh(desiredLinesToSet));
     }
     else {
-        return( (this_device)->setAsychLinesLow(desiredLinesToSet) );
+        return( (theDevice)->setAsychLinesLow(desiredLinesToSet) );
     }	
 }
 
