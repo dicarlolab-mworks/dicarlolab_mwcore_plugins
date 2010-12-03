@@ -199,7 +199,14 @@
 			isa = PBXProject;
 			buildConfigurationList = 1DEB913E08733D840010E9CD /* Build configuration list for PBXProject "CircleStimulusPlugin" */;
 			compatibilityVersion = "Xcode 3.0";
+			developmentRegion = English;
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
 			mainGroup = 089C166AFE841209C02AAC07 /* CircleStimulusPlugin */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -381,7 +388,7 @@
 				GCC_PREFIX_HEADER = CircleStimulusPlugin_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
 				OTHER_LDFLAGS = (
-					"-lboost_regex-mw",
+					"-lboost_regex",
 					"-framework",
 					OpenGL,
 				);
