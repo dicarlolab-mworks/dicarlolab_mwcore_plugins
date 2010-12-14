@@ -16,11 +16,24 @@
 MovieStimulus::MovieStimulus(const std::string &_tag,
                              shared_ptr<Variable> _frames_per_second,
                              shared_ptr<StimulusGroup> _stimulus_group,
-                             shared_ptr<Variable> ended) :
+                             shared_ptr<Variable> ended,
+                             shared_ptr<Variable> loop) :
     StandardDynamicStimulus(_tag, _frames_per_second),
     stimulus_group(_stimulus_group),
-    ended(ended)
+    ended(ended),
+    loop(loop)
 {
+}
+
+int MovieStimulus::getFrameNumber() {
+    int frameNumber = DynamicStimulusDriver::getFrameNumber();
+    
+    if (bool(loop->getValue())) {
+        int numFrames = stimulus_group->getNElements();
+        frameNumber %= numFrames;
+    }
+
+    return frameNumber;
 }
 
 bool MovieStimulus::needDraw() {
@@ -53,6 +66,7 @@ shared_ptr<mw::Component> MovieStimulusFactory::createObject(std::map<std::strin
 	const char *STIMULUS_GROUP = "stimulus_group";
 	const char *FRAMES_PER_SECOND = "frames_per_second";
 	const char *ENDED = "ended";
+	const char *LOOP = "loop";
 	
 	REQUIRE_ATTRIBUTES(parameters, 
 					   TAG, 
@@ -74,11 +88,15 @@ shared_ptr<mw::Component> MovieStimulusFactory::createObject(std::map<std::strin
         ended = reg->getVariable(parameters[ENDED]);
         CHECK_ATTRIBUTE(ended, parameters, ENDED);
     }
+
+	shared_ptr<Variable> loop = reg->getVariable(parameters[LOOP], "0");
+    CHECK_ATTRIBUTE(loop, parameters, LOOP);
 	
 	shared_ptr <MovieStimulus> new_movie = shared_ptr<MovieStimulus>(new MovieStimulus(tagname,
                                                                                        frames_per_second,
                                                                                        the_group,
-                                                                                       ended));
+                                                                                       ended,
+                                                                                       loop));
 	
 	shared_ptr <StimulusNode> thisStimNode = shared_ptr<StimulusNode>(new StimulusNode(new_movie));
 	reg->registerStimulusNode(tagname, thisStimNode);
