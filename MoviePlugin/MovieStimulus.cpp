@@ -15,19 +15,26 @@
 
 MovieStimulus::MovieStimulus(const std::string &_tag,
                              shared_ptr<Variable> _frames_per_second,
-                             shared_ptr<StimulusGroup> _stimulus_group) :
-    StandardDynamicStimulus(_tag, _frames_per_second)
+                             shared_ptr<StimulusGroup> _stimulus_group,
+                             shared_ptr<Variable> ended) :
+    StandardDynamicStimulus(_tag, _frames_per_second),
+    stimulus_group(_stimulus_group),
+    ended(ended)
 {
-	stimulus_group = _stimulus_group;
 }
 
 bool MovieStimulus::needDraw() {
-    return StandardDynamicStimulus::needDraw() && (getFrameNumber() < stimulus_group->getNElements());
+    return StandardDynamicStimulus::needDraw() && (getFrameNumber() <= stimulus_group->getNElements());
 }
 
 void MovieStimulus::drawFrame(shared_ptr<StimulusDisplay> display, int frameNumber) {	
-    if (frameNumber < stimulus_group->getNElements()) {
+    int numFrames = stimulus_group->getNElements();
+    if (frameNumber < numFrames) {
         stimulus_group->getElement(frameNumber)->draw(display);
+    } else if (frameNumber == numFrames) {
+        if (ended != NULL) {
+            ended->setValue(true);
+        }
     }
 }
 
@@ -45,6 +52,7 @@ shared_ptr<mw::Component> MovieStimulusFactory::createObject(std::map<std::strin
 	const char *TAG = "tag";
 	const char *STIMULUS_GROUP = "stimulus_group";
 	const char *FRAMES_PER_SECOND = "frames_per_second";
+	const char *ENDED = "ended";
 	
 	REQUIRE_ATTRIBUTES(parameters, 
 					   TAG, 
@@ -60,10 +68,17 @@ shared_ptr<mw::Component> MovieStimulusFactory::createObject(std::map<std::strin
 	
 	shared_ptr<Variable> frames_per_second = reg->getVariable(parameters.find(FRAMES_PER_SECOND)->second);	
 	checkAttribute(frames_per_second, parameters.find("reference_id")->second, FRAMES_PER_SECOND, parameters[FRAMES_PER_SECOND]);
+
+    shared_ptr<Variable> ended;
+    if (!(parameters[ENDED].empty())) {
+        ended = reg->getVariable(parameters[ENDED]);
+        CHECK_ATTRIBUTE(ended, parameters, ENDED);
+    }
 	
 	shared_ptr <MovieStimulus> new_movie = shared_ptr<MovieStimulus>(new MovieStimulus(tagname,
                                                                                        frames_per_second,
-                                                                                       the_group));
+                                                                                       the_group,
+                                                                                       ended));
 	
 	shared_ptr <StimulusNode> thisStimNode = shared_ptr<StimulusNode>(new StimulusNode(new_movie));
 	reg->registerStimulusNode(tagname, thisStimNode);
@@ -71,3 +86,26 @@ shared_ptr<mw::Component> MovieStimulusFactory::createObject(std::map<std::strin
 	
 	return new_movie;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

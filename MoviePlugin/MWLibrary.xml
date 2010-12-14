@@ -11,7 +11,7 @@
 		
 		<!-- Payload -->
 		<code>
-        <stimulus type="movie" tag="" stimulus_group="" frames_per_second="10"/>
+        <stimulus type="movie" tag="" stimulus_group="" frames_per_second="10" ended="" />
 		</code>
     </MWElement>
 </MWElements>
