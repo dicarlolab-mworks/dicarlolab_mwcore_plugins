@@ -31,7 +31,15 @@ public:
 private:
     WhiteNoiseBackground(const WhiteNoiseBackground &other);
     
+    void randomizePixels();
+    
     shared_ptr<Variable> anotherAttribute;
+
+    GLint width, height;
+#define PIXEL_TYPE GL_FLOAT
+    typedef GLfloat PixelType;
+    std::vector<PixelType> pixels;
+    boost::mt19937 randGen;
 
 };
 

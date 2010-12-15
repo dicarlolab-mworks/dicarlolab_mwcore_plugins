@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<monkeyml version="1.0">
+    <io_devices tag="IO Devices"></io_devices>
+    <variables tag="Variables">
+        <variable tag="index" scope="local" logging="when_changed" default_value="0" type="integer"></variable>
+    </variables>
+    <sounds tag="Sounds"></sounds>
+    <stimuli tag="Stimuli">
+        <stimulus type="white_noise_background" tag="bg" another_attribute="3"></stimulus>
+    </stimuli>
+    <filters tag="Filters"></filters>
+    <optimizers tag="Optimizers"></optimizers>
+    <experiment tag="New Experiment" full_name="" description="">
+        <protocol tag="New Protocol" nsamples="1" sampling_method="cycles" selection="sequential">
+            <action tag="Queue background" type="queue_stimulus" stimulus="bg"></action>
+            <range_replicator tag="New Replicator" from="1" to="5" step="1" variable="index">
+                <block tag="New Block" nsamples="1" sampling_method="cycles" selection="sequential">
+                    <action type="report" tag="Report" message="Display update $index"></action>
+                    <action tag="Update display" type="update_stimulus_display"></action>
+                    <action type="wait" tag="Wait" duration="2" duration_units="s"></action>
+                </block>
+            </range_replicator>
+        </protocol>
+    </experiment>
+</monkeyml>
