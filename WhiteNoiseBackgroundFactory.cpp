@@ -33,5 +33,9 @@ shared_ptr<mw::Component> WhiteNoiseBackgroundFactory::createObject(std::map<std
     shared_ptr<WhiteNoiseBackground> newComponent(new WhiteNoiseBackground(tag,
                                                                            anotherAttribute));
     
+    newComponent->load(StimulusDisplay::getCurrentStimulusDisplay());
+    shared_ptr<StimulusNode> node(new StimulusNode(newComponent));
+    reg->registerStimulusNode(tag, node);
+    
     return newComponent;
 }
