@@ -11,7 +11,7 @@
 
 
 WhiteNoiseBackground::WhiteNoiseBackground(const std::string &tag,
-                                                             shared_ptr<Variable> anotherAttribute) :
+                                           shared_ptr<Variable> anotherAttribute) :
     mw::Component(tag),
     anotherAttribute(anotherAttribute)
 { }

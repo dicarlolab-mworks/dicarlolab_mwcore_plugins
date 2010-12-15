@@ -21,8 +21,6 @@ Plugin* getPlugin() {
 
 
 void WhiteNoiseBackgroundPlugin::registerComponents(shared_ptr<ComponentRegistry> registry) {
-    // TODO: you need to customize the "signature" of the object your plugin will create
-    //       The signature is of the form component/type Ð(e.g. stimulus/circle, or iodevice/NIDAQ)
-    registry->registerFactory(std::string("stimulus/WhiteNoiseBackground"),
+    registry->registerFactory(std::string("stimulus/white_noise_background"),
                               (ComponentFactory *)(new WhiteNoiseBackgroundFactory()));
 }

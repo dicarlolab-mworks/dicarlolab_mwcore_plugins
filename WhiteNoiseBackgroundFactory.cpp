@@ -16,7 +16,7 @@ using namespace mw;
 
 
 shared_ptr<mw::Component> WhiteNoiseBackgroundFactory::createObject(std::map<std::string, std::string> parameters,
-                                                                             ComponentRegistry *reg)
+                                                                    ComponentRegistry *reg)
 {
     const char* TAG = "tag";
     const char* ANOTHER_ATTRIBUTE = "another_attribute";
@@ -31,7 +31,7 @@ shared_ptr<mw::Component> WhiteNoiseBackgroundFactory::createObject(std::map<std
     CHECK_ATTRIBUTE(anotherAttribute, parameters, ANOTHER_ATTRIBUTE);
     
     shared_ptr<WhiteNoiseBackground> newComponent(new WhiteNoiseBackground(tag,
-                                                                                             anotherAttribute));
+                                                                           anotherAttribute));
     
     return newComponent;
 }
