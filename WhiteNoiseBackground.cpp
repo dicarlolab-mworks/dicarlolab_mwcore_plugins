@@ -15,7 +15,8 @@
 WhiteNoiseBackground::WhiteNoiseBackground(const std::string &tag,
                                            shared_ptr<Variable> anotherAttribute) :
     Stimulus(tag),
-    anotherAttribute(anotherAttribute)
+    anotherAttribute(anotherAttribute),
+    randDist(randGen)
 { }
 
 
@@ -54,11 +55,8 @@ Datum WhiteNoiseBackground::getCurrentAnnounceDrawData() {
 
 
 void WhiteNoiseBackground::randomizePixels() {
-    boost::uniform_real<PixelType> randDist(0.0, 1.0);
-    boost::variate_generator< boost::mt19937&, boost::uniform_real<PixelType> > randVar(randGen, randDist);
-    
     for (size_t i = 0; i < pixels.size(); i++) {
-        pixels[i] = randVar();
+        pixels[i] = randDist();
     }
 }
 

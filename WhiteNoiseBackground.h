@@ -39,7 +39,9 @@ private:
 #define PIXEL_TYPE GL_FLOAT
     typedef GLfloat PixelType;
     std::vector<PixelType> pixels;
+
     boost::mt19937 randGen;
+    boost::uniform_01< boost::mt19937&, PixelType > randDist;
 
 };
 
