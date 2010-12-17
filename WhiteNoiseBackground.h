@@ -35,9 +35,11 @@ private:
     
     shared_ptr<Variable> anotherAttribute;
 
-    GLint width, height;
+    typedef std::pair<GLint, GLint> DisplayDimensions;
 #define PIXEL_TYPE GL_FLOAT
     typedef GLfloat PixelType;
+
+    std::map<int, DisplayDimensions> dims;
     std::vector<PixelType> pixels;
 
     boost::mt19937 randGen;

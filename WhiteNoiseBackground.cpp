@@ -26,19 +26,26 @@ WhiteNoiseBackground::~WhiteNoiseBackground() { }
 void WhiteNoiseBackground::load(shared_ptr<StimulusDisplay> display) {
     if (loaded)
         return;
+    
+    for (int i = 0; i < display->getNContexts(); i++) {
+        display->setCurrent(i);
 
-    display->setCurrent(0);
-    display->getCurrentViewportSize(width, height);
-
-    pixels.resize(width * height);
+        GLint width, height;
+        display->getCurrentViewportSize(width, height);
+        dims[i] = DisplayDimensions(width, height);
+        if (i == 0) {
+            pixels.resize(width * height);
+        }
+    }
     
     loaded = true;
 }
 
 
 void WhiteNoiseBackground::draw(shared_ptr<StimulusDisplay> display) {
+    DisplayDimensions &currentDims = dims[display->getCurrentContextIndex()];
     glWindowPos2i(0, 0);
-    glDrawPixels(width, height, GL_LUMINANCE, PIXEL_TYPE, &(pixels[0]));
+    glDrawPixels(currentDims.first, currentDims.second, GL_LUMINANCE, PIXEL_TYPE, &(pixels[0]));
 }
 
 
