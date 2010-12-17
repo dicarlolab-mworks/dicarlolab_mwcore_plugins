@@ -21,4 +21,10 @@ class WhiteNoiseBackgroundFactory : public ComponentFactory {
 };
 
 
+class RandomizeBackgroundFactory : public ComponentFactory {
+	virtual shared_ptr<mw::Component> createObject(std::map<std::string, std::string> parameters,
+                                                   ComponentRegistry *reg);
+};
+
+
 #endif

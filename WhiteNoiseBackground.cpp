@@ -37,11 +37,6 @@ void WhiteNoiseBackground::load(shared_ptr<StimulusDisplay> display) {
 
 
 void WhiteNoiseBackground::draw(shared_ptr<StimulusDisplay> display) {
-    // If we're drawing to the main display, randomize the pixels
-    if (display->getCurrentContextIndex() == 0) {
-        randomizePixels();
-    }
-
     glWindowPos2i(0, 0);
     glDrawPixels(width, height, GL_LUMINANCE, PIXEL_TYPE, &(pixels[0]));
 }

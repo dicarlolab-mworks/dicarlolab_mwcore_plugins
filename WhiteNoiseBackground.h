@@ -28,10 +28,10 @@ public:
     virtual void draw(shared_ptr<StimulusDisplay> display);
     virtual Datum getCurrentAnnounceDrawData();
     
+    void randomizePixels();
+    
 private:
     WhiteNoiseBackground(const WhiteNoiseBackground &other);
-    
-    void randomizePixels();
     
     shared_ptr<Variable> anotherAttribute;
 

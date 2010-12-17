@@ -23,4 +23,6 @@ Plugin* getPlugin() {
 void WhiteNoiseBackgroundPlugin::registerComponents(shared_ptr<ComponentRegistry> registry) {
     registry->registerFactory(std::string("stimulus/white_noise_background"),
                               (ComponentFactory *)(new WhiteNoiseBackgroundFactory()));
+    registry->registerFactory(std::string("action/randomize_background"),
+                              (ComponentFactory *)(new RandomizeBackgroundFactory()));
 }

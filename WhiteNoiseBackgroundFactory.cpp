@@ -11,6 +11,7 @@
 
 #include "WhiteNoiseBackgroundFactory.h"
 #include "WhiteNoiseBackground.h"
+#include "RandomizeBackground.h"
 
 using namespace mw;
 
@@ -39,3 +40,41 @@ shared_ptr<mw::Component> WhiteNoiseBackgroundFactory::createObject(std::map<std
     
     return newComponent;
 }
+
+
+shared_ptr<mw::Component> RandomizeBackgroundFactory::createObject(std::map<std::string, std::string> parameters,
+                                                                   ComponentRegistry *reg)
+{
+    const char* STIMULUS = "stimulus";
+    
+    REQUIRE_ATTRIBUTES(parameters, STIMULUS);
+    
+    shared_ptr<StimulusNode> backgroundNode = reg->getStimulus(parameters[STIMULUS]);
+    CHECK_ATTRIBUTE(backgroundNode, parameters, STIMULUS);
+    
+    shared_ptr<RandomizeBackground> newComponent(new RandomizeBackground(backgroundNode));
+    return newComponent;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
