@@ -20,19 +20,13 @@ shared_ptr<mw::Component> WhiteNoiseBackgroundFactory::createObject(std::map<std
                                                                     ComponentRegistry *reg)
 {
     const char* TAG = "tag";
-    const char* ANOTHER_ATTRIBUTE = "another_attribute";
 
     REQUIRE_ATTRIBUTES(parameters,
-                       TAG,
-                       ANOTHER_ATTRIBUTE);
+                       TAG);
     
     std::string tag(parameters[TAG]);
     
-    shared_ptr<Variable> anotherAttribute(reg->getVariable(parameters[ANOTHER_ATTRIBUTE]));
-    CHECK_ATTRIBUTE(anotherAttribute, parameters, ANOTHER_ATTRIBUTE);
-    
-    shared_ptr<WhiteNoiseBackground> newComponent(new WhiteNoiseBackground(tag,
-                                                                           anotherAttribute));
+    shared_ptr<WhiteNoiseBackground> newComponent(new WhiteNoiseBackground(tag));
     
     newComponent->load(StimulusDisplay::getCurrentStimulusDisplay());
     shared_ptr<StimulusNode> node(new StimulusNode(newComponent));

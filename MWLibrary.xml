@@ -9,7 +9,7 @@
         </description>
         
         <code>
-            <stimulus type="white_noise_background" tag="White Noise Background" another_attribute="something"/>
+            <stimulus type="white_noise_background" tag="White Noise Background"/>
         </code>
     </MWElement>
     <MWElement name="Randomize Background">

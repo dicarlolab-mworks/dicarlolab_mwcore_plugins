@@ -20,7 +20,7 @@ using namespace mw;
 class WhiteNoiseBackground : public Stimulus {
 
 public:
-    WhiteNoiseBackground(const std::string &tag, shared_ptr<Variable> anotherAttribute);
+    WhiteNoiseBackground(const std::string &tag);
 
     virtual ~WhiteNoiseBackground();
     
@@ -32,8 +32,6 @@ public:
     
 private:
     WhiteNoiseBackground(const WhiteNoiseBackground &other);
-    
-    shared_ptr<Variable> anotherAttribute;
 
     typedef std::pair<GLint, GLint> DisplayDimensions;
 #define PIXEL_TYPE GL_FLOAT

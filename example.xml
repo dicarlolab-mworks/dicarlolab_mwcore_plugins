@@ -9,7 +9,7 @@
     </variables>
     <sounds tag="Sounds"></sounds>
     <stimuli tag="Stimuli">
-        <stimulus type="white_noise_background" tag="bg" another_attribute="3"></stimulus>
+        <stimulus type="white_noise_background" tag="bg"></stimulus>
     </stimuli>
     <filters tag="Filters"></filters>
     <optimizers tag="Optimizers"></optimizers>

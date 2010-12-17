@@ -12,10 +12,8 @@
 #include <MWorksCore/StandardVariables.h>
 
 
-WhiteNoiseBackground::WhiteNoiseBackground(const std::string &tag,
-                                           shared_ptr<Variable> anotherAttribute) :
+WhiteNoiseBackground::WhiteNoiseBackground(const std::string &tag) :
     Stimulus(tag),
-    anotherAttribute(anotherAttribute),
     randDist(randGen)
 { }
 
