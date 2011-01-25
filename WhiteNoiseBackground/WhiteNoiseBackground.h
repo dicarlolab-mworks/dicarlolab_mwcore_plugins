@@ -25,6 +25,7 @@ public:
     virtual ~WhiteNoiseBackground();
     
     virtual void load(shared_ptr<StimulusDisplay> display);
+    virtual void unload(shared_ptr<StimulusDisplay> display);
     virtual void draw(shared_ptr<StimulusDisplay> display);
     virtual Datum getCurrentAnnounceDrawData();
     
@@ -38,7 +39,7 @@ private:
     typedef GLfloat PixelType;
 
     std::map<int, DisplayDimensions> dims;
-    std::vector<PixelType> pixels;
+    std::map<int, GLuint> buffers;
 
     boost::mt19937 randGen;
     boost::uniform_01< boost::mt19937&, PixelType > randDist;
@@ -47,3 +48,25 @@ private:
 
 
 #endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
