@@ -35,8 +35,10 @@ private:
     WhiteNoiseBackground(const WhiteNoiseBackground &other);
 
     typedef std::pair<GLint, GLint> DisplayDimensions;
+#define PIXEL_FORMAT GL_RGBA
 #define PIXEL_TYPE GL_FLOAT
     typedef GLfloat PixelType;
+    static const GLint componentsPerPixel = 4;
 
     std::map<int, DisplayDimensions> dims;
     std::map<int, GLuint> buffers;

@@ -34,7 +34,10 @@ void WhiteNoiseBackground::load(shared_ptr<StimulusDisplay> display) {
         
         glGenBuffers(1, &(buffers[i]));
         glBindBuffer(GL_PIXEL_UNPACK_BUFFER, buffers[i]);
-        glBufferData(GL_PIXEL_UNPACK_BUFFER, (width * height * sizeof(PixelType)), NULL, GL_DYNAMIC_DRAW);
+        glBufferData(GL_PIXEL_UNPACK_BUFFER,
+                     (width * height * sizeof(PixelType) * componentsPerPixel),
+                     NULL,
+                     GL_DYNAMIC_DRAW);
         glBindBuffer(GL_PIXEL_UNPACK_BUFFER, 0);
     }
     
@@ -76,7 +79,7 @@ void WhiteNoiseBackground::draw(shared_ptr<StimulusDisplay> display) {
     glWindowPos2i(0, 0);
 
     glBindBuffer(GL_PIXEL_UNPACK_BUFFER, buffers[index]);
-    glDrawPixels(currentDims.first, currentDims.second, GL_LUMINANCE, PIXEL_TYPE, (GLvoid *)0);
+    glDrawPixels(currentDims.first, currentDims.second, PIXEL_FORMAT, PIXEL_TYPE, (GLvoid *)0);
     glBindBuffer(GL_PIXEL_UNPACK_BUFFER, 0);
 
     glPopClientAttrib();
@@ -100,8 +103,13 @@ void WhiteNoiseBackground::randomizePixels() {
         glBindBuffer(GL_PIXEL_UNPACK_BUFFER, buffers[i]);
         PixelType *pixels = (PixelType *)glMapBuffer(GL_PIXEL_UNPACK_BUFFER, GL_WRITE_ONLY);
 
-        for (size_t i = 0; i < (currentDims.first * currentDims.second); i++) {
-            pixels[i] = randDist();
+        for (size_t i = 0; i < (currentDims.first * currentDims.second * componentsPerPixel); i++) {
+            PixelType randVal = randDist();
+            for (size_t j = 0; j < componentsPerPixel - 1; j++) {
+                pixels[i] = randVal;
+                i++;
+            }
+            pixels[i] = 1.0;
         }
         
         glUnmapBuffer(GL_PIXEL_UNPACK_BUFFER);
