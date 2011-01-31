@@ -2579,7 +2579,7 @@ void IOChannel_ITC18_ADC_waveform::setup(shared_ptr<mITC18_IODevice> _device, in
     
     // link to the edge channel (i.e. tell the edge channel to notify this cahnnel when it gets an edge)
     if (edgeChannelToTriggerWaveform != NULL) {
-        edgeChannelToTriggerWaveform->linkToWaveformChannel(this);
+        edgeChannelToTriggerWaveform->linkToWaveformChannel(shared_from_this());
     }
     else {
         mwarning(M_IODEVICE_MESSAGE_DOMAIN,
@@ -2844,10 +2844,8 @@ void IOChannel_ITC18_TTL_edge::setup(shared_ptr<mITC18_IODevice> _device, int ch
 //   to let the edge channel know that it should be notified when it gets an edge
 // (note:  setup is only called once all channels have been created, so the channel creation order does not matter)
 // note: more than one wveform channel can be attached to a single TTL edge channel
-void IOChannel_ITC18_TTL_edge::linkToWaveformChannel(IOChannel_ITC18_ADC_waveform *_waveformChannel) {
-	// TODO: this is dangerous
-	shared_ptr<IOChannel_ITC18_ADC_waveform> carrier(_waveformChannel);
-	linkedWaveformChannels.addReference(carrier);   
+void IOChannel_ITC18_TTL_edge::linkToWaveformChannel(shared_ptr<IOChannel> _waveformChannel) {
+	linkedWaveformChannels.addReference(_waveformChannel);   
 }
 
 void IOChannel_ITC18_TTL_edge::clearAllLinkedChannels() {
@@ -2903,7 +2901,7 @@ void IOChannel_ITC18_TTL_edge::newSample(bool thisDigitalCheck, MWorksTime time)
     if (edgeReported) {
         for (int i=0;i<linkedWaveformChannels.getNElements();i++) {
 			// pay attention
-            (linkedWaveformChannels.getElement(i))->startNewWaveform(time);  // time of edge (in absolute time since the ITC started)
+            (dynamic_pointer_cast<IOChannel_ITC18_ADC_waveform>(linkedWaveformChannels.getElement(i)))->startNewWaveform(time);  // time of edge (in absolute time since the ITC started)
         }
     }        
 	

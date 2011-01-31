@@ -393,7 +393,7 @@ class IOChannel_ITC18_TTL_edge : public IOChannel_ITC18_TTL {
         
     protected:
         bool lastDigitalCheck;
-        ExpandableList<IOChannel_ITC18_ADC_waveform>  linkedWaveformChannels;
+        ExpandableList<IOChannel>  linkedWaveformChannels;
         
     public:
         IOChannel_ITC18_TTL_edge(IOChannelRequest* _request, 
@@ -404,7 +404,7 @@ class IOChannel_ITC18_TTL_edge : public IOChannel_ITC18_TTL {
 						  MWorksTime absoluteTimeUSbasedOnITCclock);
 		virtual void clearAllLinkedChannels();      // override
         void linkToWaveformChannel(
-					IOChannel_ITC18_ADC_waveform* _waveformChannel);
+					shared_ptr<IOChannel> _waveformChannel);
 };
 
 
