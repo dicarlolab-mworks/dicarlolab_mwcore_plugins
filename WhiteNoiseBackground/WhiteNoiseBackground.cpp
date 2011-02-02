@@ -64,7 +64,6 @@ void WhiteNoiseBackground::unload(shared_ptr<StimulusDisplay> display) {
 void WhiteNoiseBackground::draw(shared_ptr<StimulusDisplay> display) {
     glPushClientAttrib(GL_CLIENT_PIXEL_STORE_BIT);
 
-    // Set all pixel unpack parameters to default values
     glPixelStorei(GL_UNPACK_SWAP_BYTES, GL_FALSE);
     glPixelStorei(GL_UNPACK_LSB_FIRST, GL_FALSE);
     glPixelStorei(GL_UNPACK_ROW_LENGTH, 0);
@@ -72,14 +71,14 @@ void WhiteNoiseBackground::draw(shared_ptr<StimulusDisplay> display) {
     glPixelStorei(GL_UNPACK_SKIP_ROWS, 0);
     glPixelStorei(GL_UNPACK_SKIP_PIXELS, 0);
     glPixelStorei(GL_UNPACK_SKIP_IMAGES, 0);
-    glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
+    glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
     int index = display->getCurrentContextIndex();
     DisplayDimensions &currentDims = dims[index];
     glWindowPos2i(0, 0);
 
     glBindBuffer(GL_PIXEL_UNPACK_BUFFER, buffers[index]);
-    glDrawPixels(currentDims.first, currentDims.second, PIXEL_FORMAT, PIXEL_TYPE, (GLvoid *)0);
+    glDrawPixels(currentDims.first, currentDims.second, pixelFormatCode, pixelTypeCode, (GLvoid *)0);
     glBindBuffer(GL_PIXEL_UNPACK_BUFFER, 0);
 
     glPopClientAttrib();
@@ -109,7 +108,7 @@ void WhiteNoiseBackground::randomizePixels() {
                 pixels[i] = randVal;
                 i++;
             }
-            pixels[i] = 1.0;
+            pixels[i] = randDist.max();
         }
         
         glUnmapBuffer(GL_PIXEL_UNPACK_BUFFER);
