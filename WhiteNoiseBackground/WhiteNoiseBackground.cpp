@@ -10,13 +10,15 @@
 #include "WhiteNoiseBackground.h"
 
 #include <algorithm>
+#include <limits>
 
 #include <MWorksCore/StandardVariables.h>
 
 
 WhiteNoiseBackground::WhiteNoiseBackground(const std::string &tag) :
     Stimulus(tag),
-    randDist(randGen)
+    randDist(std::numeric_limits<GLubyte>::min(), std::numeric_limits<GLubyte>::max()),
+    randVar(randGen, randDist)
 { }
 
 
@@ -41,7 +43,7 @@ void WhiteNoiseBackground::load(shared_ptr<StimulusDisplay> display) {
         maxHeight = std::max(height, maxHeight);
     }
 
-    pixels.resize(maxWidth * maxHeight * componentsPerPixel);
+    pixels.resize(maxWidth * maxHeight);
     
     loaded = true;
 }
@@ -75,7 +77,7 @@ void WhiteNoiseBackground::draw(shared_ptr<StimulusDisplay> display) {
     
     {
         boost::mutex::scoped_lock lock(pixelsMutex);
-        glDrawPixels(currentDims.first, currentDims.second, pixelFormatCode, pixelTypeCode, &(pixels[0]));
+        glDrawPixels(currentDims.first, currentDims.second, GL_BGRA, GL_UNSIGNED_INT_8_8_8_8_REV, &(pixels[0]));
     }
 
     glPopClientAttrib();
@@ -93,12 +95,12 @@ void WhiteNoiseBackground::randomizePixels() {
     boost::mutex::scoped_lock lock(pixelsMutex);
 
     for (size_t i = 0; i < pixels.size(); i++) {
-        PixelType randVal = randDist();
+        GLubyte randVal = randVar();
+        GLubyte *pix = (GLubyte *)(&(pixels[i]));
         for (size_t j = 0; j < componentsPerPixel - 1; j++) {
-            pixels[i] = randVal;
-            i++;
+            pix[j] = randVal;
         }
-        pixels[i] = randDist.max();
+        pix[componentsPerPixel - 1] = randVar.max();
     }
 }
 

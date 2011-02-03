@@ -35,17 +35,15 @@ private:
     WhiteNoiseBackground(const WhiteNoiseBackground &other);
 
     typedef std::pair<GLint, GLint> DisplayDimensions;
-    typedef GLfloat PixelType;
-    static const GLenum pixelTypeCode = GL_FLOAT;
-    static const GLenum pixelFormatCode = GL_RGBA;
     static const GLint componentsPerPixel = 4;
 
     std::map<int, DisplayDimensions> dims;
-    std::vector<PixelType> pixels;
+    std::vector<GLuint> pixels;
     boost::mutex pixelsMutex;
 
     boost::mt19937 randGen;
-    boost::uniform_01< boost::mt19937&, PixelType > randDist;
+    boost::uniform_smallint<GLubyte> randDist;
+    boost::variate_generator< boost::mt19937&, boost::uniform_smallint<GLubyte> > randVar;
 
 };
 
