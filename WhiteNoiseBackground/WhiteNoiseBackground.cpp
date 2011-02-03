@@ -43,7 +43,8 @@ void WhiteNoiseBackground::load(shared_ptr<StimulusDisplay> display) {
         maxHeight = std::max(height, maxHeight);
     }
 
-    pixels.resize(maxWidth * maxHeight);
+    pixels.clear();
+    pixels.assign(maxWidth * maxHeight, std::numeric_limits<GLuint>::max());
     
     loaded = true;
 }
@@ -95,12 +96,11 @@ void WhiteNoiseBackground::randomizePixels() {
     boost::mutex::scoped_lock lock(pixelsMutex);
 
     for (size_t i = 0; i < pixels.size(); i++) {
-        GLubyte randVal = randVar();
+        GLubyte randVal = randDist(randGen);
         GLubyte *pix = (GLubyte *)(&(pixels[i]));
         for (size_t j = 0; j < componentsPerPixel - 1; j++) {
             pix[j] = randVal;
         }
-        pix[componentsPerPixel - 1] = randVar.max();
     }
 }
 

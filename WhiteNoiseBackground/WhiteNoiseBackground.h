@@ -42,8 +42,8 @@ private:
     boost::mutex pixelsMutex;
 
     boost::mt19937 randGen;
-    boost::uniform_smallint<GLubyte> randDist;
-    boost::variate_generator< boost::mt19937&, boost::uniform_smallint<GLubyte> > randVar;
+    boost::uniform_int<GLubyte> randDist;
+    boost::variate_generator< boost::mt19937&, boost::uniform_int<GLubyte> > randVar;
 
 };
 
