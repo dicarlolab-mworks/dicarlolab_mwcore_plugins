@@ -41,7 +41,8 @@ private:
     static const GLint componentsPerPixel = 4;
 
     std::map<int, DisplayDimensions> dims;
-    std::map<int, GLuint> buffers;
+    std::vector<PixelType> pixels;
+    boost::mutex pixelsMutex;
 
     boost::mt19937 randGen;
     boost::uniform_01< boost::mt19937&, PixelType > randDist;

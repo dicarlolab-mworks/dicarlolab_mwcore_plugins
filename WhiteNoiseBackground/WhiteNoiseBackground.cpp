@@ -9,6 +9,8 @@
 
 #include "WhiteNoiseBackground.h"
 
+#include <algorithm>
+
 #include <MWorksCore/StandardVariables.h>
 
 
@@ -24,6 +26,9 @@ WhiteNoiseBackground::~WhiteNoiseBackground() { }
 void WhiteNoiseBackground::load(shared_ptr<StimulusDisplay> display) {
     if (loaded)
         return;
+
+    GLint maxWidth = 0;
+    GLint maxHeight = 0;
     
     for (int i = 0; i < display->getNContexts(); i++) {
         display->setCurrent(i);
@@ -32,14 +37,11 @@ void WhiteNoiseBackground::load(shared_ptr<StimulusDisplay> display) {
         display->getCurrentViewportSize(width, height);
         dims[i] = DisplayDimensions(width, height);
         
-        glGenBuffers(1, &(buffers[i]));
-        glBindBuffer(GL_PIXEL_UNPACK_BUFFER, buffers[i]);
-        glBufferData(GL_PIXEL_UNPACK_BUFFER,
-                     (width * height * sizeof(PixelType) * componentsPerPixel),
-                     NULL,
-                     GL_DYNAMIC_DRAW);
-        glBindBuffer(GL_PIXEL_UNPACK_BUFFER, 0);
+        maxWidth = std::max(width, maxWidth);
+        maxHeight = std::max(height, maxHeight);
     }
+
+    pixels.resize(maxWidth * maxHeight * componentsPerPixel);
     
     loaded = true;
 }
@@ -49,13 +51,8 @@ void WhiteNoiseBackground::unload(shared_ptr<StimulusDisplay> display) {
     if (!loaded)
         return;
     
-    for (int i = 0; i < display->getNContexts(); i++) {
-        display->setCurrent(i);
-        glDeleteBuffers(1, &(buffers[i]));
-    }
-    
     dims.clear();
-    buffers.clear();
+    pixels.clear();
     
     loaded = false;
 }
@@ -73,13 +70,13 @@ void WhiteNoiseBackground::draw(shared_ptr<StimulusDisplay> display) {
     glPixelStorei(GL_UNPACK_SKIP_IMAGES, 0);
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
-    int index = display->getCurrentContextIndex();
-    DisplayDimensions &currentDims = dims[index];
+    DisplayDimensions &currentDims = dims[display->getCurrentContextIndex()];
     glWindowPos2i(0, 0);
-
-    glBindBuffer(GL_PIXEL_UNPACK_BUFFER, buffers[index]);
-    glDrawPixels(currentDims.first, currentDims.second, pixelFormatCode, pixelTypeCode, (GLvoid *)0);
-    glBindBuffer(GL_PIXEL_UNPACK_BUFFER, 0);
+    
+    {
+        boost::mutex::scoped_lock lock(pixelsMutex);
+        glDrawPixels(currentDims.first, currentDims.second, pixelFormatCode, pixelTypeCode, &(pixels[0]));
+    }
 
     glPopClientAttrib();
 }
@@ -93,26 +90,15 @@ Datum WhiteNoiseBackground::getCurrentAnnounceDrawData() {
 
 
 void WhiteNoiseBackground::randomizePixels() {
-    shared_ptr<StimulusDisplay> display(StimulusDisplay::getCurrentStimulusDisplay());
+    boost::mutex::scoped_lock lock(pixelsMutex);
 
-    for (int i = 0; i < display->getNContexts(); i++) {
-        display->setCurrent(i);
-        DisplayDimensions &currentDims = dims[i];
-
-        glBindBuffer(GL_PIXEL_UNPACK_BUFFER, buffers[i]);
-        PixelType *pixels = (PixelType *)glMapBuffer(GL_PIXEL_UNPACK_BUFFER, GL_WRITE_ONLY);
-
-        for (size_t i = 0; i < (currentDims.first * currentDims.second * componentsPerPixel); i++) {
-            PixelType randVal = randDist();
-            for (size_t j = 0; j < componentsPerPixel - 1; j++) {
-                pixels[i] = randVal;
-                i++;
-            }
-            pixels[i] = randDist.max();
+    for (size_t i = 0; i < pixels.size(); i++) {
+        PixelType randVal = randDist();
+        for (size_t j = 0; j < componentsPerPixel - 1; j++) {
+            pixels[i] = randVal;
+            i++;
         }
-        
-        glUnmapBuffer(GL_PIXEL_UNPACK_BUFFER);
-        glBindBuffer(GL_PIXEL_UNPACK_BUFFER, 0);
+        pixels[i] = randDist.max();
     }
 }
 
