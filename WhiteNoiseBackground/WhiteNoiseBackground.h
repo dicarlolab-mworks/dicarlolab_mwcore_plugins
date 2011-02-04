@@ -41,7 +41,7 @@ private:
     std::vector<GLuint> pixels;
     boost::mutex pixelsMutex;
 
-    boost::mt19937 randGen;
+    boost::rand48 randGen;
     boost::uniform_int<GLubyte> randDist;
 
 };

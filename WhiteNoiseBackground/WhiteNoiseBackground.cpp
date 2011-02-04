@@ -17,6 +17,7 @@
 
 WhiteNoiseBackground::WhiteNoiseBackground(const std::string &tag) :
     Stimulus(tag),
+    randGen(mw::Clock::instance()->getSystemTimeUS()),
     randDist(std::numeric_limits<GLubyte>::min(), std::numeric_limits<GLubyte>::max())
 { }
 
