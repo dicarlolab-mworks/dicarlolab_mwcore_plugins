@@ -35,15 +35,14 @@ private:
     WhiteNoiseBackground(const WhiteNoiseBackground &other);
 
     typedef std::pair<GLint, GLint> DisplayDimensions;
-    static const GLint componentsPerPixel = 4;
-
     std::map<int, DisplayDimensions> dims;
+
+    static const GLint componentsPerPixel = 4;
     std::vector<GLuint> pixels;
     boost::mutex pixelsMutex;
 
     boost::mt19937 randGen;
     boost::uniform_int<GLubyte> randDist;
-    boost::variate_generator< boost::mt19937&, boost::uniform_int<GLubyte> > randVar;
 
 };
 

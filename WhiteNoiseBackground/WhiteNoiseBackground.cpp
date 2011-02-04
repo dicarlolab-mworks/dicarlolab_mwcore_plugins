@@ -17,8 +17,7 @@
 
 WhiteNoiseBackground::WhiteNoiseBackground(const std::string &tag) :
     Stimulus(tag),
-    randDist(std::numeric_limits<GLubyte>::min(), std::numeric_limits<GLubyte>::max()),
-    randVar(randGen, randDist)
+    randDist(std::numeric_limits<GLubyte>::min(), std::numeric_limits<GLubyte>::max())
 { }
 
 
@@ -74,12 +73,45 @@ void WhiteNoiseBackground::draw(shared_ptr<StimulusDisplay> display) {
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
     DisplayDimensions &currentDims = dims[display->getCurrentContextIndex()];
-    glWindowPos2i(0, 0);
+    
+    glEnable(GL_TEXTURE_2D);
+    glBindTexture(GL_TEXTURE_2D, 0);  // Disable any previous texture binding
     
     {
         boost::mutex::scoped_lock lock(pixelsMutex);
-        glDrawPixels(currentDims.first, currentDims.second, GL_BGRA, GL_UNSIGNED_INT_8_8_8_8_REV, &(pixels[0]));
+        glTexImage2D(GL_TEXTURE_2D,
+                     0,
+                     GL_RGBA8,
+                     currentDims.first,
+                     currentDims.second,
+                     0,
+                     GL_BGRA,
+                     GL_UNSIGNED_INT_8_8_8_8_REV,
+                     &(pixels[0]));
     }
+    
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+    
+    GLdouble left, right, bottom, top;
+    display->getDisplayBounds(left, right, bottom, top);
+    
+    glBegin(GL_QUADS);
+    
+    glTexCoord2f(0.0, 0.0);
+    glVertex3f(left, bottom, 0.0);
+    
+    glTexCoord2f(1.0, 0.0);
+    glVertex3f(right, bottom, 0.0);
+    
+    glTexCoord2f(1.0, 1.0);
+    glVertex3f(right, top, 0.0);
+    
+    glTexCoord2f(0.0, 1.0);
+    glVertex3f(left, top, 0.0);
+    
+    glEnd();
 
     glPopClientAttrib();
 }
