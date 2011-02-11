@@ -28,6 +28,21 @@ MovieStimulus::MovieStimulus(const std::string &_tag,
 {
 }
 
+
+void MovieStimulus::load(shared_ptr<StimulusDisplay> display) {
+    for (int i = 0; i < stimulus_group->getNElements(); i++) {
+        stimulus_group->getElement(i)->load(display);
+    }
+}
+
+
+void MovieStimulus::unload(shared_ptr<StimulusDisplay> display) {
+    for (int i = 0; i < stimulus_group->getNElements(); i++) {
+        stimulus_group->getElement(i)->unload(display);
+    }
+}
+
+
 int MovieStimulus::getFrameNumber() {
     int frameNumber = DynamicStimulusDriver::getFrameNumber();
     

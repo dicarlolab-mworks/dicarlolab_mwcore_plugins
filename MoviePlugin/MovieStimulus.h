@@ -30,6 +30,9 @@ public:
                   shared_ptr<StimulusGroup> _stimulus_group,
                   shared_ptr<Variable> ended,
                   shared_ptr<Variable> loop);
+    
+    virtual void load(shared_ptr<StimulusDisplay> display);
+    virtual void unload(shared_ptr<StimulusDisplay> display);
 
 	virtual int getFrameNumber();
     virtual bool needDraw();
