@@ -10,8 +10,11 @@
 #include "MovieStimulus.h"
 
 #define STIM_TYPE_MOVIE "movie"
+#define STIM_MOVIE_STIMULUS_GROUP "stimulus_group"
+#define STIM_MOVIE_LOOP "loop"
 #define STIM_MOVIE_PLAYING "playing"
 #define STIM_MOVIE_CURRENT_FRAME "current_frame"
+#define STIM_MOVIE_CURRENT_STIMULUS "current_stimulus"
 
 MovieStimulus::MovieStimulus(const std::string &_tag,
                              shared_ptr<Variable> _frames_per_second,
@@ -28,7 +31,7 @@ MovieStimulus::MovieStimulus(const std::string &_tag,
 int MovieStimulus::getFrameNumber() {
     int frameNumber = DynamicStimulusDriver::getFrameNumber();
     
-    if (bool(loop->getValue())) {
+    if ((frameNumber >= 0) && bool(loop->getValue())) {
         int numFrames = stimulus_group->getNElements();
         frameNumber %= numFrames;
     }
@@ -54,10 +57,22 @@ void MovieStimulus::drawFrame(shared_ptr<StimulusDisplay> display, int frameNumb
 Datum MovieStimulus::getCurrentAnnounceDrawData() {
 	boost::mutex::scoped_lock locker(stim_lock);
 	Datum announceData = StandardDynamicStimulus::getCurrentAnnounceDrawData();
+
 	announceData.addElement(STIM_TYPE, STIM_TYPE_MOVIE);  
+	announceData.addElement(STIM_MOVIE_STIMULUS_GROUP, stimulus_group->getTag());  
+	announceData.addElement(STIM_MOVIE_LOOP, loop->getValue());  
 	announceData.addElement(STIM_MOVIE_PLAYING, Datum(started));  
-	announceData.addElement(STIM_MOVIE_CURRENT_FRAME, Datum((long)getFrameNumber()));  
-	return (announceData);
+
+    int frameNumber = getFrameNumber();
+    announceData.addElement(STIM_MOVIE_CURRENT_FRAME, Datum((long)frameNumber));
+    if ((frameNumber >= 0) && (frameNumber < stimulus_group->getNElements())) {
+        announceData.addElement(STIM_MOVIE_CURRENT_STIMULUS,
+                                stimulus_group->getElement(frameNumber)->getCurrentAnnounceDrawData());
+    } else {
+        announceData.addElement(STIM_MOVIE_CURRENT_STIMULUS, Datum(0L));
+    }
+
+    return announceData;
 }
 
 shared_ptr<mw::Component> MovieStimulusFactory::createObject(std::map<std::string, std::string> parameters,
