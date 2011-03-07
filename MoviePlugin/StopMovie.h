@@ -15,8 +15,8 @@ using namespace mw;
 
 
 class StopMovieFactory : public ComponentFactory {
-	virtual boost::shared_ptr<mw::Component> createObject(std::map<std::string, std::string> parameters,
-													   ComponentRegistry *reg);
+    virtual boost::shared_ptr<mw::Component> createObject(std::map<std::string, std::string> parameters,
+                                                       ComponentRegistry *reg);
 };
 
 

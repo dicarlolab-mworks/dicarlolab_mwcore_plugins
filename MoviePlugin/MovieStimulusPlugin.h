@@ -7,14 +7,22 @@
  *
  */
 
+#ifndef MovieStimulusPlugin_PLUGIN_H_
+#define MovieStimulusPlugin_PLUGIN_H_
+
 #include <MWorksCore/Plugin.h>
+
 using namespace mw;
 
-extern "C"{
-    Plugin *getPlugin();
+
+extern "C" {
+    Plugin* getPlugin();
 }
 
+
 class MovieStimulusPlugin : public Plugin {
-    
-	virtual void registerComponents(shared_ptr<ComponentRegistry> registry);	
+    virtual void registerComponents(shared_ptr<ComponentRegistry> registry);
 };
+
+
+#endif

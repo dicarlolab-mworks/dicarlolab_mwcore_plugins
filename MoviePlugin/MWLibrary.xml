@@ -1,17 +1,15 @@
 <MWElements>
-	<MWElement name="Movie Stimulus">
-		<!-- XPath 2.0 expression defining nodes of this type -->
-		<match_signature>stimulus[@type="movie"]</match_signature>
-		
-		<isa>Stimulus</isa>
-		
-		<description>
-			A movie stimulus
-			</description>
-		
-		<!-- Payload -->
-		<code>
-        <stimulus type="movie" tag="" stimulus_group="" frames_per_second="10" ended="" loop="0" />
-		</code>
+    <MWElement name="Movie Stimulus">
+        <match_signature>stimulus[@type="movie"]</match_signature>
+        
+        <isa>Stimulus</isa>
+        
+        <description>
+            A movie stimulus
+        </description>
+        
+        <code>
+            <stimulus type="movie" tag="New Movie" stimulus_group="" frames_per_second="10" ended="" loop="0" />
+        </code>
     </MWElement>
 </MWElements>
