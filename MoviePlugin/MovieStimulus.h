@@ -16,30 +16,61 @@
 using namespace mw;
 
 
-class MovieStimulus : public StandardDynamicStimulus {
+class BaseMovieStimulus : public StandardDynamicStimulus {
     
 public:
-    MovieStimulus(const std::string &tag,
-                  shared_ptr<Variable> frames_per_second,
-                  shared_ptr<StimulusGroup> stimulus_group,
-                  shared_ptr<Variable> ended,
-                  shared_ptr<Variable> loop);
+    BaseMovieStimulus(const std::string &tag,
+                      shared_ptr<Variable> framesPerSecond,
+                      shared_ptr<Variable> ended,
+                      shared_ptr<Variable> loop);
+    
+    virtual ~BaseMovieStimulus() { }
     
     virtual void load(shared_ptr<StimulusDisplay> display);
     virtual void unload(shared_ptr<StimulusDisplay> display);
-
+    
     virtual int getFrameNumber();
     virtual bool needDraw();
     virtual void drawFrame(shared_ptr<StimulusDisplay> display, int frameNumber);
     virtual Datum getCurrentAnnounceDrawData();
+
+protected:
+    virtual int getNumFrames() = 0;
+    virtual shared_ptr<Stimulus> getStimulusForFrame(int frameNumber) = 0;
     
-protected: 
-    shared_ptr<StimulusGroup> stimulus_group;
+private:
+    BaseMovieStimulus(const BaseMovieStimulus &other);
+
     shared_ptr<Variable> ended;
     shared_ptr<Variable> loop;
     
-private:
-    MovieStimulus(const MovieStimulus &other);
+};
+
+
+class MovieStimulus : public BaseMovieStimulus {
+    
+public:
+    MovieStimulus(const std::string &tag,
+                  shared_ptr<Variable> framesPerSecond,
+                  shared_ptr<StimulusGroup> stimulusGroup,
+                  shared_ptr<Variable> ended,
+                  shared_ptr<Variable> loop);
+    
+    virtual ~MovieStimulus() { }
+
+    virtual Datum getCurrentAnnounceDrawData();
+    
+protected:
+    virtual int getNumFrames() {
+        return stimulusGroup->getNElements();
+    }
+
+    virtual shared_ptr<Stimulus> getStimulusForFrame(int frameNumber) {
+        return stimulusGroup->getElement(frameNumber);
+    }
+    
+private: 
+    shared_ptr<StimulusGroup> stimulusGroup;
     
 };
 
