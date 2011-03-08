@@ -27,6 +27,8 @@ public:
     
     virtual ~BaseMovieStimulus() { }
     
+    virtual void freeze(bool shouldFreeze = true);
+    
     virtual void load(shared_ptr<StimulusDisplay> display);
     virtual void unload(shared_ptr<StimulusDisplay> display);
     

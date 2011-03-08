@@ -31,8 +31,16 @@ BaseMovieStimulus::BaseMovieStimulus(const std::string &tag,
                                      shared_ptr<Variable> loop) :
     StandardDynamicStimulus(tag, framesPerSecond),
     ended(ended),
-    loop(loop)
+    loop(registerVariable(loop))
 { }
+
+
+void BaseMovieStimulus::freeze(bool shouldFreeze) {
+    StandardDynamicStimulus::freeze(shouldFreeze);
+    for (int i = 0; i < getNumFrames(); i++) {
+        getStimulusForFrame(i)->freeze(shouldFreeze);
+    }
+}
 
 
 void BaseMovieStimulus::load(shared_ptr<StimulusDisplay> display) {
