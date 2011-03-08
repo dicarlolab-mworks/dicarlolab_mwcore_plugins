@@ -49,14 +49,14 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 8D5B49AC048680CD000E48DA /* MovieStimulusPlugin */;
+			remoteGlobalIDString = 8D5B49AC048680CD000E48DA;
 			remoteInfo = MovieStimulusPlugin;
 		};
 		E1944B4B132551E200D5ED81 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = E1944B47132551A400D5ED81 /* Install */;
+			remoteGlobalIDString = E1944B47132551A400D5ED81;
 			remoteInfo = Install;
 		};
 /* End PBXContainerItemProxy section */

@@ -11,6 +11,7 @@
 #define MOVIE_STIMULUS_H_
 
 #include <MWorksCore/StandardDynamicStimulus.h>
+#include <MWorksCore/StandardStimuli.h>
 #include <MWorksCore/ComponentFactory.h>
 
 using namespace mw;
@@ -69,8 +70,43 @@ protected:
         return stimulusGroup->getElement(frameNumber);
     }
     
-private: 
+private:
     shared_ptr<StimulusGroup> stimulusGroup;
+    
+};
+
+
+class ImageDirectoryMovieStimulus : public BaseMovieStimulus {
+    
+public:
+    ImageDirectoryMovieStimulus(const std::string &tag,
+                                const std::string &directoryPath,
+                                shared_ptr<Variable> xSize,
+                                shared_ptr<Variable> ySize,
+                                shared_ptr<Variable> xPosition,
+                                shared_ptr<Variable> yPosition,
+                                shared_ptr<Variable> rotation,
+                                shared_ptr<Variable> alphaMultiplier,
+                                shared_ptr<Variable> framesPerSecond,
+                                shared_ptr<Variable> ended,
+                                shared_ptr<Variable> loop);
+    
+    virtual ~ImageDirectoryMovieStimulus() { }
+    
+    virtual Datum getCurrentAnnounceDrawData();
+    
+protected:
+    virtual int getNumFrames() {
+        return images.size();
+    }
+    
+    virtual shared_ptr<Stimulus> getStimulusForFrame(int frameNumber) {
+        return images[frameNumber];
+    }
+    
+private:
+    const std::string directoryPath;
+    std::vector< shared_ptr<ImageStimulus> > images;
     
 };
 

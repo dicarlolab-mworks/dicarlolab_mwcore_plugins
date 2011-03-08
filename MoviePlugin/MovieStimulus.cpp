@@ -13,12 +13,16 @@
 
 using namespace mw;
 
-#define STIM_TYPE_MOVIE "movie"
-#define STIM_MOVIE_STIMULUS_GROUP "stimulus_group"
 #define STIM_MOVIE_LOOP "loop"
 #define STIM_MOVIE_PLAYING "playing"
 #define STIM_MOVIE_CURRENT_FRAME "current_frame"
 #define STIM_MOVIE_CURRENT_STIMULUS "current_stimulus"
+
+#define STIM_TYPE_MOVIE "movie"
+#define STIM_MOVIE_STIMULUS_GROUP "stimulus_group"
+
+#define STIM_TYPE_IMAGE_DIRECTORY_MOVIE "image_directory_movie"
+#define STIM_MOVIE_DIRECTORY_PATH "path"
 
 
 BaseMovieStimulus::BaseMovieStimulus(const std::string &tag,
@@ -46,7 +50,7 @@ void BaseMovieStimulus::unload(shared_ptr<StimulusDisplay> display) {
 
 
 int BaseMovieStimulus::getFrameNumber() {
-    int frameNumber = DynamicStimulusDriver::getFrameNumber();
+    int frameNumber = StandardDynamicStimulus::getFrameNumber();
     
     if ((frameNumber >= 0) && bool(loop->getValue())) {
         int numFrames = getNumFrames();
@@ -109,6 +113,33 @@ Datum MovieStimulus::getCurrentAnnounceDrawData() {
     
     announceData.addElement(STIM_TYPE, STIM_TYPE_MOVIE);  
     announceData.addElement(STIM_MOVIE_STIMULUS_GROUP, stimulusGroup->getTag());  
+    
+    return announceData;
+}
+
+
+ImageDirectoryMovieStimulus::ImageDirectoryMovieStimulus(const std::string &tag,
+                                                         const std::string &directoryPath,
+                                                         shared_ptr<Variable> xSize,
+                                                         shared_ptr<Variable> ySize,
+                                                         shared_ptr<Variable> xPosition,
+                                                         shared_ptr<Variable> yPosition,
+                                                         shared_ptr<Variable> rotation,
+                                                         shared_ptr<Variable> alphaMultiplier,
+                                                         shared_ptr<Variable> framesPerSecond,
+                                                         shared_ptr<Variable> ended,
+                                                         shared_ptr<Variable> loop) :
+    BaseMovieStimulus(tag, framesPerSecond, ended, loop),
+    directoryPath(directoryPath)
+{ }
+
+
+Datum ImageDirectoryMovieStimulus::getCurrentAnnounceDrawData() {
+    boost::mutex::scoped_lock locker(stim_lock);
+    Datum announceData = BaseMovieStimulus::getCurrentAnnounceDrawData();
+    
+    announceData.addElement(STIM_TYPE, STIM_TYPE_IMAGE_DIRECTORY_MOVIE);  
+    announceData.addElement(STIM_MOVIE_DIRECTORY_PATH, directoryPath);  
     
     return announceData;
 }
