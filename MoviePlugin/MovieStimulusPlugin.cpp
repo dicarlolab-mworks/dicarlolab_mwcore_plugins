@@ -24,6 +24,9 @@ void MovieStimulusPlugin::registerComponents(shared_ptr<ComponentRegistry> regis
     registry->registerFactory(std::string("stimulus/movie"),
                               (ComponentFactory *)(new MovieStimulusFactory()));
     
+    registry->registerFactory(std::string("stimulus/image_directory_movie"),
+                              (ComponentFactory *)(new ImageDirectoryMovieStimulusFactory()));
+    
     registry->registerFactory(std::string("action/play_movie"),
                               (ComponentFactory *)(new PlayMovieFactory()));
 
