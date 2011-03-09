@@ -9,6 +9,8 @@
 
 #include "MovieStimulus.h"
 
+#include <algorithm>
+
 #include <MWorksCore/ComponentRegistry.h>
 
 using namespace mw;
@@ -22,7 +24,7 @@ using namespace mw;
 #define STIM_MOVIE_STIMULUS_GROUP "stimulus_group"
 
 #define STIM_TYPE_IMAGE_DIRECTORY_MOVIE "image_directory_movie"
-#define STIM_MOVIE_DIRECTORY_PATH "path"
+#define STIM_MOVIE_DIRECTORY_PATH "directory_path"
 
 
 BaseMovieStimulus::BaseMovieStimulus(const std::string &tag,
@@ -139,7 +141,27 @@ ImageDirectoryMovieStimulus::ImageDirectoryMovieStimulus(const std::string &tag,
                                                          shared_ptr<Variable> loop) :
     BaseMovieStimulus(tag, framesPerSecond, ended, loop),
     directoryPath(directoryPath)
-{ }
+{
+    std::vector<std::string> imageFilePaths;
+
+    if (!mw::getFilePaths(directoryPath, imageFilePaths)) {
+        throw SimpleException("Invalid directory path", directoryPath);
+    }
+    
+    std::sort(imageFilePaths.begin(), imageFilePaths.end());
+    
+    for (std::vector<std::string>::iterator iter = imageFilePaths.begin(); iter != imageFilePaths.end(); iter++) {
+        std::string filePath(*iter);
+        images.push_back(shared_ptr<ImageStimulus>(new ImageStimulus(filePath,
+                                                                     filePath,
+                                                                     xPosition,
+                                                                     yPosition,
+                                                                     xSize,
+                                                                     ySize,
+                                                                     rotation,
+                                                                     alphaMultiplier)));
+    }
+}
 
 
 Datum ImageDirectoryMovieStimulus::getCurrentAnnounceDrawData() {
@@ -217,7 +239,7 @@ shared_ptr<mw::Component> MovieStimulusFactory::createObject(std::map<std::strin
 shared_ptr<mw::Component>
 ImageDirectoryMovieStimulusFactory::createObject(std::map<std::string, std::string> parameters, ComponentRegistry *reg)
 {
-    const char *PATH = "path";
+    const char *DIRECTORY_PATH = "directory_path";
     const char *X_SIZE = "x_size";
     const char *Y_SIZE = "y_size";
     const char *X_POSITION = "x_position";
@@ -227,7 +249,7 @@ ImageDirectoryMovieStimulusFactory::createObject(std::map<std::string, std::stri
     const char *DEFERRED = "deferred";
     
     REQUIRE_ATTRIBUTES(parameters,
-                       PATH,
+                       DIRECTORY_PATH,
                        X_SIZE,
                        Y_SIZE);
     
@@ -237,7 +259,7 @@ ImageDirectoryMovieStimulusFactory::createObject(std::map<std::string, std::stri
     shared_ptr<Variable> loop;
     getBaseMovieParameters(parameters, reg, tag, framesPerSecond, ended, loop);
     
-    boost::filesystem::path directoryPath(reg->getPath(parameters["working_path"], parameters[PATH]));
+    boost::filesystem::path directoryPath(reg->getPath(parameters["working_path"], parameters[DIRECTORY_PATH]));
     
     shared_ptr<Variable> xSize(reg->getVariable(parameters[X_SIZE]));
     CHECK_ATTRIBUTE(xSize, parameters, X_SIZE);
