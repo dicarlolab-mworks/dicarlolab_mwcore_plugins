@@ -8,7 +8,7 @@
  */
 
 #include "MovieStimulusPlugin.h"
-#include "MovieStimulus.h"
+#include "MovieStimulusFactory.h"
 #include "PlayMovie.h"
 #include "StopMovie.h"
 
