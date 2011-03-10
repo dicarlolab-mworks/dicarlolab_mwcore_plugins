@@ -11,7 +11,6 @@
 #define MOVIE_STIMULUS_H_
 
 #include <MWorksCore/StandardDynamicStimulus.h>
-#include <MWorksCore/StandardStimuli.h>
 
 using namespace mw;
 
@@ -107,7 +106,7 @@ protected:
     
 private:
     const std::string directoryPath;
-    std::vector< shared_ptr<ImageStimulus> > images;
+    std::vector< shared_ptr<Stimulus> > images;
     
 };
 

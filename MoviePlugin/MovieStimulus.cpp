@@ -9,6 +9,8 @@
 
 #include "MovieStimulus.h"
 
+#include <MWorksCore/StandardStimuli.h>
+
 #include <algorithm>
 
 #define STIM_MOVIE_LOOP "loop"
@@ -140,10 +142,7 @@ ImageDirectoryMovieStimulus::ImageDirectoryMovieStimulus(const std::string &tag,
 {
     std::vector<std::string> imageFilePaths;
 
-    if (!mw::getFilePaths(directoryPath, imageFilePaths)) {
-        throw SimpleException("Invalid directory path", directoryPath);
-    }
-    
+    mw::getFilePaths(directoryPath, imageFilePaths);
     std::sort(imageFilePaths.begin(), imageFilePaths.end());
     
     for (size_t i = 0; i < imageFilePaths.size(); i++) {
