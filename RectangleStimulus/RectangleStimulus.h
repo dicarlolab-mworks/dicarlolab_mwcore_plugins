@@ -10,27 +10,22 @@
 #ifndef RECTANGLE_STIMULUS_H
 #define RECTANGLE_STIMULUS_H
 
-#include "MWorksCore/StandardStimuli.h"
+#include <MWorksCore/ParameterValue.h>
+#include <MWorksCore/StandardStimuli.h>
 
 using namespace mw;
 
-class mRectangleStimulus : public PointStimulus {
-protected:
+
+class RectangleStimulus : public PointStimulus {
+
 public:
-	mRectangleStimulus(std::string _tag, shared_ptr<Variable> _xoffset, 
-					shared_ptr<Variable> _yoffset, 
-					shared_ptr<Variable> _xscale,
-					shared_ptr<Variable> _yscale,
-					shared_ptr<Variable> _rot,
-					shared_ptr<Variable> _alpha,
-					shared_ptr<Variable> _r, 
-					shared_ptr<Variable> _g, 
-					shared_ptr<Variable> _b);
-	mRectangleStimulus(const mRectangleStimulus &tocopy);
-	~mRectangleStimulus();
-	virtual Stimulus * frozenClone();
-	
+    static void describeComponent(ComponentInfo &info);
+    
+    explicit RectangleStimulus(const ParameterValueMap &parameters);
+    
 	virtual Datum getCurrentAnnounceDrawData();
+
 };
+
 
 #endif 

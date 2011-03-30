@@ -7,17 +7,21 @@
  *
  */
 
-#include "RectangleStimulusPlugin.h"
-#include "RectangleStimulusFactory.h"
-#include "MWorksCore/ComponentFactory.h"
+#include <MWorksCore/Plugin.h>
+#include <MWorksCore/StandardStimulusFactory.h>
+
+#include "RectangleStimulus.h"
+
 using namespace mw;
 
-Plugin *getPlugin(){
-    return new mRectangleStimulusPlugin();
-}
+
+class RectangleStimulusPlugin : public Plugin {
+    virtual void registerComponents(shared_ptr<ComponentRegistry> registry) {
+        registry->registerFactory<StandardStimulusFactory, RectangleStimulus>();
+    }	
+};
 
 
-void mRectangleStimulusPlugin::registerComponents(shared_ptr<ComponentRegistry> registry) {
-	registry->registerFactory(std::string("stimulus/rectangle"),
-							  (ComponentFactory *)(new mRectangleStimulusFactory()));
+extern "C" Plugin* getPlugin(){
+    return new RectangleStimulusPlugin();
 }
