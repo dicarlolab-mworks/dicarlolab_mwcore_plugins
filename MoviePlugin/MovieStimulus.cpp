@@ -25,14 +25,25 @@
 #define STIM_MOVIE_DIRECTORY_PATH "directory_path"
 
 
-BaseMovieStimulus::BaseMovieStimulus(const std::string &tag,
-                                     shared_ptr<Variable> framesPerSecond,
-                                     shared_ptr<Variable> ended,
-                                     shared_ptr<Variable> loop) :
-    StandardDynamicStimulus(tag, framesPerSecond),
-    ended(ended),
-    loop(registerVariable(loop))
-{ }
+const std::string BaseMovieStimulus::ENDED("ended");
+const std::string BaseMovieStimulus::LOOP("loop");
+
+
+void BaseMovieStimulus::describeComponent(ComponentInfo &info) {
+    StandardDynamicStimulus::describeComponent(info);
+    info.addParameter(ENDED, false);
+    info.addParameter(LOOP, "0");
+}
+
+
+BaseMovieStimulus::BaseMovieStimulus(const ParameterValueMap &parameters) :
+    StandardDynamicStimulus(parameters),
+    loop(registerVariable(parameters[LOOP]))
+{
+    if (!(parameters[ENDED].empty())) {
+        ended = parameters[ENDED];
+    }
+}
 
 
 void BaseMovieStimulus::freeze(bool shouldFreeze) {
@@ -61,8 +72,7 @@ int BaseMovieStimulus::getFrameNumber() {
     int frameNumber = StandardDynamicStimulus::getFrameNumber();
     
     if ((frameNumber >= 0) && bool(loop->getValue())) {
-        int numFrames = getNumFrames();
-        frameNumber %= numFrames;
+        frameNumber %= getNumFrames();
     }
 
     return frameNumber;
@@ -105,13 +115,21 @@ Datum BaseMovieStimulus::getCurrentAnnounceDrawData() {
 }
 
 
-MovieStimulus::MovieStimulus(const std::string &tag,
-                             shared_ptr<Variable> framesPerSecond,
-                             shared_ptr<StimulusGroup> stimulusGroup,
-                             shared_ptr<Variable> ended,
-                             shared_ptr<Variable> loop) :
-    BaseMovieStimulus(tag, framesPerSecond, ended, loop),
-    stimulusGroup(stimulusGroup)
+const std::string MovieStimulus::STIMULUS_GROUP("stimulus_group");
+
+
+void MovieStimulus::describeComponent(ComponentInfo &info) {
+    BaseMovieStimulus::describeComponent(info);
+    info.setSignature("stimulus/movie");
+    info.addParameter(STIMULUS_GROUP);
+    // To preserve existing behavior, do not auto-load stimulus by default
+    info.addParameter(Stimulus::DEFERRED, "explicit");
+}
+
+
+MovieStimulus::MovieStimulus(const ParameterValueMap &parameters) :
+    BaseMovieStimulus(parameters),
+    stimulusGroup(parameters[STIMULUS_GROUP])
 { }
 
 
@@ -126,35 +144,45 @@ Datum MovieStimulus::getCurrentAnnounceDrawData() {
 }
 
 
-ImageDirectoryMovieStimulus::ImageDirectoryMovieStimulus(const std::string &tag,
-                                                         const std::string &directoryPath,
-                                                         shared_ptr<Variable> xSize,
-                                                         shared_ptr<Variable> ySize,
-                                                         shared_ptr<Variable> xPosition,
-                                                         shared_ptr<Variable> yPosition,
-                                                         shared_ptr<Variable> rotation,
-                                                         shared_ptr<Variable> alphaMultiplier,
-                                                         shared_ptr<Variable> framesPerSecond,
-                                                         shared_ptr<Variable> ended,
-                                                         shared_ptr<Variable> loop) :
-    BaseMovieStimulus(tag, framesPerSecond, ended, loop),
-    directoryPath(directoryPath)
+const std::string ImageDirectoryMovieStimulus::DIRECTORY_PATH("directory_path");
+
+
+void ImageDirectoryMovieStimulus::describeComponent(ComponentInfo &info) {
+    BaseMovieStimulus::describeComponent(info);
+    info.setSignature("stimulus/image_directory_movie");
+    info.addParameter(DIRECTORY_PATH);
+
+    // Add all ImageStimulus parameters except "path"
+    ComponentInfo imageInfo;
+    ImageStimulus::describeComponent(imageInfo);
+    const ParameterInfoMap &imageParams = imageInfo.getParameters();
+    for (ParameterInfoMap::const_iterator iter = imageParams.begin(); iter != imageParams.end(); iter++) {
+        const std::string &name = (*iter).first;
+        if (name != ImageStimulus::PATH) {
+            info.addParameter(name, (*iter).second);
+        }
+    }
+}
+
+
+ImageDirectoryMovieStimulus::ImageDirectoryMovieStimulus(const ParameterValueMap &parameters) :
+    BaseMovieStimulus(parameters),
+    directoryPath(mw::expandPath(parameters["working_path"], parameters[DIRECTORY_PATH]).string())
 {
     std::vector<std::string> imageFilePaths;
-
     mw::getFilePaths(directoryPath, imageFilePaths);
     std::sort(imageFilePaths.begin(), imageFilePaths.end());
     
+    ComponentRegistryPtr reg = parameters[DIRECTORY_PATH].getRegistry();
+    
     for (size_t i = 0; i < imageFilePaths.size(); i++) {
         std::string imageTag((boost::format("%1%_frame_%2%") % tag % i).str());
-        images.push_back(shared_ptr<ImageStimulus>(new ImageStimulus(imageTag,
-                                                                     imageFilePaths[i],
-                                                                     xPosition,
-                                                                     yPosition,
-                                                                     xSize,
-                                                                     ySize,
-                                                                     rotation,
-                                                                     alphaMultiplier)));
+        
+        ParameterValueMap imageParams(parameters);
+        imageParams.at(Component::TAG) = ParameterValue(imageTag, reg);
+        imageParams.insert(std::make_pair(ImageStimulus::PATH, ParameterValue(imageFilePaths[i], reg)));
+        
+        images.push_back(shared_ptr<ImageStimulus>(new ImageStimulus(imageParams)));
     }
 }
 

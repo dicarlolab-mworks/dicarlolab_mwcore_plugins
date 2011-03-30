@@ -10,18 +10,22 @@
 #ifndef MOVIE_STIMULUS_H_
 #define MOVIE_STIMULUS_H_
 
+#include <boost/noncopyable.hpp>
+
 #include <MWorksCore/StandardDynamicStimulus.h>
 
 using namespace mw;
 
 
-class BaseMovieStimulus : public StandardDynamicStimulus {
+class BaseMovieStimulus : public StandardDynamicStimulus, boost::noncopyable {
     
 public:
-    BaseMovieStimulus(const std::string &tag,
-                      shared_ptr<Variable> framesPerSecond,
-                      shared_ptr<Variable> ended,
-                      shared_ptr<Variable> loop);
+    static const std::string ENDED;
+    static const std::string LOOP;
+    
+    static void describeComponent(ComponentInfo &info);
+    
+    explicit BaseMovieStimulus(const ParameterValueMap &parameters);
     
     virtual ~BaseMovieStimulus() { }
     
@@ -40,8 +44,6 @@ protected:
     virtual shared_ptr<Stimulus> getStimulusForFrame(int frameNumber) = 0;
     
 private:
-    BaseMovieStimulus(const BaseMovieStimulus &other);
-
     shared_ptr<Variable> ended;
     shared_ptr<Variable> loop;
     
@@ -51,11 +53,11 @@ private:
 class MovieStimulus : public BaseMovieStimulus {
     
 public:
-    MovieStimulus(const std::string &tag,
-                  shared_ptr<Variable> framesPerSecond,
-                  shared_ptr<StimulusGroup> stimulusGroup,
-                  shared_ptr<Variable> ended,
-                  shared_ptr<Variable> loop);
+    static const std::string STIMULUS_GROUP;
+    
+    static void describeComponent(ComponentInfo &info);
+    
+    explicit MovieStimulus(const ParameterValueMap &parameters);
     
     virtual ~MovieStimulus() { }
 
@@ -79,17 +81,11 @@ private:
 class ImageDirectoryMovieStimulus : public BaseMovieStimulus {
     
 public:
-    ImageDirectoryMovieStimulus(const std::string &tag,
-                                const std::string &directoryPath,
-                                shared_ptr<Variable> xSize,
-                                shared_ptr<Variable> ySize,
-                                shared_ptr<Variable> xPosition,
-                                shared_ptr<Variable> yPosition,
-                                shared_ptr<Variable> rotation,
-                                shared_ptr<Variable> alphaMultiplier,
-                                shared_ptr<Variable> framesPerSecond,
-                                shared_ptr<Variable> ended,
-                                shared_ptr<Variable> loop);
+    static const std::string DIRECTORY_PATH;
+    
+    static void describeComponent(ComponentInfo &info);
+    
+    explicit ImageDirectoryMovieStimulus(const ParameterValueMap &parameters);
     
     virtual ~ImageDirectoryMovieStimulus() { }
     
