@@ -10,27 +10,23 @@
 #ifndef CIRCLE_STIMULUS_H
 #define CIRCLE_STIMULUS_H
 
-#include "MWorksCore/StandardStimuli.h"
+#include <MWorksCore/ParameterValue.h>
+#include <MWorksCore/StandardStimuli.h>
+
 using namespace mw;
 
-class mCircleStimulus : public PointStimulus {
-protected:
+
+class CircleStimulus : public PointStimulus {
+
 public:
-	mCircleStimulus(std::string _tag, shared_ptr<Variable> _xoffset, 
-					shared_ptr<Variable> _yoffset, 
-					shared_ptr<Variable> _xscale,
-					shared_ptr<Variable> _yscale,
-					shared_ptr<Variable> _rot,
-					shared_ptr<Variable> _alpha,
-					shared_ptr<Variable> _r, 
-					shared_ptr<Variable> _g, 
-					shared_ptr<Variable> _b);
-	mCircleStimulus(const mCircleStimulus &tocopy);
-	~mCircleStimulus();
-	virtual Stimulus * frozenClone();
-	
+    static void describeComponent(ComponentInfo &info);
+    
+    explicit CircleStimulus(const ParameterValueMap &parameters);
+    
 	virtual void drawInUnitSquare(shared_ptr<StimulusDisplay> display);
-	virtual Datum getCurrentAnnounceDrawData();
+    virtual Datum getCurrentAnnounceDrawData();
+
 };
+
 
 #endif 

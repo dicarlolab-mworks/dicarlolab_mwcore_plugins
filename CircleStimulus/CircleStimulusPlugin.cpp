@@ -7,17 +7,21 @@
  *
  */
 
-#include "CircleStimulusPlugin.h"
-#include "CircleStimulusFactory.h"
-#include "MWorksCore/ComponentFactory.h"
+#include <MWorksCore/Plugin.h>
+#include <MWorksCore/StandardStimulusFactory.h>
+
+#include "CircleStimulus.h"
+
 using namespace mw;
 
-Plugin *getPlugin(){
-    return new mCircleStimulusPlugin();
-}
+
+class CircleStimulusPlugin : public Plugin {
+    virtual void registerComponents(shared_ptr<ComponentRegistry> registry) {
+        registry->registerFactory<StandardStimulusFactory, CircleStimulus>();
+    }	
+};
 
 
-void mCircleStimulusPlugin::registerComponents(shared_ptr<ComponentRegistry> registry) {
-	registry->registerFactory(std::string("stimulus/circle"),
-							  (ComponentFactory *)(new mCircleStimulusFactory()));
+extern "C" Plugin* getPlugin(){
+    return new CircleStimulusPlugin();
 }
