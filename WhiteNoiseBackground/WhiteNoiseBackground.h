@@ -10,19 +10,24 @@
 #ifndef WhiteNoiseBackground_H_
 #define WhiteNoiseBackground_H_
 
+#include <boost/noncopyable.hpp>
 #include <boost/random.hpp>
 
 #include <MWorksCore/Stimulus.h>
+#include <MWorksCore/ComponentInfo.h>
+#include <MWorksCore/ParameterValue.h>
 
 using namespace mw;
 
 
-class WhiteNoiseBackground : public Stimulus {
+class WhiteNoiseBackground : public Stimulus, boost::noncopyable {
 
 public:
-    WhiteNoiseBackground(const std::string &tag);
+    static void describeComponent(ComponentInfo &info);
+    
+    explicit WhiteNoiseBackground(const ParameterValueMap &parameters);
 
-    virtual ~WhiteNoiseBackground();
+    virtual ~WhiteNoiseBackground() { }
     
     virtual void load(shared_ptr<StimulusDisplay> display);
     virtual void unload(shared_ptr<StimulusDisplay> display);
@@ -32,8 +37,6 @@ public:
     void randomizePixels();
     
 private:
-    WhiteNoiseBackground(const WhiteNoiseBackground &other);
-
     typedef std::pair<GLint, GLint> DisplayDimensions;
     std::map<int, DisplayDimensions> dims;
 

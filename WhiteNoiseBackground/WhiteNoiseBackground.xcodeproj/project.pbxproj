@@ -33,7 +33,6 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		5CF9AEBB0FD5795C00F405F6 /* WhiteNoiseBackgroundFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5CF9AEB70FD5795C00F405F6 /* WhiteNoiseBackgroundFactory.cpp */; };
 		5CF9AEBC0FD5795C00F405F6 /* WhiteNoiseBackgroundPlugin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5CF9AEB90FD5795C00F405F6 /* WhiteNoiseBackgroundPlugin.cpp */; };
 		5CFCAB0A1105FB4C007CE55F /* MWLibrary.xml in Resources */ = {isa = PBXBuildFile; fileRef = 5CFCAB091105FB4C007CE55F /* MWLibrary.xml */; };
 		5CFE591A0F571B15000C7F30 /* WhiteNoiseBackground.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5CFE59190F571B15000C7F30 /* WhiteNoiseBackground.cpp */; };
@@ -77,10 +76,7 @@
 		32DBCF630370AF2F00C91783 /* WhiteNoiseBackground_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WhiteNoiseBackground_Prefix.pch; sourceTree = "<group>"; };
 		5C78EE6B115D02EE00151A76 /* Development.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Development.xcconfig; path = "/Library/Application Support/MWorks/Developer/Xcode/Development.xcconfig"; sourceTree = "<absolute>"; };
 		5C78EE6C115D02EE00151A76 /* WARNING.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = WARNING.txt; path = "/Library/Application Support/MWorks/Developer/Xcode/WARNING.txt"; sourceTree = "<absolute>"; };
-		5CF9AEB70FD5795C00F405F6 /* WhiteNoiseBackgroundFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WhiteNoiseBackgroundFactory.cpp; sourceTree = SOURCE_ROOT; };
-		5CF9AEB80FD5795C00F405F6 /* WhiteNoiseBackgroundFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WhiteNoiseBackgroundFactory.h; sourceTree = SOURCE_ROOT; };
 		5CF9AEB90FD5795C00F405F6 /* WhiteNoiseBackgroundPlugin.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WhiteNoiseBackgroundPlugin.cpp; sourceTree = SOURCE_ROOT; };
-		5CF9AEBA0FD5795C00F405F6 /* WhiteNoiseBackgroundPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WhiteNoiseBackgroundPlugin.h; sourceTree = SOURCE_ROOT; };
 		5CFCAB091105FB4C007CE55F /* MWLibrary.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MWLibrary.xml; sourceTree = "<group>"; };
 		5CFE59180F571B15000C7F30 /* WhiteNoiseBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WhiteNoiseBackground.h; sourceTree = SOURCE_ROOT; };
 		5CFE59190F571B15000C7F30 /* WhiteNoiseBackground.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WhiteNoiseBackground.cpp; sourceTree = SOURCE_ROOT; };
@@ -143,9 +139,6 @@
 				5CFE59190F571B15000C7F30 /* WhiteNoiseBackground.cpp */,
 				E1EC6EBC12BBC5B5003C9543 /* RandomizeBackground.h */,
 				E1EC6EBD12BBC5B5003C9543 /* RandomizeBackground.cpp */,
-				5CF9AEB80FD5795C00F405F6 /* WhiteNoiseBackgroundFactory.h */,
-				5CF9AEB70FD5795C00F405F6 /* WhiteNoiseBackgroundFactory.cpp */,
-				5CF9AEBA0FD5795C00F405F6 /* WhiteNoiseBackgroundPlugin.h */,
 				5CF9AEB90FD5795C00F405F6 /* WhiteNoiseBackgroundPlugin.cpp */,
 			);
 			name = Classes;
@@ -264,7 +257,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				5CFE591A0F571B15000C7F30 /* WhiteNoiseBackground.cpp in Sources */,
-				5CF9AEBB0FD5795C00F405F6 /* WhiteNoiseBackgroundFactory.cpp in Sources */,
 				5CF9AEBC0FD5795C00F405F6 /* WhiteNoiseBackgroundPlugin.cpp in Sources */,
 				E1EC6EBE12BBC5B5003C9543 /* RandomizeBackground.cpp in Sources */,
 			);

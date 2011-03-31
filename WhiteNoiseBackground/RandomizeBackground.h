@@ -18,7 +18,9 @@ using namespace mw;
 class RandomizeBackground : public Action {
     
 public:
-    RandomizeBackground(shared_ptr<StimulusNode> backgroundNode);
+    static void describeComponent(ComponentInfo &info);
+    
+    explicit RandomizeBackground(const ParameterValueMap &parameters);
     virtual bool execute();
     
 private:

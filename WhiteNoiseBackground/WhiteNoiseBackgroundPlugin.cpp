@@ -7,22 +7,23 @@
  *
  */
 
-#include <MWorksCore/ComponentFactory.h>
+#include <MWorksCore/Plugin.h>
+#include <MWorksCore/StandardStimulusFactory.h>
 
-#include "WhiteNoiseBackgroundPlugin.h"
-#include "WhiteNoiseBackgroundFactory.h"
+#include "WhiteNoiseBackground.h"
+#include "RandomizeBackground.h"
 
 using namespace mw;
 
 
-Plugin* getPlugin() {
+class WhiteNoiseBackgroundPlugin : public Plugin {
+	virtual void registerComponents(shared_ptr<ComponentRegistry> registry) {
+        registry->registerFactory<StandardStimulusFactory, WhiteNoiseBackground>();
+        registry->registerFactory<StandardComponentFactory, RandomizeBackground>();
+    }	
+};
+
+
+extern "C" Plugin* getPlugin() {
     return new WhiteNoiseBackgroundPlugin();
-}
-
-
-void WhiteNoiseBackgroundPlugin::registerComponents(shared_ptr<ComponentRegistry> registry) {
-    registry->registerFactory(std::string("stimulus/white_noise_background"),
-                              (ComponentFactory *)(new WhiteNoiseBackgroundFactory()));
-    registry->registerFactory(std::string("action/randomize_background"),
-                              (ComponentFactory *)(new RandomizeBackgroundFactory()));
 }

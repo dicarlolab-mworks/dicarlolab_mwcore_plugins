@@ -12,8 +12,19 @@
 #include "WhiteNoiseBackground.h"
 
 
-RandomizeBackground::RandomizeBackground(shared_ptr<StimulusNode> backgroundNode) :
-    backgroundNode(backgroundNode)
+static const std::string STIMULUS("stimulus");
+
+
+void RandomizeBackground::describeComponent(ComponentInfo &info) {
+    Action::describeComponent(info);
+    info.setSignature("action/randomize_background");
+    info.addParameter(STIMULUS);
+}
+
+
+RandomizeBackground::RandomizeBackground(const ParameterValueMap &parameters) :
+    Action(parameters),
+    backgroundNode(parameters[STIMULUS])
 {
     setName("RandomizeBackground");
 }

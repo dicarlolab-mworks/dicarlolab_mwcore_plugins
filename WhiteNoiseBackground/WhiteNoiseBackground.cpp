@@ -15,14 +15,17 @@
 #include <MWorksCore/StandardVariables.h>
 
 
-WhiteNoiseBackground::WhiteNoiseBackground(const std::string &tag) :
-    Stimulus(tag),
+void WhiteNoiseBackground::describeComponent(ComponentInfo &info) {
+    Stimulus::describeComponent(info);
+    info.setSignature("stimulus/white_noise_background");
+}
+
+
+WhiteNoiseBackground::WhiteNoiseBackground(const ParameterValueMap &parameters) :
+    Stimulus(parameters),
     randGen(mw::Clock::instance()->getSystemTimeUS()),
     randDist(std::numeric_limits<GLubyte>::min(), std::numeric_limits<GLubyte>::max())
 { }
-
-
-WhiteNoiseBackground::~WhiteNoiseBackground() { }
 
 
 void WhiteNoiseBackground::load(shared_ptr<StimulusDisplay> display) {
