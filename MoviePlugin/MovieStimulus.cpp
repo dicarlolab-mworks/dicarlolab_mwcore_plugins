@@ -122,15 +122,16 @@ void MovieStimulus::describeComponent(ComponentInfo &info) {
     BaseMovieStimulus::describeComponent(info);
     info.setSignature("stimulus/movie");
     info.addParameter(STIMULUS_GROUP);
-    // To preserve existing behavior, do not auto-load stimulus by default
-    info.addParameter(Stimulus::DEFERRED, "explicit");
 }
 
 
 MovieStimulus::MovieStimulus(const ParameterValueMap &parameters) :
     BaseMovieStimulus(parameters),
     stimulusGroup(parameters[STIMULUS_GROUP])
-{ }
+{
+    // To preserve existing behavior, do not auto-load stimulus
+    setDeferred(explicit_load);
+}
 
 
 Datum MovieStimulus::getCurrentAnnounceDrawData() {
@@ -179,7 +180,7 @@ ImageDirectoryMovieStimulus::ImageDirectoryMovieStimulus(const ParameterValueMap
         std::string imageTag((boost::format("%1%_frame_%2%") % tag % i).str());
         
         ParameterValueMap imageParams(parameters);
-        imageParams.at(Component::TAG) = ParameterValue(imageTag, reg);
+        imageParams.at(TAG) = ParameterValue(imageTag, reg);
         imageParams.insert(std::make_pair(ImageStimulus::PATH, ParameterValue(imageFilePaths[i], reg)));
         
         images.push_back(shared_ptr<ImageStimulus>(new ImageStimulus(imageParams)));
