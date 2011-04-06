@@ -168,7 +168,7 @@ void ImageDirectoryMovieStimulus::describeComponent(ComponentInfo &info) {
 
 ImageDirectoryMovieStimulus::ImageDirectoryMovieStimulus(const ParameterValueMap &parameters) :
     BaseMovieStimulus(parameters),
-    directoryPath(mw::expandPath(parameters["working_path"], parameters[DIRECTORY_PATH]).string())
+    directoryPath(parameters[DIRECTORY_PATH].as<boost::filesystem::path>().string())
 {
     std::vector<std::string> imageFilePaths;
     mw::getFilePaths(directoryPath, imageFilePaths);
