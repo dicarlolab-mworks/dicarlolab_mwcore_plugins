@@ -92,4 +92,23 @@
 			<iochannel tag="ITC18 Triggered Analog Snippet" type="itc18_triggered_analog_snippet" variable="" capability="ITC18_ADC_INPUT0" data_type="triggered_analog_snippet" direction="output" synchrony="hardware_timed_synchronous" range_min="-10" range_max="10" resolution="16" update_interval="3ms" data_interval="70us" TTL_trigger_port="0" pre_trigger_interval="4ms" post_trigger_interval="4ms"/>
 			</code>
 		</MWElement>	
-	</MWElements>
+	
+	<MWElement name="ITC18 Word Output Channel">
+		<!-- XPath 2.0 expression defining nodes of this type -->
+		<match_signature>iochannel[@type='itc18_word_output']</match_signature>
+		
+		<!-- Inheritance -->
+		<isa>IOChannel</isa>
+		<allowed_parent>ITC18 IO Device</allowed_parent>
+		
+		<description>
+			Used for sending word output on the ITC18 (e.g. to a Plexon system for clock synchronization)
+		</description>
+		<icon>smallIOFolder</icon>
+		
+		<!-- Payload -->
+		<code>
+			<iochannel tag="ITC18 word output" type="itc18_word_output" variable="" capability="ITC18_TTL_AUX_WORD1" data_type="digital_uint8" direction="output" synchrony="asynchronous" range_min="0" range_max="0" resolution="1" update_interval="3ms" data_interval="1ms" TTL_trigger_port="0" pre_trigger_interval="5ms" post_trigger_interval="5ms"/>
+		</code>
+	</MWElement>	
+</MWElements>
