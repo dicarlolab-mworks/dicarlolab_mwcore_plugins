@@ -7,18 +7,22 @@
  *
  */
 
-#include "ITC18Plugin.h"
-#include "ITC18_IODeviceFactory.h"
+#include <MWorksCore/Plugin.h>
+#include <MWorksCore/StandardComponentFactory.h>
+
+#include "ITC18_IODevice.h"
+
 using namespace mw;
 
-Plugin *getPlugin(){
+
+class ITC18Plugin : public Plugin {
+	virtual void registerComponents(shared_ptr<ComponentRegistry> registry) {
+        registry->registerFactory<StandardComponentFactory, mITC18_IODevice>();
+        registry->registerFactory<StandardComponentFactory, IOChannelRequest_TriggeredAnalogSnippetITC18>();
+    }
+};
+
+
+extern "C" Plugin* getPlugin() {
     return new ITC18Plugin();
-}
-
-
-void ITC18Plugin::registerComponents(shared_ptr<ComponentRegistry> registry) {
-	registry->registerFactory(std::string("iodevice/itc18"),
-							  (ComponentFactory *)(new mITC18_IODeviceFactory()));
-	registry->registerFactory(std::string("iochannel/itc18_triggered_analog_snippet"),
-							  (ComponentFactory *)(new ITC18_TriggeredAnalogSnippetChannelRequestFactory()));
 }

@@ -107,10 +107,18 @@ Lockable *mITC18_IODevice::ITC18DriverLock = NULL;
 // ---------------------------------
 
 
+void mITC18_IODevice::describeComponent(ComponentInfo &info) {
+    LegacyIODevice::describeComponent(info);
+    info.setSignature("iodevice/itc18");
+}
+
+
 // constructor function for ITC18_IODevice objects
-mITC18_IODevice::mITC18_IODevice(const shared_ptr<Scheduler> &a_scheduler)  : LegacyIODevice() {
+mITC18_IODevice::mITC18_IODevice(const ParameterValueMap &parameters) :
+    LegacyIODevice(parameters)
+{
 	
-	scheduler = a_scheduler;
+	scheduler = Scheduler::instance();
 	// set up some defaults
 	itc = NULL;
 	attachedDeviceElementNumber = -1;	// no physical ITC device yet
@@ -3273,50 +3281,45 @@ Datum mWaveform::getWaveformPackage() {
 }
 
 
+const std::string IOChannelRequest_TriggeredAnalogSnippetITC18::TTL_TRIGGER_PORT("TTL_trigger_port");
+const std::string IOChannelRequest_TriggeredAnalogSnippetITC18::PRE_TRIGGER_INTERVAL("pre_trigger_interval");
+const std::string IOChannelRequest_TriggeredAnalogSnippetITC18::POST_TRIGGER_INTERVAL("post_trigger_interval");
 
 
-IOChannelRequest_TriggeredAnalogSnippetITC18::IOChannelRequest_TriggeredAnalogSnippetITC18(
-												 std::string channel_name,
-												 shared_ptr<Variable> _param, 
-												 std::string _requested_capability_name,  
-												 IODataDirection _requested_data_direction, 
-												 IODataType _requested_data_type, 
-												 IODataSynchronyType _requested_synchrony_type,
-												 long _requested_data_interval_usec, 
-												 long _requested_update_interval_usec, 
-												 double _requested_range_min, 
-												 double _requested_range_max, 
-												 int _requested_resolution_bits,
-												 int _preSpikeWindowTimeUS,
-												 int _postSpikeWindowTimeUS,
-												 int _linkedTTLhardwarePort): 
-IOChannelRequest(
-				  channel_name,
-				  _param, 
-				  _requested_capability_name,  
-				  _requested_data_direction, 
-				  _requested_data_type, 
-				  _requested_synchrony_type,
-				  _requested_data_interval_usec, 
-				  _requested_update_interval_usec, 
-				  _requested_range_min, 
-				  _requested_range_max, 
-				  _requested_resolution_bits) {
-	
-	requested_preSpikeWindowTimeUS = _preSpikeWindowTimeUS;     
-	requested_postSpikeWindowTimeUS = _postSpikeWindowTimeUS;
-	requested_linkedTTLhardwarePort = _linkedTTLhardwarePort;
-	if (VERBOSE_IO_DEVICE) mprintf("ITC18 subclassed channel request object was successfully instantiated. pre: %d  post us: %d Requested TTL port = %d",requested_preSpikeWindowTimeUS, requested_postSpikeWindowTimeUS, requested_linkedTTLhardwarePort);                    
-	
+void IOChannelRequest_TriggeredAnalogSnippetITC18::describeComponent(ComponentInfo &info) {
+    IOChannelRequest::describeComponent(info);
+    
+    info.setSignature("iochannel/itc18_triggered_analog_snippet");
+    
+    info.addParameter(TTL_TRIGGER_PORT);
+    info.addParameter(PRE_TRIGGER_INTERVAL);
+    info.addParameter(POST_TRIGGER_INTERVAL);
 }
 
-/*
- B::B(const B& tocopy) : A((const A&)tocopy {
- // do nothing
- }
- */
 
-//IOChannelRequest_ITC18::IOChannelRequest_ITC18(IOChannelRequest_ITC18& copy) : IOChannelRequest( (IOChannelRequest&)copy ) { }
+IOChannelRequest_TriggeredAnalogSnippetITC18::IOChannelRequest_TriggeredAnalogSnippetITC18(const ParameterValueMap &parameters) :
+    IOChannelRequest(parameters),
+    requested_preSpikeWindowTimeUS(parameters[PRE_TRIGGER_INTERVAL]),
+    requested_postSpikeWindowTimeUS(parameters[POST_TRIGGER_INTERVAL]),
+    requested_linkedTTLhardwarePort(parameters[TTL_TRIGGER_PORT])
+{
+    // Override the user-specified values for these parameters
+    requested_data_direction = M_INPUT_DATA;
+    requested_synchrony_type = M_HARDWARE_TIMED_SYNCHRONOUS_IO;
+    requested_data_type = M_ANALOG_SNIPPET_DATA;
+    
+	if (VERBOSE_IO_DEVICE) mprintf("ITC18 subclassed channel request object was successfully instantiated. pre: %d  post us: %d Requested TTL port = %d",requested_preSpikeWindowTimeUS, requested_postSpikeWindowTimeUS, requested_linkedTTLhardwarePort);                    
+}
+
+
+
+
+
+
+
+
+
+
 
 
 

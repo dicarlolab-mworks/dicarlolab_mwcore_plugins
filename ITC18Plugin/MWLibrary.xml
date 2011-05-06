@@ -108,7 +108,7 @@
 		
 		<!-- Payload -->
 		<code>
-			<iochannel tag="ITC18 word output" type="itc18_word_output" variable="" capability="ITC18_TTL_AUX_WORD1" data_type="digital_uint8" direction="output" synchrony="asynchronous" range_min="0" range_max="0" resolution="1" update_interval="3ms" data_interval="1ms" TTL_trigger_port="0" pre_trigger_interval="5ms" post_trigger_interval="5ms"/>
+			<iochannel tag="ITC18 word output" type="itc18_word_output" variable="" capability="ITC18_TTL_AUX_WORD1" data_type="digital_uint8" direction="output" synchrony="asynchronous" range_min="0" range_max="0" resolution="1" update_interval="3ms" data_interval="1ms"/>
 		</code>
 	</MWElement>	
 </MWElements>

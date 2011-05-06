@@ -221,39 +221,31 @@ class mITC18_IODevice;
 
 // Subclass the IOChannelRequest class so that we can add ITC-specific stuff
 class IOChannelRequest_TriggeredAnalogSnippetITC18 : public IOChannelRequest {
-
-    protected:
-        int requested_preSpikeWindowTimeUS;         // parameter -- include data from up to this many US BEFORE the digital edge
-        int requested_postSpikeWindowTimeUS;        // after the digital edge
-        int requested_linkedTTLhardwarePort;        // makey this should be the entire request -- starts to interact with how this looks in the XML
+    
+protected:
+    int requested_preSpikeWindowTimeUS;         // parameter -- include data from up to this many US BEFORE the digital edge
+    int requested_postSpikeWindowTimeUS;        // after the digital edge
+    int requested_linkedTTLhardwarePort;        // makey this should be the entire request -- starts to interact with how this looks in the XML
 	
-    public:
-        IOChannelRequest_TriggeredAnalogSnippetITC18(
-								std::string channel_name, 
-							shared_ptr<Variable> _param, 
-							std::string _requested_capability_name,  
-							IODataDirection _requested_data_direction, 
-							IODataType _requested_data_type, 
-							IODataSynchronyType _requested_synchrony_type,
-							long _requested_data_interval_usec, 
-							long _requested_update_interval_usec, 
-							double _requested_range_min, 
-							double _requested_range_max, 
-							int _requested_resolution_bits,
-                            int _preSpikeWindowTimeUS,
-                            int _postSpikeWindowTimeUS,
-                            int _linkedTTLhardwarePort);
-		
-		//IOChannelRequest_ITC18(IOChannelRequest_ITC18& copy); 
-		~IOChannelRequest_TriggeredAnalogSnippetITC18() {};
-        int getRequestedPreSpikeWindow(){ return requested_preSpikeWindowTimeUS;}          
-        int getRequestedPostSpikeWindow() { return requested_postSpikeWindowTimeUS;}       
-        int getRequestedLinkedDigitalPort() { return requested_linkedTTLhardwarePort;}	
-        
-        virtual IOChannelRequest *clone(){
-            return (IOChannelRequest *)(new IOChannelRequest_TriggeredAnalogSnippetITC18(*this));
-        }    
-                	
+public:
+    static const std::string TTL_TRIGGER_PORT;
+    static const std::string PRE_TRIGGER_INTERVAL;
+    static const std::string POST_TRIGGER_INTERVAL;
+
+    static void describeComponent(ComponentInfo &info);
+    
+    explicit IOChannelRequest_TriggeredAnalogSnippetITC18(const ParameterValueMap &parameters);
+    
+    //IOChannelRequest_ITC18(IOChannelRequest_ITC18& copy); 
+    ~IOChannelRequest_TriggeredAnalogSnippetITC18() {};
+    int getRequestedPreSpikeWindow(){ return requested_preSpikeWindowTimeUS;}          
+    int getRequestedPostSpikeWindow() { return requested_postSpikeWindowTimeUS;}       
+    int getRequestedLinkedDigitalPort() { return requested_linkedTTLhardwarePort;}	
+    
+    virtual IOChannelRequest *clone(){
+        return (IOChannelRequest *)(new IOChannelRequest_TriggeredAnalogSnippetITC18(*this));
+    }    
+    
 };
 
 
@@ -571,8 +563,10 @@ class mITC18_IODevice : public LegacyIODevice {
 
 			
     public:
-            
-            mITC18_IODevice(const shared_ptr<Scheduler> &a_scheduler);  
+            static void describeComponent(ComponentInfo &info);
+    
+            explicit mITC18_IODevice(const ParameterValueMap &parameters);
+    
             ~mITC18_IODevice();
 	
 			// methods from base class that are overridden by the ITC18_IODevice class  
