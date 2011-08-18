@@ -13,6 +13,7 @@
 
 #include <algorithm>
 
+#define STIM_MOVIE_FRAMES_PER_SECOND "frames_per_second"
 #define STIM_MOVIE_LOOP "loop"
 #define STIM_MOVIE_PLAYING "playing"
 #define STIM_MOVIE_CURRENT_FRAME "current_frame"
@@ -25,12 +26,14 @@
 #define STIM_MOVIE_DIRECTORY_PATH "directory_path"
 
 
+const std::string BaseMovieStimulus::FRAMES_PER_SECOND("frames_per_second");
 const std::string BaseMovieStimulus::ENDED("ended");
 const std::string BaseMovieStimulus::LOOP("loop");
 
 
 void BaseMovieStimulus::describeComponent(ComponentInfo &info) {
     StandardDynamicStimulus::describeComponent(info);
+    info.addParameter(FRAMES_PER_SECOND, "refreshRate()");
     info.addParameter(ENDED, false);
     info.addParameter(LOOP, "0");
 }
@@ -38,6 +41,7 @@ void BaseMovieStimulus::describeComponent(ComponentInfo &info) {
 
 BaseMovieStimulus::BaseMovieStimulus(const ParameterValueMap &parameters) :
     StandardDynamicStimulus(parameters),
+    framesPerSecond(registerVariable(parameters[FRAMES_PER_SECOND])),
     loop(registerVariable(parameters[LOOP]))
 {
     if (!(parameters[ENDED].empty())) {
@@ -68,10 +72,30 @@ void BaseMovieStimulus::unload(shared_ptr<StimulusDisplay> display) {
 }
 
 
-int BaseMovieStimulus::getFrameNumber() {
-    int frameNumber = StandardDynamicStimulus::getFrameNumber();
+void BaseMovieStimulus::play() {
+    const double frameRate = framesPerSecond->getValue().getFloat();
+    const double refreshRate = StimulusDisplay::getCurrentStimulusDisplay()->getMainDisplayRefreshRate();
     
-    if ((frameNumber >= 0) && bool(loop->getValue())) {
+    if ((frameRate > refreshRate) || (fmod(refreshRate, frameRate) != 0.0)) {
+        merror(M_DISPLAY_MESSAGE_DOMAIN,
+               "Requested frame rate (%g) is incompatible with display refresh rate (%g)",
+               frameRate,
+               refreshRate);
+
+    }
+    
+    StandardDynamicStimulus::play();
+}
+
+
+int BaseMovieStimulus::getFrameNumber() {
+    if (!isPlaying()) {
+        return -1;
+    }
+    
+    int frameNumber = int(double(getElapsedTime()) * (framesPerSecond->getValue().getFloat()) / 1e6);
+    
+    if (bool(loop->getValue())) {
         frameNumber %= getNumFrames();
     }
 
@@ -84,7 +108,8 @@ bool BaseMovieStimulus::needDraw() {
 }
 
 
-void BaseMovieStimulus::drawFrame(shared_ptr<StimulusDisplay> display, int frameNumber) {    
+void BaseMovieStimulus::draw(shared_ptr<StimulusDisplay> display) {
+    int frameNumber = getFrameNumber();
     int numFrames = getNumFrames();
     if (frameNumber < numFrames) {
         getStimulusForFrame(frameNumber)->draw(display);
@@ -99,8 +124,9 @@ void BaseMovieStimulus::drawFrame(shared_ptr<StimulusDisplay> display, int frame
 Datum BaseMovieStimulus::getCurrentAnnounceDrawData() {
     Datum announceData = StandardDynamicStimulus::getCurrentAnnounceDrawData();
 
+    announceData.addElement(STIM_MOVIE_FRAMES_PER_SECOND, framesPerSecond->getValue().getInteger());  
     announceData.addElement(STIM_MOVIE_LOOP, loop->getValue());  
-    announceData.addElement(STIM_MOVIE_PLAYING, Datum(started));  
+    announceData.addElement(STIM_MOVIE_PLAYING, Datum(isPlaying()));  
 
     int frameNumber = getFrameNumber();
     announceData.addElement(STIM_MOVIE_CURRENT_FRAME, Datum((long)frameNumber));

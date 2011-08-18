@@ -10,16 +10,15 @@
 #ifndef MOVIE_STIMULUS_H_
 #define MOVIE_STIMULUS_H_
 
-#include <boost/noncopyable.hpp>
-
 #include <MWorksCore/StandardDynamicStimulus.h>
 
 using namespace mw;
 
 
-class BaseMovieStimulus : public StandardDynamicStimulus, boost::noncopyable {
+class BaseMovieStimulus : public StandardDynamicStimulus {
     
 public:
+    static const std::string FRAMES_PER_SECOND;
     static const std::string ENDED;
     static const std::string LOOP;
     
@@ -34,16 +33,19 @@ public:
     virtual void load(shared_ptr<StimulusDisplay> display);
     virtual void unload(shared_ptr<StimulusDisplay> display);
     
-    virtual int getFrameNumber();
     virtual bool needDraw();
-    virtual void drawFrame(shared_ptr<StimulusDisplay> display, int frameNumber);
+    virtual void draw(shared_ptr<StimulusDisplay> display);
     virtual Datum getCurrentAnnounceDrawData();
 
 protected:
+    virtual void play();
+    
+    virtual int getFrameNumber();
     virtual int getNumFrames() = 0;
     virtual shared_ptr<Stimulus> getStimulusForFrame(int frameNumber) = 0;
     
 private:
+    shared_ptr<Variable> framesPerSecond;
     shared_ptr<Variable> ended;
     shared_ptr<Variable> loop;
     
