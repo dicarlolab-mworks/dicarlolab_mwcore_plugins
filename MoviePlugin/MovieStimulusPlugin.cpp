@@ -11,8 +11,6 @@
 #include <MWorksCore/StandardStimulusFactory.h>
 
 #include "MovieStimulus.h"
-#include "PlayMovie.h"
-#include "StopMovie.h"
 
 using namespace mw;
 
@@ -21,12 +19,6 @@ class MovieStimulusPlugin : public Plugin {
     virtual void registerComponents(shared_ptr<ComponentRegistry> registry) {
         registry->registerFactory<StandardStimulusFactory, MovieStimulus>();
         registry->registerFactory<StandardStimulusFactory, ImageDirectoryMovieStimulus>();
-        
-        registry->registerFactory(std::string("action/play_movie"),
-                                  (ComponentFactory *)(new PlayMovieFactory()));
-        
-        registry->registerFactory(std::string("action/stop_movie"),
-                                  (ComponentFactory *)(new StopMovieFactory()));
     }
 };
 
