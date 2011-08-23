@@ -9,7 +9,13 @@
         </description>
         
         <code>
-            <stimulus type="movie" tag="New Movie" stimulus_group="" frames_per_second="10" ended="" loop="0" />
+            <stimulus type="movie"
+                      tag="New Movie"
+                      stimulus_group="" 
+                      frames_per_second="10"
+                      ended=""
+                      loop="0"
+                      autoplay="0" />
         </code>
     </MWElement>
     <MWElement name="Image Directory Movie Stimulus">
@@ -34,7 +40,8 @@
                       deferred="no"
                       frames_per_second="10"
                       ended=""
-                      loop="0" />
+                      loop="0"
+                      autoplay="0" />
         </code>
     </MWElement>
 </MWElements>

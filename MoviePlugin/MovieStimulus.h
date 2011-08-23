@@ -34,11 +34,11 @@ public:
     virtual void unload(shared_ptr<StimulusDisplay> display);
     
     virtual bool needDraw();
-    virtual void draw(shared_ptr<StimulusDisplay> display);
+    virtual void drawFrame(shared_ptr<StimulusDisplay> display);
     virtual Datum getCurrentAnnounceDrawData();
 
 protected:
-    virtual void play();
+    virtual void startPlaying();
     
     virtual int getFrameNumber();
     virtual int getNumFrames() = 0;
@@ -48,6 +48,8 @@ private:
     shared_ptr<Variable> framesPerSecond;
     shared_ptr<Variable> ended;
     shared_ptr<Variable> loop;
+    
+    double framesPerUS;
     
 };
 
