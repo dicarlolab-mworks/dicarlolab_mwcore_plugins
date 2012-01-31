@@ -85,6 +85,7 @@ void BaseMovieStimulus::startPlaying() {
     }
     
     framesPerUS = frameRate / 1.0e6;
+    lastFrameDrawn = -1;
     
     StandardDynamicStimulus::startPlaying();
 }
@@ -106,7 +107,8 @@ int BaseMovieStimulus::getFrameNumber() {
 
 
 bool BaseMovieStimulus::needDraw() {
-    return StandardDynamicStimulus::needDraw() && (getFrameNumber() <= getNumFrames());
+    int frameNumber = getFrameNumber();
+    return StandardDynamicStimulus::needDraw() && (frameNumber != lastFrameDrawn) && (frameNumber <= getNumFrames());
 }
 
 
@@ -115,6 +117,7 @@ void BaseMovieStimulus::drawFrame(shared_ptr<StimulusDisplay> display) {
     int numFrames = getNumFrames();
     if (frameNumber < numFrames) {
         getStimulusForFrame(frameNumber)->draw(display);
+        lastFrameDrawn = frameNumber;
     } else if (frameNumber == numFrames) {
         if (ended != NULL) {
             ended->setValue(true);

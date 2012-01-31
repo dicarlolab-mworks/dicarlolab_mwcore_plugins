@@ -50,6 +50,7 @@ private:
     shared_ptr<Variable> loop;
     
     double framesPerUS;
+    int lastFrameDrawn;
     
 };
 
