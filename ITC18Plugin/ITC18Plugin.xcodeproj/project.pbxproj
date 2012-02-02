@@ -7,17 +7,6 @@
 	objects = {
 
 /* Begin PBXAggregateTarget section */
-		0E121C700E6B1EB6007B29B8 /* UninstallITC18Plugin */ = {
-			isa = PBXAggregateTarget;
-			buildConfigurationList = 0E121C770E6B1ED3007B29B8 /* Build configuration list for PBXAggregateTarget "UninstallITC18Plugin" */;
-			buildPhases = (
-				0E121C6F0E6B1EB6007B29B8 /* ShellScript */,
-			);
-			dependencies = (
-			);
-			name = UninstallITC18Plugin;
-			productName = UninstallITC18Plugin;
-		};
 		E17B9DA4119CA20500EEBF5D /* Everything */ = {
 			isa = PBXAggregateTarget;
 			buildConfigurationList = E17B9DAE119CA20D00EEBF5D /* Build configuration list for PBXAggregateTarget "Everything" */;
@@ -212,7 +201,6 @@
 			projectRoot = "";
 			targets = (
 				8D5B49AC048680CD000E48DA /* ITC18Plugin */,
-				0E121C700E6B1EB6007B29B8 /* UninstallITC18Plugin */,
 				E17B9DA4119CA20500EEBF5D /* Everything */,
 			);
 		};
@@ -231,19 +219,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0E121C6F0E6B1EB6007B29B8 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/zsh;
-			shellScript = "rm -R \"${FINAL_INSTALL_DIR}/${PRODUCT_NAME}\"\n\nexit 0\n\n\n";
-		};
 		5C4B0B5D0DC7CAB9001BC518 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -291,46 +266,6 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		0E121C720E6B1EB6007B29B8 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				PRODUCT_NAME = ITC18Plugin.bundle;
-			};
-			name = Release;
-		};
-		1DEB913C08733D840010E9CD /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
-				GCC_MODEL_TUNING = G5;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = ITC18Plugin_Prefix.pch;
-				HEADER_SEARCH_PATHS = /usr/include/libxml2;
-				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = "$(HOME)/Library/Bundles";
-				OTHER_LDFLAGS = "-lboost";
-				PRODUCT_NAME = ITC18Plugin;
-				WRAPPER_EXTENSION = bundle;
-			};
-			name = Release;
-		};
-		1DEB914008733D840010E9CD /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				APP_SUPPORT_DIR = "/Library/Application Support/MonkeyWorks";
-				ARCHS = i386;
-				FINAL_INSTALL_DIR = "$(APP_SUPPORT_DIR)/Plugins/Core Plugins";
-				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = "$(MW_INCLUDE_DIR)";
-				LIBRARY_SEARCH_PATHS = "$(MW_LIB_DIR)";
-				MW_INCLUDE_DIR = "\"$(APP_SUPPORT_DIR)/Developer/gcc40/include\"";
-				MW_LIB_DIR = "\"$(APP_SUPPORT_DIR)/Developer/gcc40/lib\"";
-				SDKROOT = "";
-			};
-			name = Release;
-		};
 		E17B9DA5119CA20500EEBF5D /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -341,37 +276,19 @@
 			};
 			name = Development;
 		};
-		E17B9DA6119CA20500EEBF5D /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COPY_PHASE_STRIP = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				PRODUCT_NAME = Everything;
-				ZERO_LINK = NO;
-			};
-			name = Release;
-		};
 		E1895A44116FBD9E00D8CBE0 /* Development */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E1895A39116FBD5700D8CBE0 /* Development.xcconfig */;
 			buildSettings = {
-				ARCHS = i386;
 				FINAL_INSTALL_DIR = "$(PLUGINS_DIR)";
 				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = "$(MW_INCLUDE_DIR)";
-				LIBRARY_SEARCH_PATHS = "$(MW_LIB_DIR)";
 			};
 			name = Development;
 		};
 		E1895A45116FBD9E00D8CBE0 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
-				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
-				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ITC18Plugin_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
@@ -380,51 +297,32 @@
 			};
 			name = Development;
 		};
-		E1895A46116FBD9E00D8CBE0 /* Development */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				PRODUCT_NAME = ITC18Plugin.bundle;
-			};
-			name = Development;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		0E121C770E6B1ED3007B29B8 /* Build configuration list for PBXAggregateTarget "UninstallITC18Plugin" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				E1895A46116FBD9E00D8CBE0 /* Development */,
-				0E121C720E6B1EB6007B29B8 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		1DEB913A08733D840010E9CD /* Build configuration list for PBXNativeTarget "ITC18Plugin" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E1895A45116FBD9E00D8CBE0 /* Development */,
-				1DEB913C08733D840010E9CD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Development;
 		};
 		1DEB913E08733D840010E9CD /* Build configuration list for PBXProject "ITC18Plugin" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E1895A44116FBD9E00D8CBE0 /* Development */,
-				1DEB914008733D840010E9CD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Development;
 		};
 		E17B9DAE119CA20D00EEBF5D /* Build configuration list for PBXAggregateTarget "Everything" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E17B9DA5119CA20500EEBF5D /* Development */,
-				E17B9DA6119CA20500EEBF5D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Development;
 		};
 /* End XCConfigurationList section */
 	};
