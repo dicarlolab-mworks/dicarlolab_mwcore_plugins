@@ -11,7 +11,8 @@
 #define WhiteNoiseBackground_H_
 
 #include <boost/noncopyable.hpp>
-#include <boost/random.hpp>
+#include <boost/random/linear_congruential.hpp>
+#include <boost/random/uniform_int.hpp>
 
 #include <MWorksCore/Stimulus.h>
 #include <MWorksCore/ComponentInfo.h>

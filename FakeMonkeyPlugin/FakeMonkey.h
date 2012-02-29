@@ -12,7 +12,7 @@
 #include "MWorksCore/LegacyIODevice.h"
 #include "MWorksCore/ComponentFactory.h"
 #include "FakeMonkeyEyeMovementChannel.h"
-#include "boost/random.hpp"
+#include <boost/random/mersenne_twister.hpp>
 #include "boost/enable_shared_from_this.hpp"
 using namespace mw;
 

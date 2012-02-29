@@ -14,6 +14,8 @@
 #include "FakeMonkeyJuiceChannel.h"
 #include "FakeMonkeyJuiceNotification.h"
 #include "boost/bind.hpp"
+#include <boost/random/variate_generator.hpp>
+#include <boost/random/exponential_distribution.hpp>
 using namespace mw;
 
 // a schedulable saccade function
