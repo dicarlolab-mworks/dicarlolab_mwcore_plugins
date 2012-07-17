@@ -208,7 +208,7 @@ ImageDirectoryMovieStimulus::ImageDirectoryMovieStimulus(const ParameterValueMap
     ComponentRegistryPtr reg = parameters[DIRECTORY_PATH].getRegistry();
     
     for (size_t i = 0; i < imageFilePaths.size(); i++) {
-        std::string imageTag((boost::format("%1%_frame_%2%") % tag % i).str());
+        std::string imageTag((boost::format("%1%_frame_%2%") % getTag() % i).str());
         
         ParameterValueMap imageParams(parameters);
         imageParams.at(TAG) = ParameterValue(imageTag, reg);
