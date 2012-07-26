@@ -269,9 +269,6 @@
 		E17B9DA5119CA20500EEBF5D /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				COPY_PHASE_STRIP = NO;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
 				PRODUCT_NAME = Everything;
 			};
 			name = Development;
@@ -281,7 +278,6 @@
 			baseConfigurationReference = E1895A39116FBD5700D8CBE0 /* Development.xcconfig */;
 			buildSettings = {
 				FINAL_INSTALL_DIR = "$(PLUGINS_DIR)";
-				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 			};
 			name = Development;
