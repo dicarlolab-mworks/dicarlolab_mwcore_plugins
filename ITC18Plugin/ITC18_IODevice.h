@@ -6,11 +6,15 @@
 
 
 #include <fstream>
-#include "MWorksCore/LegacyIODevice.h"				
-#include "ITC/ITC18.h"		// Instrutech header
-#include "MWorksCore/ExpandableList.h"					
-#include "MWorksCore/Buffers.h"				
-#include "MWorksCore/ComponentFactory.h"
+
+#include <MWorksCore/LegacyIODevice.h>
+#include <MWorksCore/ExpandableList.h>
+#include <MWorksCore/Buffers.h>
+#include <MWorksCore/ComponentFactory.h>
+
+#define ITC_Suppress_Symbols  // Suppress weak linking of ITC framework symbols
+#include <ITC/ITC18.h>
+
 using namespace mw;
 
 /**
