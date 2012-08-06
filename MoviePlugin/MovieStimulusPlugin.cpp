@@ -11,8 +11,7 @@
 #include <MWorksCore/StandardStimulusFactory.h>
 
 #include "MovieStimulus.h"
-
-using namespace mw;
+#include "ImageDirectoryMovieStimulus.h"
 
 
 class MovieStimulusPlugin : public Plugin {
