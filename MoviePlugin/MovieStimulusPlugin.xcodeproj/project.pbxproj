@@ -301,7 +301,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E1895A5C116FCCB400D8CBE0 /* Development.xcconfig */;
 			buildSettings = {
-				FINAL_INSTALL_DIR = "$(PLUGINS_DIR)";
 			};
 			name = Development;
 		};

@@ -26,8 +26,6 @@ public:
     
     explicit BaseMovieStimulus(const ParameterValueMap &parameters);
     
-    virtual ~BaseMovieStimulus() { }
-    
     virtual void freeze(bool shouldFreeze = true);
     
     virtual void load(shared_ptr<StimulusDisplay> display);
@@ -63,8 +61,6 @@ public:
     static void describeComponent(ComponentInfo &info);
     
     explicit MovieStimulus(const ParameterValueMap &parameters);
-    
-    virtual ~MovieStimulus() { }
 
     virtual Datum getCurrentAnnounceDrawData();
     
@@ -91,8 +87,6 @@ public:
     static void describeComponent(ComponentInfo &info);
     
     explicit ImageDirectoryMovieStimulus(const ParameterValueMap &parameters);
-    
-    virtual ~ImageDirectoryMovieStimulus() { }
     
     virtual Datum getCurrentAnnounceDrawData();
     

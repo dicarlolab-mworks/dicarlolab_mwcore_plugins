@@ -13,18 +13,6 @@
 
 #include <algorithm>
 
-#define STIM_MOVIE_FRAMES_PER_SECOND "frames_per_second"
-#define STIM_MOVIE_LOOP "loop"
-#define STIM_MOVIE_PLAYING "playing"
-#define STIM_MOVIE_CURRENT_FRAME "current_frame"
-#define STIM_MOVIE_CURRENT_STIMULUS "current_stimulus"
-
-#define STIM_TYPE_MOVIE "movie"
-#define STIM_MOVIE_STIMULUS_GROUP "stimulus_group"
-
-#define STIM_TYPE_IMAGE_DIRECTORY_MOVIE "image_directory_movie"
-#define STIM_MOVIE_DIRECTORY_PATH "directory_path"
-
 
 const std::string BaseMovieStimulus::FRAMES_PER_SECOND("frames_per_second");
 const std::string BaseMovieStimulus::ENDED("ended");
@@ -129,18 +117,18 @@ void BaseMovieStimulus::drawFrame(shared_ptr<StimulusDisplay> display) {
 Datum BaseMovieStimulus::getCurrentAnnounceDrawData() {
     Datum announceData = StandardDynamicStimulus::getCurrentAnnounceDrawData();
 
-    announceData.addElement(STIM_MOVIE_FRAMES_PER_SECOND, framesPerSecond->getValue().getInteger());  
-    announceData.addElement(STIM_MOVIE_LOOP, loop->getValue());  
-    announceData.addElement(STIM_MOVIE_PLAYING, Datum(isPlaying()));  
+    announceData.addElement(FRAMES_PER_SECOND, framesPerSecond->getValue().getInteger());  
+    announceData.addElement(LOOP, loop->getValue());  
+    announceData.addElement("playing", Datum(isPlaying()));  
 
     int frameNumber = getFrameNumber();
-    announceData.addElement(STIM_MOVIE_CURRENT_FRAME, Datum((long)frameNumber));
+    announceData.addElement("current_frame", Datum((long)frameNumber));
+    
+    Datum currentStimulusAnnounceData(0L);
     if ((frameNumber >= 0) && (frameNumber < getNumFrames())) {
-        announceData.addElement(STIM_MOVIE_CURRENT_STIMULUS,
-                                getStimulusForFrame(frameNumber)->getCurrentAnnounceDrawData());
-    } else {
-        announceData.addElement(STIM_MOVIE_CURRENT_STIMULUS, Datum(0L));
+        currentStimulusAnnounceData = getStimulusForFrame(frameNumber)->getCurrentAnnounceDrawData();
     }
+    announceData.addElement("current_stimulus", currentStimulusAnnounceData);
 
     return announceData;
 }
@@ -169,8 +157,8 @@ Datum MovieStimulus::getCurrentAnnounceDrawData() {
     boost::mutex::scoped_lock locker(stim_lock);
     Datum announceData = BaseMovieStimulus::getCurrentAnnounceDrawData();
     
-    announceData.addElement(STIM_TYPE, STIM_TYPE_MOVIE);  
-    announceData.addElement(STIM_MOVIE_STIMULUS_GROUP, stimulusGroup->getTag());  
+    announceData.addElement(STIM_TYPE, "movie");  
+    announceData.addElement(STIMULUS_GROUP, stimulusGroup->getTag());  
     
     return announceData;
 }
@@ -223,8 +211,8 @@ Datum ImageDirectoryMovieStimulus::getCurrentAnnounceDrawData() {
     boost::mutex::scoped_lock locker(stim_lock);
     Datum announceData = BaseMovieStimulus::getCurrentAnnounceDrawData();
     
-    announceData.addElement(STIM_TYPE, STIM_TYPE_IMAGE_DIRECTORY_MOVIE);  
-    announceData.addElement(STIM_MOVIE_DIRECTORY_PATH, directoryPath);  
+    announceData.addElement(STIM_TYPE, "image_directory_movie");  
+    announceData.addElement(DIRECTORY_PATH, directoryPath);  
     
     return announceData;
 }
