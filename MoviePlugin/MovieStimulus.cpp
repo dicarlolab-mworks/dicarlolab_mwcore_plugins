@@ -14,22 +14,19 @@
 #include <algorithm>
 
 
-const std::string BaseMovieStimulus::FRAMES_PER_SECOND("frames_per_second");
-const std::string BaseMovieStimulus::ENDED("ended");
-const std::string BaseMovieStimulus::LOOP("loop");
+const std::string BaseFrameListStimulus::ENDED("ended");
+const std::string BaseFrameListStimulus::LOOP("loop");
 
 
-void BaseMovieStimulus::describeComponent(ComponentInfo &info) {
+void BaseFrameListStimulus::describeComponent(ComponentInfo &info) {
     StandardDynamicStimulus::describeComponent(info);
-    info.addParameter(FRAMES_PER_SECOND);
     info.addParameter(ENDED, false);
     info.addParameter(LOOP, "0");
 }
 
 
-BaseMovieStimulus::BaseMovieStimulus(const ParameterValueMap &parameters) :
+BaseFrameListStimulus::BaseFrameListStimulus(const ParameterValueMap &parameters) :
     StandardDynamicStimulus(parameters),
-    framesPerSecond(registerVariable(parameters[FRAMES_PER_SECOND])),
     loop(registerVariable(parameters[LOOP]))
 {
     if (!(parameters[ENDED].empty())) {
@@ -38,7 +35,7 @@ BaseMovieStimulus::BaseMovieStimulus(const ParameterValueMap &parameters) :
 }
 
 
-void BaseMovieStimulus::freeze(bool shouldFreeze) {
+void BaseFrameListStimulus::freeze(bool shouldFreeze) {
     StandardDynamicStimulus::freeze(shouldFreeze);
     for (int i = 0; i < getNumFrames(); i++) {
         getStimulusForFrame(i)->freeze(shouldFreeze);
@@ -46,18 +43,87 @@ void BaseMovieStimulus::freeze(bool shouldFreeze) {
 }
 
 
-void BaseMovieStimulus::load(shared_ptr<StimulusDisplay> display) {
+void BaseFrameListStimulus::load(shared_ptr<StimulusDisplay> display) {
     for (int i = 0; i < getNumFrames(); i++) {
         getStimulusForFrame(i)->load(display);
     }
 }
 
 
-void BaseMovieStimulus::unload(shared_ptr<StimulusDisplay> display) {
+void BaseFrameListStimulus::unload(shared_ptr<StimulusDisplay> display) {
     for (int i = 0; i < getNumFrames(); i++) {
         getStimulusForFrame(i)->unload(display);
     }
 }
+
+
+void BaseFrameListStimulus::drawFrame(shared_ptr<StimulusDisplay> display) {
+    int frameNumber = getFrameNumber();
+    int numFrames = getNumFrames();
+    if (frameNumber < numFrames) {
+        getStimulusForFrame(frameNumber)->draw(display);
+        lastFrameDrawn = frameNumber;
+    } else if (frameNumber == numFrames) {
+        if (ended != NULL) {
+            ended->setValue(true);
+        }
+    }
+}
+
+
+Datum BaseFrameListStimulus::getCurrentAnnounceDrawData() {
+    Datum announceData = StandardDynamicStimulus::getCurrentAnnounceDrawData();
+    
+    announceData.addElement(LOOP, loop->getValue());
+    announceData.addElement("playing", Datum(isPlaying()));
+    
+    int frameNumber = getFrameNumber();
+    announceData.addElement("current_frame", Datum((long)frameNumber));
+    
+    Datum currentStimulusAnnounceData(0L);
+    if ((frameNumber >= 0) && (frameNumber < getNumFrames())) {
+        currentStimulusAnnounceData = getStimulusForFrame(frameNumber)->getCurrentAnnounceDrawData();
+    }
+    announceData.addElement("current_stimulus", currentStimulusAnnounceData);
+    
+    return announceData;
+}
+
+
+void BaseFrameListStimulus::startPlaying() {
+    lastFrameDrawn = -1;
+    StandardDynamicStimulus::startPlaying();
+}
+
+
+int BaseFrameListStimulus::getFrameNumber() {
+    if (!isPlaying()) {
+        return -1;
+    }
+    
+    int frameNumber = getNominalFrameNumber();
+    
+    if (bool(loop->getValue())) {
+        frameNumber %= getNumFrames();
+    }
+    
+    return frameNumber;
+}
+
+
+const std::string BaseMovieStimulus::FRAMES_PER_SECOND("frames_per_second");
+
+
+void BaseMovieStimulus::describeComponent(ComponentInfo &info) {
+    BaseFrameListStimulus::describeComponent(info);
+    info.addParameter(FRAMES_PER_SECOND);
+}
+
+
+BaseMovieStimulus::BaseMovieStimulus(const ParameterValueMap &parameters) :
+    BaseFrameListStimulus(parameters),
+    framesPerSecond(registerVariable(parameters[FRAMES_PER_SECOND]))
+{ }
 
 
 void BaseMovieStimulus::startPlaying() {
@@ -73,63 +139,20 @@ void BaseMovieStimulus::startPlaying() {
     }
     
     framesPerUS = frameRate / 1.0e6;
-    lastFrameDrawn = -1;
     
-    StandardDynamicStimulus::startPlaying();
-}
-
-
-int BaseMovieStimulus::getFrameNumber() {
-    if (!isPlaying()) {
-        return -1;
-    }
-    
-    int frameNumber = int(double(getElapsedTime()) * framesPerUS);
-    
-    if (bool(loop->getValue())) {
-        frameNumber %= getNumFrames();
-    }
-
-    return frameNumber;
+    BaseFrameListStimulus::startPlaying();
 }
 
 
 bool BaseMovieStimulus::needDraw() {
     int frameNumber = getFrameNumber();
-    return StandardDynamicStimulus::needDraw() && (frameNumber != lastFrameDrawn) && (frameNumber <= getNumFrames());
-}
-
-
-void BaseMovieStimulus::drawFrame(shared_ptr<StimulusDisplay> display) {
-    int frameNumber = getFrameNumber();
-    int numFrames = getNumFrames();
-    if (frameNumber < numFrames) {
-        getStimulusForFrame(frameNumber)->draw(display);
-        lastFrameDrawn = frameNumber;
-    } else if (frameNumber == numFrames) {
-        if (ended != NULL) {
-            ended->setValue(true);
-        }
-    }
+    return BaseFrameListStimulus::needDraw() && (frameNumber != getLastFrameDrawn()) && (frameNumber <= getNumFrames());
 }
 
 
 Datum BaseMovieStimulus::getCurrentAnnounceDrawData() {
-    Datum announceData = StandardDynamicStimulus::getCurrentAnnounceDrawData();
-
-    announceData.addElement(FRAMES_PER_SECOND, framesPerSecond->getValue().getInteger());  
-    announceData.addElement(LOOP, loop->getValue());  
-    announceData.addElement("playing", Datum(isPlaying()));  
-
-    int frameNumber = getFrameNumber();
-    announceData.addElement("current_frame", Datum((long)frameNumber));
-    
-    Datum currentStimulusAnnounceData(0L);
-    if ((frameNumber >= 0) && (frameNumber < getNumFrames())) {
-        currentStimulusAnnounceData = getStimulusForFrame(frameNumber)->getCurrentAnnounceDrawData();
-    }
-    announceData.addElement("current_stimulus", currentStimulusAnnounceData);
-
+    Datum announceData = BaseFrameListStimulus::getCurrentAnnounceDrawData();
+    announceData.addElement(FRAMES_PER_SECOND, framesPerSecond->getValue().getInteger());
     return announceData;
 }
 

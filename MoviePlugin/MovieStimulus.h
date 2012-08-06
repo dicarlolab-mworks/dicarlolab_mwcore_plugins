@@ -15,40 +15,64 @@
 using namespace mw;
 
 
-class BaseMovieStimulus : public StandardDynamicStimulus {
+class BaseFrameListStimulus : public StandardDynamicStimulus {
     
 public:
-    static const std::string FRAMES_PER_SECOND;
     static const std::string ENDED;
     static const std::string LOOP;
     
     static void describeComponent(ComponentInfo &info);
     
-    explicit BaseMovieStimulus(const ParameterValueMap &parameters);
+    explicit BaseFrameListStimulus(const ParameterValueMap &parameters);
     
     virtual void freeze(bool shouldFreeze = true);
     
     virtual void load(shared_ptr<StimulusDisplay> display);
     virtual void unload(shared_ptr<StimulusDisplay> display);
     
-    virtual bool needDraw();
     virtual void drawFrame(shared_ptr<StimulusDisplay> display);
+    virtual Datum getCurrentAnnounceDrawData();
+    
+protected:
+    virtual void startPlaying();
+    
+    int getFrameNumber();
+    int getLastFrameDrawn() const { return lastFrameDrawn; }
+    
+    virtual int getNumFrames() = 0;
+    virtual int getNominalFrameNumber() = 0;
+    virtual shared_ptr<Stimulus> getStimulusForFrame(int frameNumber) = 0;
+    
+private:
+    shared_ptr<Variable> ended;
+    shared_ptr<Variable> loop;
+    
+    int lastFrameDrawn;
+    
+};
+
+
+class BaseMovieStimulus : public BaseFrameListStimulus {
+    
+public:
+    static const std::string FRAMES_PER_SECOND;
+    
+    static void describeComponent(ComponentInfo &info);
+    
+    explicit BaseMovieStimulus(const ParameterValueMap &parameters);
+    
+    virtual bool needDraw();
     virtual Datum getCurrentAnnounceDrawData();
 
 protected:
     virtual void startPlaying();
     
-    virtual int getFrameNumber();
-    virtual int getNumFrames() = 0;
-    virtual shared_ptr<Stimulus> getStimulusForFrame(int frameNumber) = 0;
+    virtual int getNominalFrameNumber() { return int(double(getElapsedTime()) * framesPerUS); }
     
 private:
     shared_ptr<Variable> framesPerSecond;
-    shared_ptr<Variable> ended;
-    shared_ptr<Variable> loop;
     
     double framesPerUS;
-    int lastFrameDrawn;
     
 };
 
