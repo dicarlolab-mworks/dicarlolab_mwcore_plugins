@@ -1,3 +1,6 @@
 [submodule "EyeLink1000"]
 	path = EyeLink1000
 	url = git://github.com/pschwed/MWorks-Eyelink-1000-Plugin.git
+[submodule "NIDAQ"]
+	path = NIDAQ
+	url = git://github.com/dicarlolab-mworks/NIDAQ.git
