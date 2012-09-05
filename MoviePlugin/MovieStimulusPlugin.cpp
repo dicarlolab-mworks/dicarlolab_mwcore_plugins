@@ -10,12 +10,14 @@
 #include <MWorksCore/Plugin.h>
 #include <MWorksCore/StandardStimulusFactory.h>
 
+#include "FrameListStimulus.h"
 #include "MovieStimulus.h"
 #include "ImageDirectoryMovieStimulus.h"
 
 
 class MovieStimulusPlugin : public Plugin {
     virtual void registerComponents(shared_ptr<ComponentRegistry> registry) {
+        registry->registerFactory<StandardStimulusFactory, FrameListStimulus>();
         registry->registerFactory<StandardStimulusFactory, MovieStimulus>();
         registry->registerFactory<StandardStimulusFactory, ImageDirectoryMovieStimulus>();
     }
