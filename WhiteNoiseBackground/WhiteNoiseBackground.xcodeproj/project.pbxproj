@@ -284,7 +284,7 @@
 		1DEB913B08733D840010E9CD /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = WhiteNoiseBackground_Prefix.pch;
 				INFOPLIST_FILE = "WhiteNoiseBackground-Info.plist";
@@ -298,18 +298,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5C78EE6B115D02EE00151A76 /* Development.xcconfig */;
 			buildSettings = {
-				GCC_OPTIMIZATION_LEVEL = 3;
-				HEADER_SEARCH_PATHS = "$(MW_INCLUDE_DIR)";
-				LIBRARY_SEARCH_PATHS = "$(MW_LIB_DIR)";
 			};
 			name = Development;
 		};
 		5CFCAB1F11060986007CE55F /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				COPY_PHASE_STRIP = NO;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
 				PRODUCT_NAME = Everything;
 			};
 			name = Development;
@@ -317,9 +311,6 @@
 		E12A26F91201E2FB00CE8C55 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				COPY_PHASE_STRIP = NO;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
 				PRODUCT_NAME = Install;
 			};
 			name = Development;
