@@ -274,7 +274,6 @@
 			baseConfigurationReference = E1C78808116FB968004928BF /* Development.xcconfig */;
 			buildSettings = {
 				FINAL_INSTALL_DIR = "$(PLUGINS_DIR)";
-				GCC_WARN_UNUSED_VARIABLE = YES;
 			};
 			name = Development;
 		};
