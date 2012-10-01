@@ -7,8 +7,8 @@
  *
  */
 
-#include "FakeMonkeyFixateFactory.h"
 #include "MWorksCore/ComponentRegistry.h"
+#include "FakeMonkeyFixateFactory.h"
 #include "FakeMonkey.h"
 #include "FakeMonkeyFixate.h"
 

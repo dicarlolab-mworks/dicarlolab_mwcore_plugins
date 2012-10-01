@@ -7,8 +7,8 @@
  *
  */
 
-#include "FakeMonkeySaccadeToLocationFactory.h"
 #include "MWorksCore/ComponentRegistry.h"
+#include "FakeMonkeySaccadeToLocationFactory.h"
 #include "FakeMonkey.h"
 #include "FakeMonkeySaccadeToLocation.h"
 

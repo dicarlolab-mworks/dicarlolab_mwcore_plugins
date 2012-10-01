@@ -412,7 +412,6 @@
 		E1895A25116FBC1200D8CBE0 /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = FakeMonkeyPlugin_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
