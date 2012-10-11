@@ -82,7 +82,7 @@ bool mFakeMonkey::attachPhysicalDevice(){                                      /
 void mFakeMonkey::addChild(std::map<std::string, std::string> parameters,
 						   ComponentRegistry *reg,
 						   shared_ptr<mw::Component> child) {
-	shared_ptr<mFakeMonkeyEyeMovementChannel> eye_movement_channel = dynamic_pointer_cast<mFakeMonkeyEyeMovementChannel,mw::Component>(child);	
+	shared_ptr<mFakeMonkeyEyeMovementChannel> eye_movement_channel = boost::dynamic_pointer_cast<mFakeMonkeyEyeMovementChannel,mw::Component>(child);
 	if(eye_movement_channel != 0) {
 		eye_movement_channel->setChannelParams(scheduler->getClock(),
 											   monkey_lock,
@@ -96,13 +96,13 @@ void mFakeMonkey::addChild(std::map<std::string, std::string> parameters,
 		movement_channels.push_back(eye_movement_channel);
 	}
 	
-	shared_ptr<mFakeMonkeySpikeChannel> spike_channel = dynamic_pointer_cast<mFakeMonkeySpikeChannel,mw::Component>(child);
+	shared_ptr<mFakeMonkeySpikeChannel> spike_channel = boost::dynamic_pointer_cast<mFakeMonkeySpikeChannel,mw::Component>(child);
 	if(spike_channel != 0) {
 		shared_ptr<Variable> spike_variable = spike_channel->getVariable();
 		spike_variables.push_back(spike_variable);
 	}
 	
-	shared_ptr<mFakeMonkeyJuiceChannel> juice_channel = dynamic_pointer_cast<mFakeMonkeyJuiceChannel,mw::Component>(child);
+	shared_ptr<mFakeMonkeyJuiceChannel> juice_channel = boost::dynamic_pointer_cast<mFakeMonkeyJuiceChannel,mw::Component>(child);
 	if(juice_channel != 0) {
 		shared_ptr<VariableNotification> notif = shared_ptr<VariableNotification>(new mFakeMonkeyJuiceNotification());			
 		juice_channel->getVariable()->addNotification(notif);	
@@ -181,7 +181,7 @@ bool mFakeMonkey::startDeviceIO(){
 void mFakeMonkey::spike(){
 	boost::mutex::scoped_lock lock(*monkey_lock);
 	boost::exponential_distribution<double> dist = boost::exponential_distribution<double>(spike_rate->getValue().getFloat() / 1000000); 	
-	variate_generator<boost::mt19937&, boost::exponential_distribution<double> > sampler = variate_generator<boost::mt19937&, boost::exponential_distribution<double> >(rng,dist);
+	boost::variate_generator<boost::mt19937&, boost::exponential_distribution<double> > sampler = boost::variate_generator<boost::mt19937&, boost::exponential_distribution<double> >(rng,dist);
 	
 	if(spike_node){
 		spike_node->cancel();

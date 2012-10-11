@@ -2909,7 +2909,7 @@ void IOChannel_ITC18_TTL_edge::newSample(bool thisDigitalCheck, MWorksTime time)
     if (edgeReported) {
         for (int i=0;i<linkedWaveformChannels.getNElements();i++) {
 			// pay attention
-            (dynamic_pointer_cast<IOChannel_ITC18_ADC_waveform>(linkedWaveformChannels.getElement(i)))->startNewWaveform(time);  // time of edge (in absolute time since the ITC started)
+            (boost::dynamic_pointer_cast<IOChannel_ITC18_ADC_waveform>(linkedWaveformChannels.getElement(i)))->startNewWaveform(time);  // time of edge (in absolute time since the ITC started)
         }
     }        
 	

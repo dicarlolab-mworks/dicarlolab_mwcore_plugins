@@ -598,7 +598,7 @@ class mITC18_IODevice : public LegacyIODevice {
 			int					getAnalogInputRangeTag(double requestedAnalogInRangeV);
             IOChannel_ITC18_TTL_edge  *findEdgeChannelUsingTTLport(ExpandableList<IOChannel> *channelListToCheck, int TTLhardwarePortNumber);
 
-	shared_ptr<mITC18_IODevice> shared_from_this() { return dynamic_pointer_cast<mITC18_IODevice>(IODevice::shared_from_this()); }
+	shared_ptr<mITC18_IODevice> shared_from_this() { return boost::dynamic_pointer_cast<mITC18_IODevice>(IODevice::shared_from_this()); }
 };
 
 

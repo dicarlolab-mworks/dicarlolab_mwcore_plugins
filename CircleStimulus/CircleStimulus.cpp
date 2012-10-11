@@ -52,7 +52,7 @@ void CircleStimulus::drawInUnitSquare(shared_ptr<StimulusDisplay> display) {
 	
 	// the number of sections depends on the size of the circle and the location of the screen
 	// this needs to be revisted
-	int sections = 10*max(xscale->getValue().getFloat(), yscale->getValue().getFloat());
+	int sections = 10*std::max(xscale->getValue().getFloat(), yscale->getValue().getFloat());
 	
 	
 	glVertex3f(0.5, 0.5, 0.0);

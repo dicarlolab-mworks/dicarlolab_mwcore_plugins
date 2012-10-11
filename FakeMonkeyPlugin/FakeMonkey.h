@@ -72,7 +72,7 @@ public:
 				   const MWorksTime time_to_fixate_at_end_of_saccade);
 	void fixate(const MWorksTime duration);
 	
-	shared_ptr<mFakeMonkey> shared_from_this() { return dynamic_pointer_cast<mFakeMonkey>(IODevice::shared_from_this()); }
+	shared_ptr<mFakeMonkey> shared_from_this() { return boost::dynamic_pointer_cast<mFakeMonkey>(IODevice::shared_from_this()); }
 };
 
 
