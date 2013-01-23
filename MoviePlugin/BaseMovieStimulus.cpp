@@ -43,8 +43,21 @@ void BaseMovieStimulus::startPlaying() {
 
 
 bool BaseMovieStimulus::needDraw() {
-    int frameNumber = getFrameNumber();
-    return BaseFrameListStimulus::needDraw() && (frameNumber != getLastFrameDrawn()) && (frameNumber <= getNumFrames());
+    if (!BaseFrameListStimulus::needDraw()) {
+        return false;
+    }
+    
+    const int frameNumber = getFrameNumber();
+    const int numFrames = getNumFrames();
+    
+    if (frameNumber == getLastFrameDrawn()) {
+        // Here we account for the case of a one-frame movie set to loop.  Since such a movie makes sense
+        // only if the sole frame is being updated dynamically, we always redraw, so that any updates
+        // become visible.
+        return (numFrames == 1);
+    }
+    
+    return (frameNumber <= numFrames);
 }
 
 
