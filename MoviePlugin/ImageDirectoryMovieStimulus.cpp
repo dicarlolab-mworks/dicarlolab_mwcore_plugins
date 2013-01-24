@@ -8,9 +8,10 @@
 
 #include "ImageDirectoryMovieStimulus.h"
 
-#include <MWorksCore/StandardStimuli.h>
-
 #include <algorithm>
+
+
+BEGIN_NAMESPACE_MW
 
 
 const std::string ImageDirectoryMovieStimulus::DIRECTORY_PATH("directory_path");
@@ -39,7 +40,7 @@ ImageDirectoryMovieStimulus::ImageDirectoryMovieStimulus(const ParameterValueMap
     directoryPath(parameters[DIRECTORY_PATH].as<boost::filesystem::path>().string())
 {
     std::vector<std::string> imageFilePaths;
-    mw::getFilePaths(directoryPath, imageFilePaths);
+    getFilePaths(directoryPath, imageFilePaths);
     std::sort(imageFilePaths.begin(), imageFilePaths.end());
     
     ComponentRegistryPtr reg = parameters[DIRECTORY_PATH].getRegistry();
@@ -65,6 +66,9 @@ Datum ImageDirectoryMovieStimulus::getCurrentAnnounceDrawData() {
     
     return announceData;
 }
+
+
+END_NAMESPACE_MW
 
 
 

@@ -12,6 +12,9 @@
 #include "BaseMovieStimulus.h"
 
 
+BEGIN_NAMESPACE_MW
+
+
 class ImageDirectoryMovieStimulus : public BaseMovieStimulus {
     
 public:
@@ -21,14 +24,14 @@ public:
     
     explicit ImageDirectoryMovieStimulus(const ParameterValueMap &parameters);
     
-    virtual Datum getCurrentAnnounceDrawData();
+    Datum getCurrentAnnounceDrawData() MW_OVERRIDE;
     
 protected:
-    virtual int getNumFrames() {
+    int getNumFrames() MW_OVERRIDE {
         return images.size();
     }
     
-    virtual shared_ptr<Stimulus> getStimulusForFrame(int frameNumber) {
+    shared_ptr<Stimulus> getStimulusForFrame(int frameNumber) MW_OVERRIDE {
         return images[frameNumber];
     }
     
@@ -39,4 +42,7 @@ private:
 };
 
 
-#endif /* defined(__MovieStimulusPlugin__ImageDirectoryMovieStimulus__) */
+END_NAMESPACE_MW
+
+
+#endif /* !defined(__MovieStimulusPlugin__ImageDirectoryMovieStimulus__) */

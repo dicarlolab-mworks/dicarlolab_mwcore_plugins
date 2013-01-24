@@ -9,6 +9,9 @@
 #include "BaseMovieStimulus.h"
 
 
+BEGIN_NAMESPACE_MW
+
+
 const std::string BaseMovieStimulus::FRAMES_PER_SECOND("frames_per_second");
 
 
@@ -66,6 +69,9 @@ Datum BaseMovieStimulus::getCurrentAnnounceDrawData() {
     announceData.addElement(FRAMES_PER_SECOND, framesPerSecond->getValue().getInteger());
     return announceData;
 }
+
+
+END_NAMESPACE_MW
 
 
 

@@ -9,6 +9,9 @@
 #include "FrameListStimulus.h"
 
 
+BEGIN_NAMESPACE_MW
+
+
 const std::string FrameListStimulus::STIMULUS_GROUP("stimulus_group");
 
 
@@ -51,6 +54,9 @@ int FrameListStimulus::getNominalFrameNumber() {
     }
     return getLastFrameDrawn();
 }
+
+
+END_NAMESPACE_MW
 
 
 

@@ -1,6 +1,6 @@
 /*
  *  MovieStimulus.h
- *  MWorksCore
+ *  MovieStimulusPlugin
  *
  *  Created by labuser on 5/16/08.
  *  Copyright 2008 MIT. All rights reserved.
@@ -13,6 +13,9 @@
 #include "BaseMovieStimulus.h"
 
 
+BEGIN_NAMESPACE_MW
+
+
 class MovieStimulus : public BaseMovieStimulus {
     
 public:
@@ -22,14 +25,14 @@ public:
     
     explicit MovieStimulus(const ParameterValueMap &parameters);
 
-    virtual Datum getCurrentAnnounceDrawData();
+    Datum getCurrentAnnounceDrawData() MW_OVERRIDE;
     
 protected:
-    virtual int getNumFrames() {
+    int getNumFrames() MW_OVERRIDE {
         return stimulusGroup->getNElements();
     }
 
-    virtual shared_ptr<Stimulus> getStimulusForFrame(int frameNumber) {
+    shared_ptr<Stimulus> getStimulusForFrame(int frameNumber) MW_OVERRIDE {
         return stimulusGroup->getElement(frameNumber);
     }
     
@@ -37,6 +40,9 @@ private:
     shared_ptr<StimulusGroup> stimulusGroup;
     
 };
+
+
+END_NAMESPACE_MW
 
 
 #endif /* MOVIE_STIMULUS_H_ */

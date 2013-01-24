@@ -9,6 +9,9 @@
 #include "BaseFrameListStimulus.h"
 
 
+BEGIN_NAMESPACE_MW
+
+
 const std::string BaseFrameListStimulus::ENDED("ended");
 const std::string BaseFrameListStimulus::LOOP("loop");
 
@@ -104,6 +107,9 @@ int BaseFrameListStimulus::getFrameNumber() {
     
     return frameNumber;
 }
+
+
+END_NAMESPACE_MW
 
 
 

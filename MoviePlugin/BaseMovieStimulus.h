@@ -12,6 +12,9 @@
 #include "BaseFrameListStimulus.h"
 
 
+BEGIN_NAMESPACE_MW
+
+
 class BaseMovieStimulus : public BaseFrameListStimulus {
     
 public:
@@ -21,13 +24,15 @@ public:
     
     explicit BaseMovieStimulus(const ParameterValueMap &parameters);
     
-    virtual bool needDraw();
-    virtual Datum getCurrentAnnounceDrawData();
+    bool needDraw() MW_OVERRIDE;
+    Datum getCurrentAnnounceDrawData() MW_OVERRIDE;
     
 protected:
-    virtual void startPlaying();
+    void startPlaying() MW_OVERRIDE;
     
-    virtual int getNominalFrameNumber() { return int(double(getElapsedTime()) * framesPerUS); }
+    int getNominalFrameNumber() MW_OVERRIDE {
+        return int(double(getElapsedTime()) * framesPerUS);
+    }
     
 private:
     shared_ptr<Variable> framesPerSecond;
@@ -37,4 +42,7 @@ private:
 };
 
 
-#endif /* defined(__MovieStimulusPlugin__BaseMovieStimulus__) */
+END_NAMESPACE_MW
+
+
+#endif /* !defined(__MovieStimulusPlugin__BaseMovieStimulus__) */

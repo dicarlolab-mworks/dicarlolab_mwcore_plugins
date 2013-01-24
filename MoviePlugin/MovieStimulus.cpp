@@ -1,6 +1,6 @@
 /*
  *  MovieStimulus.cpp
- *  MWorksCore
+ *  MovieStimulusPlugin
  *
  *  Created by labuser on 5/16/08.
  *  Copyright 2008 MIT. All rights reserved.
@@ -8,6 +8,9 @@
  */
 
 #include "MovieStimulus.h"
+
+
+BEGIN_NAMESPACE_MW
 
 
 const std::string MovieStimulus::STIMULUS_GROUP("stimulus_group");
@@ -38,6 +41,9 @@ Datum MovieStimulus::getCurrentAnnounceDrawData() {
     
     return announceData;
 }
+
+
+END_NAMESPACE_MW
 
 
 

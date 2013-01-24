@@ -9,9 +9,8 @@
 #ifndef __MovieStimulusPlugin__BaseFrameListStimulus__
 #define __MovieStimulusPlugin__BaseFrameListStimulus__
 
-#include <MWorksCore/StandardDynamicStimulus.h>
 
-using namespace mw;
+BEGIN_NAMESPACE_MW
 
 
 class BaseFrameListStimulus : public StandardDynamicStimulus {
@@ -24,16 +23,16 @@ public:
     
     explicit BaseFrameListStimulus(const ParameterValueMap &parameters);
     
-    virtual void freeze(bool shouldFreeze = true);
+    void freeze(bool shouldFreeze = true) MW_OVERRIDE;
     
-    virtual void load(shared_ptr<StimulusDisplay> display);
-    virtual void unload(shared_ptr<StimulusDisplay> display);
+    void load(shared_ptr<StimulusDisplay> display) MW_OVERRIDE;
+    void unload(shared_ptr<StimulusDisplay> display) MW_OVERRIDE;
     
-    virtual void drawFrame(shared_ptr<StimulusDisplay> display);
-    virtual Datum getCurrentAnnounceDrawData();
+    void drawFrame(shared_ptr<StimulusDisplay> display) MW_OVERRIDE;
+    Datum getCurrentAnnounceDrawData() MW_OVERRIDE;
     
 protected:
-    virtual void startPlaying();
+    void startPlaying() MW_OVERRIDE;
     
     int getFrameNumber();
     int getLastFrameDrawn() const { return lastFrameDrawn; }
@@ -51,4 +50,35 @@ private:
 };
 
 
-#endif /* defined(__MovieStimulusPlugin__BaseFrameListStimulus__) */
+END_NAMESPACE_MW
+
+
+#endif /* !defined(__MovieStimulusPlugin__BaseFrameListStimulus__) */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
