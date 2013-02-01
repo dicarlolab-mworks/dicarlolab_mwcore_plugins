@@ -7,13 +7,25 @@
 	objects = {
 
 /* Begin PBXAggregateTarget section */
+		E12D98D516BC24E0004FEF79 /* Install */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = E12D98D616BC24E0004FEF79 /* Build configuration list for PBXAggregateTarget "Install" */;
+			buildPhases = (
+				E12D98DC16BC24ED004FEF79 /* CopyFiles */,
+			);
+			dependencies = (
+				E12D98DB16BC24EA004FEF79 /* PBXTargetDependency */,
+			);
+			name = Install;
+			productName = Install;
+		};
 		E17B9D8A119CA15400EEBF5D /* Everything */ = {
 			isa = PBXAggregateTarget;
 			buildConfigurationList = E17B9D94119CA16000EEBF5D /* Build configuration list for PBXAggregateTarget "Everything" */;
 			buildPhases = (
 			);
 			dependencies = (
-				E17B9D8E119CA15900EEBF5D /* PBXTargetDependency */,
+				E12D98D916BC24E7004FEF79 /* PBXTargetDependency */,
 			);
 			name = Everything;
 			productName = Everything;
@@ -44,10 +56,18 @@
 		688D4D1F0E9D0A3300EC8832 /* FakeMonkeySaccadeAndFixateFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 688D4D1E0E9D0A3300EC8832 /* FakeMonkeySaccadeAndFixateFactory.cpp */; };
 		689708DC0E5A03BB00CE38EA /* FakeMonkeyFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 689708DB0E5A03BB00CE38EA /* FakeMonkeyFactory.cpp */; };
 		8D5B49B0048680CD000E48DA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C167DFE841241C02AAC07 /* InfoPlist.strings */; };
+		E12D98DD16BC24F1004FEF79 /* FakeMonkeyPlugin.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8D5B49B6048680CD000E48DA /* FakeMonkeyPlugin.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		E17B9D8D119CA15900EEBF5D /* PBXContainerItemProxy */ = {
+		E12D98D816BC24E7004FEF79 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E12D98D516BC24E0004FEF79;
+			remoteInfo = Install;
+		};
+		E12D98DA16BC24EA004FEF79 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 089C1669FE841209C02AAC07 /* Project object */;
 			proxyType = 1;
@@ -55,6 +75,19 @@
 			remoteInfo = FakeMonkeyPlugin;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		E12D98DC16BC24ED004FEF79 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(MW_PLUGINS_DIR)";
+			dstSubfolderSpec = 0;
+			files = (
+				E12D98DD16BC24F1004FEF79 /* FakeMonkeyPlugin.bundle in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		089C167EFE841241C02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -279,7 +312,6 @@
 				8D5B49AF048680CD000E48DA /* Resources */,
 				8D5B49B1048680CD000E48DA /* Sources */,
 				8D5B49B3048680CD000E48DA /* Frameworks */,
-				5C4B0B5D0DC7CAB9001BC518 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -314,6 +346,7 @@
 			projectRoot = "";
 			targets = (
 				8D5B49AC048680CD000E48DA /* FakeMonkeyPlugin */,
+				E12D98D516BC24E0004FEF79 /* Install */,
 				E17B9D8A119CA15400EEBF5D /* Everything */,
 			);
 		};
@@ -330,22 +363,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		5C4B0B5D0DC7CAB9001BC518 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/zsh;
-			shellScript = "export FULL_NAME=${PRODUCT_NAME}.${WRAPPER_EXTENSION}\n\nmkdir -p \"${FINAL_INSTALL_DIR}/${FULL_NAME}\"\nrm -R \"${FINAL_INSTALL_DIR}/${FULL_NAME}\"\ncp -R \"${BUILT_PRODUCTS_DIR}/${FULL_NAME}\" \"${FINAL_INSTALL_DIR}\"";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8D5B49B1048680CD000E48DA /* Sources */ = {
@@ -375,10 +392,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		E17B9D8E119CA15900EEBF5D /* PBXTargetDependency */ = {
+		E12D98D916BC24E7004FEF79 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E12D98D516BC24E0004FEF79 /* Install */;
+			targetProxy = E12D98D816BC24E7004FEF79 /* PBXContainerItemProxy */;
+		};
+		E12D98DB16BC24EA004FEF79 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 8D5B49AC048680CD000E48DA /* FakeMonkeyPlugin */;
-			targetProxy = E17B9D8D119CA15900EEBF5D /* PBXContainerItemProxy */;
+			targetProxy = E12D98DA16BC24EA004FEF79 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -394,6 +416,13 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		E12D98D716BC24E0004FEF79 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Development;
+		};
 		E17B9D8B119CA15500EEBF5D /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -405,7 +434,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E1895A1B116FBBC100D8CBE0 /* Development.xcconfig */;
 			buildSettings = {
-				FINAL_INSTALL_DIR = "$(PLUGINS_DIR)";
 			};
 			name = Development;
 		};
@@ -438,6 +466,13 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Development;
+		};
+		E12D98D616BC24E0004FEF79 /* Build configuration list for PBXAggregateTarget "Install" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E12D98D716BC24E0004FEF79 /* Development */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		E17B9D94119CA16000EEBF5D /* Build configuration list for PBXAggregateTarget "Everything" */ = {
 			isa = XCConfigurationList;

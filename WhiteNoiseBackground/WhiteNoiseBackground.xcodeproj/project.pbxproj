@@ -288,7 +288,6 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = WhiteNoiseBackground_Prefix.pch;
 				INFOPLIST_FILE = "WhiteNoiseBackground-Info.plist";
-				INSTALL_PATH = "$(PLUGINS_DIR)";
 				PRODUCT_NAME = WhiteNoiseBackground;
 				WRAPPER_EXTENSION = bundle;
 			};
