@@ -23,6 +23,7 @@ class ITC18Plugin : public Plugin {
 };
 
 
+MW_SYMBOL_PUBLIC
 extern "C" Plugin* getPlugin() {
     return new ITC18Plugin();
 }

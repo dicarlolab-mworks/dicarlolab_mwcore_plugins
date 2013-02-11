@@ -22,6 +22,7 @@ class CircleStimulusPlugin : public Plugin {
 };
 
 
+MW_SYMBOL_PUBLIC
 extern "C" Plugin* getPlugin(){
     return new CircleStimulusPlugin();
 }

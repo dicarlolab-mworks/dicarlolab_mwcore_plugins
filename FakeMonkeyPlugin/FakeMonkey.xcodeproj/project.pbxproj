@@ -38,9 +38,6 @@
 		0E4F1E4A0EB20EF700AA5380 /* FakeMonkeyChannel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0E4F1E490EB20EF700AA5380 /* FakeMonkeyChannel.cpp */; };
 		0E4F1E840EB2145100AA5380 /* FakeMonkeyEyeMovementChannel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0E4F1E830EB2145100AA5380 /* FakeMonkeyEyeMovementChannel.cpp */; };
 		0E52AED30E93B9780013DFCC /* FakeMonkey.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0E52AECF0E93B9780013DFCC /* FakeMonkey.cpp */; };
-		0E52AF5B0E93BE8B0013DFCC /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E52AF5A0E93BE8B0013DFCC /* IOKit.framework */; };
-		0E52AF5F0E93BEB20013DFCC /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 089C167FFE841241C02AAC07 /* AppKit.framework */; };
-		0E52AF640E93BEDB0013DFCC /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E52AF630E93BEDB0013DFCC /* Carbon.framework */; };
 		0EBCF86B0EB18B790054C035 /* FakeMonkeySpikeChannel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0EBCF86A0EB18B790054C035 /* FakeMonkeySpikeChannel.cpp */; };
 		0EBCF8D60EB199A50054C035 /* FakeMonkeySpikeChannelFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0EBCF8D40EB199A50054C035 /* FakeMonkeySpikeChannelFactory.cpp */; };
 		0EBCF8E50EB19BC40054C035 /* FakeMonkeyJuiceChannel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0EBCF8E30EB19BC40054C035 /* FakeMonkeyJuiceChannel.cpp */; };
@@ -57,6 +54,7 @@
 		689708DC0E5A03BB00CE38EA /* FakeMonkeyFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 689708DB0E5A03BB00CE38EA /* FakeMonkeyFactory.cpp */; };
 		8D5B49B0048680CD000E48DA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C167DFE841241C02AAC07 /* InfoPlist.strings */; };
 		E12D98DD16BC24F1004FEF79 /* FakeMonkeyPlugin.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8D5B49B6048680CD000E48DA /* FakeMonkeyPlugin.bundle */; };
+		E15D0B1C16C2BE3E00F331B1 /* libboost_system.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E15D0B1B16C2BE3E00F331B1 /* libboost_system.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,7 +89,6 @@
 
 /* Begin PBXFileReference section */
 		089C167EFE841241C02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		089C167FFE841241C02AAC07 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		0E0C61150EB60DDC004B707E /* FakeMonkeyEyeMovementChannelFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FakeMonkeyEyeMovementChannelFactory.h; sourceTree = "<group>"; };
 		0E0C61160EB60DDC004B707E /* FakeMonkeyEyeMovementChannelFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FakeMonkeyEyeMovementChannelFactory.cpp; sourceTree = "<group>"; };
 		0E37FBA10E59C3DD008B885D /* FakeMonkeyPlugin.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FakeMonkeyPlugin.cpp; sourceTree = "<group>"; };
@@ -103,8 +100,6 @@
 		0E4F1EF30EB2226A00AA5380 /* FakeMonkeyStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FakeMonkeyStatus.h; sourceTree = "<group>"; };
 		0E52AECF0E93B9780013DFCC /* FakeMonkey.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FakeMonkey.cpp; sourceTree = "<group>"; };
 		0E52AED00E93B9780013DFCC /* FakeMonkey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FakeMonkey.h; sourceTree = "<group>"; };
-		0E52AF5A0E93BE8B0013DFCC /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = /System/Library/Frameworks/IOKit.framework; sourceTree = "<absolute>"; };
-		0E52AF630E93BEDB0013DFCC /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = /System/Library/Frameworks/Carbon.framework; sourceTree = "<absolute>"; };
 		0EBCF8690EB18B790054C035 /* FakeMonkeySpikeChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FakeMonkeySpikeChannel.h; sourceTree = "<group>"; };
 		0EBCF86A0EB18B790054C035 /* FakeMonkeySpikeChannel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FakeMonkeySpikeChannel.cpp; sourceTree = "<group>"; };
 		0EBCF8D40EB199A50054C035 /* FakeMonkeySpikeChannelFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FakeMonkeySpikeChannelFactory.cpp; sourceTree = "<group>"; };
@@ -134,6 +129,7 @@
 		689708DB0E5A03BB00CE38EA /* FakeMonkeyFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FakeMonkeyFactory.cpp; sourceTree = "<group>"; };
 		8D5B49B6048680CD000E48DA /* FakeMonkeyPlugin.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FakeMonkeyPlugin.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D5B49B7048680CD000E48DA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E15D0B1B16C2BE3E00F331B1 /* libboost_system.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_system.a; path = "/Library/Application Support/MWorks/Developer/lib/libboost_system.a"; sourceTree = "<absolute>"; };
 		E1895A1B116FBBC100D8CBE0 /* Development.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Development.xcconfig; path = "/Library/Application Support/MWorks/Developer/Xcode/Development.xcconfig"; sourceTree = "<absolute>"; };
 		E1895A1C116FBBC100D8CBE0 /* WARNING.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = WARNING.txt; path = "/Library/Application Support/MWorks/Developer/Xcode/WARNING.txt"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
@@ -144,9 +140,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5C4B0A650DC79212001BC518 /* MWorksCore.framework in Frameworks */,
-				0E52AF5B0E93BE8B0013DFCC /* IOKit.framework in Frameworks */,
-				0E52AF5F0E93BEB20013DFCC /* AppKit.framework in Frameworks */,
-				0E52AF640E93BEDB0013DFCC /* Carbon.framework in Frameworks */,
+				E15D0B1C16C2BE3E00F331B1 /* libboost_system.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -160,21 +154,19 @@
 				08FB77AFFE84173DC02AAC07 /* Classes */,
 				32C88E010371C26100C91783 /* Other Sources */,
 				089C167CFE841241C02AAC07 /* Resources */,
-				089C1671FE841209C02AAC07 /* Frameworks and Libraries */,
+				089C1671FE841209C02AAC07 /* Frameworks & Libraries */,
 				19C28FB8FE9D52D311CA2CBB /* Products */,
 			);
 			name = FakeMonkeyPlugin;
 			sourceTree = "<group>";
 		};
-		089C1671FE841209C02AAC07 /* Frameworks and Libraries */ = {
+		089C1671FE841209C02AAC07 /* Frameworks & Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				0E52AF630E93BEDB0013DFCC /* Carbon.framework */,
-				0E52AF5A0E93BE8B0013DFCC /* IOKit.framework */,
-				1058C7ACFEA557BF11CA2CBB /* Linked Frameworks */,
-				1058C7AEFEA557BF11CA2CBB /* Other Frameworks */,
+				5C4B0A630DC79212001BC518 /* MWorksCore.framework */,
+				E15D0B1B16C2BE3E00F331B1 /* libboost_system.a */,
 			);
-			name = "Frameworks and Libraries";
+			name = "Frameworks & Libraries";
 			sourceTree = "<group>";
 		};
 		089C167CFE841241C02AAC07 /* Resources */ = {
@@ -259,22 +251,6 @@
 				688D4D1E0E9D0A3300EC8832 /* FakeMonkeySaccadeAndFixateFactory.cpp */,
 			);
 			name = Actions;
-			sourceTree = "<group>";
-		};
-		1058C7ACFEA557BF11CA2CBB /* Linked Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				5C4B0A630DC79212001BC518 /* MWorksCore.framework */,
-			);
-			name = "Linked Frameworks";
-			sourceTree = "<group>";
-		};
-		1058C7AEFEA557BF11CA2CBB /* Other Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				089C167FFE841241C02AAC07 /* AppKit.framework */,
-			);
-			name = "Other Frameworks";
 			sourceTree = "<group>";
 		};
 		19C28FB8FE9D52D311CA2CBB /* Products */ = {
@@ -473,6 +449,7 @@
 				E12D98D716BC24E0004FEF79 /* Development */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Development;
 		};
 		E17B9D94119CA16000EEBF5D /* Build configuration list for PBXAggregateTarget "Everything" */ = {
 			isa = XCConfigurationList;

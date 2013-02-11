@@ -42,6 +42,7 @@
 		E118EEC015D04F270018BE9C /* BaseMovieStimulus.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E118EEBE15D04F270018BE9C /* BaseMovieStimulus.cpp */; };
 		E118EEC315D04F3E0018BE9C /* ImageDirectoryMovieStimulus.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E118EEC115D04F3D0018BE9C /* ImageDirectoryMovieStimulus.cpp */; };
 		E118EEC615D052FD0018BE9C /* FrameListStimulus.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E118EEC415D052FD0018BE9C /* FrameListStimulus.cpp */; };
+		E15D0B2016C2BFDA00F331B1 /* libboost_system.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E15D0B1F16C2BFDA00F331B1 /* libboost_system.a */; };
 		E194490213254E7100D5ED81 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E194490113254E7100D5ED81 /* OpenGL.framework */; };
 		E1944B601325525F00D5ED81 /* MovieStimulusPlugin.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8D5B49B6048680CD000E48DA /* MovieStimulusPlugin.bundle */; };
 /* End PBXBuildFile section */
@@ -94,6 +95,7 @@
 		E118EEC215D04F3D0018BE9C /* ImageDirectoryMovieStimulus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageDirectoryMovieStimulus.h; sourceTree = "<group>"; };
 		E118EEC415D052FD0018BE9C /* FrameListStimulus.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FrameListStimulus.cpp; sourceTree = "<group>"; };
 		E118EEC515D052FD0018BE9C /* FrameListStimulus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FrameListStimulus.h; sourceTree = "<group>"; };
+		E15D0B1F16C2BFDA00F331B1 /* libboost_system.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_system.a; path = "/Library/Application Support/MWorks/Developer/lib/libboost_system.a"; sourceTree = "<absolute>"; };
 		E1895A5C116FCCB400D8CBE0 /* Development.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Development.xcconfig; path = "/Library/Application Support/MWorks/Developer/Xcode/Development.xcconfig"; sourceTree = "<absolute>"; };
 		E1895A5D116FCCB400D8CBE0 /* WARNING.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = WARNING.txt; path = "/Library/Application Support/MWorks/Developer/Xcode/WARNING.txt"; sourceTree = "<absolute>"; };
 		E194490113254E7100D5ED81 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
@@ -106,6 +108,7 @@
 			files = (
 				5C4B0A650DC79212001BC518 /* MWorksCore.framework in Frameworks */,
 				E194490213254E7100D5ED81 /* OpenGL.framework in Frameworks */,
+				E15D0B2016C2BFDA00F331B1 /* libboost_system.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -120,19 +123,20 @@
 				E1944B3613254FD700D5ED81 /* Editor Definitions */,
 				32C88E010371C26100C91783 /* Other Sources */,
 				089C167CFE841241C02AAC07 /* Resources */,
-				089C1671FE841209C02AAC07 /* Frameworks and Libraries */,
+				089C1671FE841209C02AAC07 /* Frameworks & Libraries */,
 				19C28FB8FE9D52D311CA2CBB /* Products */,
 			);
 			name = MovieStimulusPlugin;
 			sourceTree = "<group>";
 		};
-		089C1671FE841209C02AAC07 /* Frameworks and Libraries */ = {
+		089C1671FE841209C02AAC07 /* Frameworks & Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				1058C7ACFEA557BF11CA2CBB /* Linked Frameworks */,
-				1058C7AEFEA557BF11CA2CBB /* Other Frameworks */,
+				5C4B0A630DC79212001BC518 /* MWorksCore.framework */,
+				E194490113254E7100D5ED81 /* OpenGL.framework */,
+				E15D0B1F16C2BFDA00F331B1 /* libboost_system.a */,
 			);
-			name = "Frameworks and Libraries";
+			name = "Frameworks & Libraries";
 			sourceTree = "<group>";
 		};
 		089C167CFE841241C02AAC07 /* Resources */ = {
@@ -160,22 +164,6 @@
 				0E37FBA10E59C3DD008B885D /* MovieStimulusPlugin.cpp */,
 			);
 			name = Classes;
-			sourceTree = "<group>";
-		};
-		1058C7ACFEA557BF11CA2CBB /* Linked Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				5C4B0A630DC79212001BC518 /* MWorksCore.framework */,
-				E194490113254E7100D5ED81 /* OpenGL.framework */,
-			);
-			name = "Linked Frameworks";
-			sourceTree = "<group>";
-		};
-		1058C7AEFEA557BF11CA2CBB /* Other Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "Other Frameworks";
 			sourceTree = "<group>";
 		};
 		19C28FB8FE9D52D311CA2CBB /* Products */ = {

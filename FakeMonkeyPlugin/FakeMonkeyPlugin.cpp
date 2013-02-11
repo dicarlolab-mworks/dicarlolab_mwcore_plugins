@@ -16,6 +16,7 @@
 #include "FakeMonkeySpikeChannelFactory.h"
 #include "FakeMonkeyEyeMovementChannelFactory.h"
 
+MW_SYMBOL_PUBLIC
 Plugin *getPlugin(){
     return new mFakeMonkeyPlugin();
 }
