@@ -36,7 +36,7 @@ void WhiteNoiseBackground::load(shared_ptr<StimulusDisplay> display) {
     GLint maxHeight = 0;
     
     for (int i = 0; i < display->getNContexts(); i++) {
-        display->setCurrent(i);
+        OpenGLContextLock ctxLock = display->setCurrent(i);
 
         GLint width, height;
         display->getCurrentViewportSize(width, height);
