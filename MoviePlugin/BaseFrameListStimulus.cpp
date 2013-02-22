@@ -61,10 +61,6 @@ void BaseFrameListStimulus::drawFrame(shared_ptr<StimulusDisplay> display) {
     if (frameNumber < numFrames) {
         getStimulusForFrame(frameNumber)->draw(display);
         lastFrameDrawn = frameNumber;
-    } else if (frameNumber == numFrames) {
-        if (ended != NULL) {
-            ended->setValue(true);
-        }
     }
 }
 
@@ -100,9 +96,12 @@ int BaseFrameListStimulus::getFrameNumber() {
     }
     
     int frameNumber = getNominalFrameNumber();
+    const int numFrames = getNumFrames();
     
     if (bool(loop->getValue())) {
-        frameNumber %= getNumFrames();
+        frameNumber %= numFrames;
+    } else if ((frameNumber >= numFrames) && (ended != NULL) && (ended->getValue().getInteger() == 0)) {
+        ended->setValue(true);
     }
     
     return frameNumber;
