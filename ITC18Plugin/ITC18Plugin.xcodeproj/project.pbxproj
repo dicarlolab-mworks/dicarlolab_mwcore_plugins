@@ -12,6 +12,7 @@
 			buildConfigurationList = E12D98DF16BC26E2004FEF79 /* Build configuration list for PBXAggregateTarget "Install" */;
 			buildPhases = (
 				E12D98E516BC26F0004FEF79 /* CopyFiles */,
+				E18D8BEF18E1BD22005B7DFC /* CopyFiles */,
 			);
 			dependencies = (
 				E12D98E416BC26EC004FEF79 /* PBXTargetDependency */,
@@ -41,6 +42,7 @@
 		8D5B49B0048680CD000E48DA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C167DFE841241C02AAC07 /* InfoPlist.strings */; };
 		E12D98E616BC26F7004FEF79 /* ITC18Plugin.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8D5B49B6048680CD000E48DA /* ITC18Plugin.bundle */; };
 		E15D0B1E16C2BF1B00F331B1 /* libboost_system.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E15D0B1D16C2BF1B00F331B1 /* libboost_system.a */; };
+		E18D8C2E18E1C381005B7DFC /* ITC18 in CopyFiles */ = {isa = PBXBuildFile; fileRef = E18D8C2D18E1C379005B7DFC /* ITC18 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +73,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E18D8BEF18E1BD22005B7DFC /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(MW_TESTS_XML_DIR)/IODevice";
+			dstSubfolderSpec = 0;
+			files = (
+				E18D8C2E18E1C381005B7DFC /* ITC18 in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -87,6 +99,7 @@
 		E15D0B1D16C2BF1B00F331B1 /* libboost_system.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_system.a; path = "/Library/Application Support/MWorks/Developer/lib/libboost_system.a"; sourceTree = "<absolute>"; };
 		E1895A39116FBD5700D8CBE0 /* Development.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Development.xcconfig; path = "/Library/Application Support/MWorks/Developer/Xcode/Development.xcconfig"; sourceTree = "<absolute>"; };
 		E1895A3A116FBD5700D8CBE0 /* WARNING.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = WARNING.txt; path = "/Library/Application Support/MWorks/Developer/Xcode/WARNING.txt"; sourceTree = "<absolute>"; };
+		E18D8C2D18E1C379005B7DFC /* ITC18 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ITC18; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +123,7 @@
 				08FB77AFFE84173DC02AAC07 /* Classes */,
 				32C88E010371C26100C91783 /* Other Sources */,
 				089C167CFE841241C02AAC07 /* Resources */,
+				E18D8C0518E1BECF005B7DFC /* Tests */,
 				089C1671FE841209C02AAC07 /* Frameworks & Libraries */,
 				19C28FB8FE9D52D311CA2CBB /* Products */,
 			);
@@ -169,6 +183,14 @@
 				E1895A3A116FBD5700D8CBE0 /* WARNING.txt */,
 			);
 			name = "External Configs";
+			sourceTree = "<group>";
+		};
+		E18D8C0518E1BECF005B7DFC /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				E18D8C2D18E1C379005B7DFC /* ITC18 */,
+			);
+			path = Tests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
