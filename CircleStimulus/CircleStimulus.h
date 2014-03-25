@@ -16,7 +16,7 @@
 using namespace mw;
 
 
-class CircleStimulus : public PointStimulus {
+class CircleStimulus : public RectangleStimulus {
 
 public:
     static void describeComponent(ComponentInfo &info);

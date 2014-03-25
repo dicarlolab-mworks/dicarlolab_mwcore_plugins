@@ -14,13 +14,13 @@
 
 
 void CircleStimulus::describeComponent(ComponentInfo &info) {
-    PointStimulus::describeComponent(info);
+    RectangleStimulus::describeComponent(info);
     info.setSignature("stimulus/circle");
 }
 
 
 CircleStimulus::CircleStimulus(const ParameterValueMap &parameters) :
-    PointStimulus(parameters)
+    RectangleStimulus(parameters)
 { }
 
 
@@ -86,7 +86,7 @@ void CircleStimulus::drawInUnitSquare(shared_ptr<StimulusDisplay> display) {
 
 
 Datum CircleStimulus::getCurrentAnnounceDrawData() {
-    Datum announceData(PointStimulus::getCurrentAnnounceDrawData());
+    Datum announceData(RectangleStimulus::getCurrentAnnounceDrawData());
     announceData.addElement(STIM_TYPE, "circle");
     return announceData;
 }
