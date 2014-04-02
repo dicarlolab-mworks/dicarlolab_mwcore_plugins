@@ -12,6 +12,7 @@
 			buildConfigurationList = E12D98CB16BC2403004FEF79 /* Build configuration list for PBXAggregateTarget "Install" */;
 			buildPhases = (
 				E12D98D116BC2413004FEF79 /* CopyFiles */,
+				E140986A18EC8957003C2B05 /* CopyFiles */,
 			);
 			dependencies = (
 				E12D98D016BC240F004FEF79 /* PBXTargetDependency */,
@@ -40,6 +41,7 @@
 		8D5B49B0048680CD000E48DA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C167DFE841241C02AAC07 /* InfoPlist.strings */; };
 		E12D98D216BC2418004FEF79 /* CircleStimulusPlugin.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8D5B49B6048680CD000E48DA /* CircleStimulusPlugin.bundle */; };
 		E12D98D416BC2447004FEF79 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E12D98D316BC2447004FEF79 /* OpenGL.framework */; };
+		E140986B18EC8960003C2B05 /* Circle in CopyFiles */ = {isa = PBXBuildFile; fileRef = E140986918EC893B003C2B05 /* Circle */; };
 		E15D0B1A16C2BD6300F331B1 /* libboost_system.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E15D0B1916C2BD6300F331B1 /* libboost_system.a */; };
 /* End PBXBuildFile section */
 
@@ -71,6 +73,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E140986A18EC8957003C2B05 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(MW_TESTS_XML_DIR)/Stimulus";
+			dstSubfolderSpec = 0;
+			files = (
+				E140986B18EC8960003C2B05 /* Circle in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -84,6 +96,7 @@
 		8D5B49B6048680CD000E48DA /* CircleStimulusPlugin.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CircleStimulusPlugin.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D5B49B7048680CD000E48DA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E12D98D316BC2447004FEF79 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		E140986918EC893B003C2B05 /* Circle */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Circle; sourceTree = "<group>"; };
 		E15D0B1916C2BD6300F331B1 /* libboost_system.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_system.a; path = "/Library/Application Support/MWorks/Developer/lib/libboost_system.a"; sourceTree = "<absolute>"; };
 		E1C78808116FB968004928BF /* Development.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Development.xcconfig; path = "/Library/Application Support/MWorks/Developer/Xcode/Development.xcconfig"; sourceTree = "<absolute>"; };
 		E1C78809116FB968004928BF /* WARNING.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = WARNING.txt; path = "/Library/Application Support/MWorks/Developer/Xcode/WARNING.txt"; sourceTree = "<absolute>"; };
@@ -110,6 +123,7 @@
 				08FB77AFFE84173DC02AAC07 /* Classes */,
 				32C88E010371C26100C91783 /* Other Sources */,
 				089C167CFE841241C02AAC07 /* Resources */,
+				E140986818EC890F003C2B05 /* Tests */,
 				089C1671FE841209C02AAC07 /* Frameworks and Libraries */,
 				19C28FB8FE9D52D311CA2CBB /* Products */,
 			);
@@ -160,6 +174,14 @@
 				32DBCF630370AF2F00C91783 /* CircleStimulusPlugin_Prefix.pch */,
 			);
 			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		E140986818EC890F003C2B05 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				E140986918EC893B003C2B05 /* Circle */,
+			);
+			path = Tests;
 			sourceTree = "<group>";
 		};
 		E1C78804116FB93D004928BF /* External Configs */ = {
