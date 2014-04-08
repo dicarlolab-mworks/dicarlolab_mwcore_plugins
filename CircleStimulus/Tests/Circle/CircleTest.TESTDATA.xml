@@ -73,6 +73,10 @@
 								<key>rotation</key>
 								<value type="float">0</value>
 							</dictionary_element>
+                            <dictionary_element>
+                                <key>alpha_multiplier</key>
+                                <value type="float">0.5</value>
+                            </dictionary_element>
 						</dictionary>					
 				</list_element>
 			</list>

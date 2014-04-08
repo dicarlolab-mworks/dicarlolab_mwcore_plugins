@@ -40,6 +40,7 @@ void CircleStimulus::drawInUnitSquare(shared_ptr<StimulusDisplay> display) {
 	GLfloat _r = (float)(*r);
 	GLfloat _g = (float)(*g);
 	GLfloat _b = (float)(*b);
+	GLfloat _a = (float)(*alpha_multiplier);
 	
 	glBindTexture(GL_TEXTURE_2D, 0);
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
@@ -48,7 +49,7 @@ void CircleStimulus::drawInUnitSquare(shared_ptr<StimulusDisplay> display) {
 	glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_ADD);
 	
 	glBegin(GL_TRIANGLE_FAN);
-	glColor4f(_r, _g, _b, *alpha_multiplier);
+	glColor4f(_r, _g, _b, _a);
 	
 	// the number of sections depends on the size of the circle and the location of the screen
 	// this needs to be revisted
@@ -80,6 +81,7 @@ void CircleStimulus::drawInUnitSquare(shared_ptr<StimulusDisplay> display) {
     last_r = _r;
     last_g = _g;
     last_b = _b;
+    last_alpha = _a;
     
 	
 }
