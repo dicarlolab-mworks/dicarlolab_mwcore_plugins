@@ -13,6 +13,9 @@
 #include "CircleStimulus.h"
 
 
+BEGIN_NAMESPACE_MW
+
+
 void CircleStimulus::describeComponent(ComponentInfo &info) {
     RectangleStimulus::describeComponent(info);
     info.setSignature("stimulus/circle");
@@ -24,57 +27,57 @@ CircleStimulus::CircleStimulus(const ParameterValueMap &parameters) :
 { }
 
 
+void CircleStimulus::load(shared_ptr<StimulusDisplay> display) {
+    if (loaded)
+        return;
+    
+    pixelDensity.clear();
+    
+    GLdouble xMin, xMax, yMin, yMax;
+    GLint width, height;
+    
+    display->getDisplayBounds(xMin, xMax, yMin, yMax);
+    
+    for (int i = 0; i < display->getNContexts(); i++) {
+        OpenGLContextLock ctxLock = display->setCurrent(i);
+        display->getCurrentViewportSize(width, height);
+        pixelDensity.push_back(double(width) / (xMax - xMin));
+    }
+    
+    loaded = true;
+}
+
+
 #define TWO_PI (2.0 * M_PI)
 
 void CircleStimulus::drawInUnitSquare(shared_ptr<StimulusDisplay> display) {
-    
-	// draw point at desired location with desired color
-	// fill a (0,0) (1,1) box with the right color
-    if(r == NULL || g == NULL || b == NULL ){
-		merror(M_DISPLAY_MESSAGE_DOMAIN,
-			   "NULL color variable in CircleStimulus.");
-	}
-	
-	
     // get current values in these variables.
 	GLfloat _r = (float)(*r);
 	GLfloat _g = (float)(*g);
 	GLfloat _b = (float)(*b);
 	GLfloat _a = (float)(*alpha_multiplier);
 	
-	glBindTexture(GL_TEXTURE_2D, 0);
+	glColor4f(_r, _g, _b, _a);
+	
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	glEnable (GL_BLEND); 
 	glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_ADD);
+	
+	// The formula for the number of sections is borrowed from http://slabode.exofire.net/circle_draw.shtml
+    double radius = std::max(xscale->getValue().getFloat(), yscale->getValue().getFloat()) / 2.0;
+	int sections = 10 * std::sqrt(radius * pixelDensity.at(display->getCurrentContextIndex()));
 	
 	glBegin(GL_TRIANGLE_FAN);
-	glColor4f(_r, _g, _b, _a);
-	
-	// the number of sections depends on the size of the circle and the location of the screen
-	// this needs to be revisted
-	int sections = 10*std::max(xscale->getValue().getFloat(), yscale->getValue().getFloat());
-	
-	
-	glVertex3f(0.5, 0.5, 0.0);
+    
+	glVertex2f(0.5, 0.5);
 	
 	for (int i=0; i<=sections; ++i)
 	{
-		glVertex3f(0.5 + (0.5 * cos(i * TWO_PI / sections)), 
-				   0.5 + (0.5 * sin(i * TWO_PI / sections)),
-				   0.0);		
+		glVertex2f(0.5 + (0.5 * std::cos(i * TWO_PI / sections)),
+				   0.5 + (0.5 * std::sin(i * TWO_PI / sections)));
 	}
+    
 	glEnd();
-	
-	//mprintf("fixpoint r: %g, g: %g, b: %g", red, green, blue);
-	
-	//glColor3f(_r,_g,_b);
-	//	glVertex3f(0.0,0.0,0.0);
-	//	glVertex3f(1.0,0.0,0.0);
-	//	glVertex3f(1.0,1.0,0.0);
-	//	glVertex3f(0.0,1.0,0.0);
-	//	
-	//    glEnd();
     
 	glDisable(GL_BLEND);
     
@@ -82,8 +85,6 @@ void CircleStimulus::drawInUnitSquare(shared_ptr<StimulusDisplay> display) {
     last_g = _g;
     last_b = _b;
     last_alpha = _a;
-    
-	
 }
 
 
@@ -92,6 +93,9 @@ Datum CircleStimulus::getCurrentAnnounceDrawData() {
     announceData.addElement(STIM_TYPE, "circle");
     return announceData;
 }
+
+
+END_NAMESPACE_MW
 
 
 

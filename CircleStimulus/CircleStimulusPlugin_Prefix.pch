@@ -2,6 +2,8 @@
 // Prefix header for all source files of the 'CircleStimulusPlugins' target in the 'CircleStimulusPlugins' project.
 //
 
-#ifdef __OBJC__
-    #import <Foundation/Foundation.h>
+#ifdef __cplusplus
+    #include <MWorksCore/Plugin.h>
+    #include <MWorksCore/StandardStimuli.h>
+    #include <MWorksCore/StandardStimulusFactory.h>
 #endif

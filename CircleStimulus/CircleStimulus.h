@@ -10,10 +10,8 @@
 #ifndef CIRCLE_STIMULUS_H
 #define CIRCLE_STIMULUS_H
 
-#include <MWorksCore/ParameterValue.h>
-#include <MWorksCore/StandardStimuli.h>
 
-using namespace mw;
+BEGIN_NAMESPACE_MW
 
 
 class CircleStimulus : public RectangleStimulus {
@@ -23,10 +21,17 @@ public:
     
     explicit CircleStimulus(const ParameterValueMap &parameters);
     
-	virtual void drawInUnitSquare(shared_ptr<StimulusDisplay> display);
-    virtual Datum getCurrentAnnounceDrawData();
+    void load(shared_ptr<StimulusDisplay> display) MW_OVERRIDE;
+    void drawInUnitSquare(shared_ptr<StimulusDisplay> display) MW_OVERRIDE;
+    Datum getCurrentAnnounceDrawData() MW_OVERRIDE;
+    
+private:
+    std::vector<double> pixelDensity;
 
 };
+
+
+END_NAMESPACE_MW
 
 
 #endif 

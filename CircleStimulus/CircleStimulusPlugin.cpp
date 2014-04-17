@@ -7,12 +7,10 @@
  *
  */
 
-#include <MWorksCore/Plugin.h>
-#include <MWorksCore/StandardStimulusFactory.h>
-
 #include "CircleStimulus.h"
 
-using namespace mw;
+
+BEGIN_NAMESPACE_MW
 
 
 class CircleStimulusPlugin : public Plugin {
@@ -22,7 +20,9 @@ class CircleStimulusPlugin : public Plugin {
 };
 
 
-MW_SYMBOL_PUBLIC
 extern "C" Plugin* getPlugin(){
     return new CircleStimulusPlugin();
 }
+
+
+END_NAMESPACE_MW
