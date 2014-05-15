@@ -1,5 +1,8 @@
 <?xml version="1.0"?>
 <marionette_info>
+  <requirements>
+    <feature name="itc18"/>
+  </requirements>
   <permitted_error_messages>
     <message type="starts_with">WARNING: Warning: IODevice: ITC clock differs from system clock by more than </message>
   </permitted_error_messages>
