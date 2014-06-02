@@ -932,7 +932,7 @@ bool mITC18_IODevice::startDeviceIOchannels() {
 				   "Node could not be scheduled");
 			return false;
 		}			
-		if (VERBOSE_IO_DEVICE) mprintf("Scheduled flush of FIFO at %d us intervals (node= %d) task = %u", flushFIFOintervalUS, schedule_nodes.size(),node.get());
+		if (VERBOSE_IO_DEVICE) mprintf("Scheduled flush of FIFO at %ld us intervals (node= %lu) task = %p", flushFIFOintervalUS, schedule_nodes.size(),node.get());
 		schedule_nodes_lock.lock();		 // JJD Feb 2007
 		schedule_nodes.push_back(node); 
 		schedule_nodes_lock.unlock();		 // JJD Feb 2007
@@ -988,7 +988,7 @@ bool mITC18_IODevice::startDeviceIOchannels() {
 			}	
 			
 			schedule_nodes_lock.lock();		 // JJD Feb 2007
-			if (VERBOSE_IO_DEVICE) mprintf("Scheduled flush of channel matched to capability = %s at %d us intervals (node= %d) task = %u",  
+			if (VERBOSE_IO_DEVICE) mprintf("Scheduled flush of channel matched to capability = %s at %ld us intervals (node= %lu) task = %p",  
 										   (chan->getCapability())->getName().c_str(), (chan->getRequest())->getRequestedUpdateIntervalUsec(), schedule_nodes.size(),node.get());
 			schedule_nodes.push_back(node); 
 			schedule_nodes_lock.unlock();		 // JJD Feb 2007
@@ -1019,7 +1019,7 @@ bool mITC18_IODevice::updateChannel(int channel_index){
 	
 	if (VERBOSE_IO_DEVICE > 2) {
 		shared_ptr<Clock> clock = Clock::instance();
-		mprintf("Call to update an input/output channel received:  channel index = %d, global time = %d msec", channel_index,(long)clock->getCurrentTimeMS());
+		mprintf("Call to update an input/output channel received:  channel index = %d, global time = %ld msec", channel_index,(long)clock->getCurrentTimeMS());
 	}
 	
 	if (channel_index == FLUSH_FIFO_CHANNEL) {      // signal to flush
@@ -1027,7 +1027,7 @@ bool mITC18_IODevice::updateChannel(int channel_index){
 		//setAsychLinesHigh(0x0004); 
 		if (VERBOSE_IO_DEVICE > 2) {
 			shared_ptr<Clock> clock = Clock::instance();
-			mprintf("Call to update channel received:  now calling for fullFlushITC18FIFO. %d",(long)(clock->getCurrentTimeUS()));
+			mprintf("Call to update channel received:  now calling for fullFlushITC18FIFO. %ld",(long)(clock->getCurrentTimeUS()));
 		}
 		fullFlushITC18FIFO();
 		//setAsychLinesLow(0x0004);	
@@ -1067,7 +1067,7 @@ bool mITC18_IODevice::updateChannel(int channel_index, Datum data){
 	// call the notify method for this ITC18 channel
 	if (VERBOSE_IO_DEVICE > 2) {
 		shared_ptr<Clock> clock = Clock::instance();
-		mprintf("ITC18: Call to update an OUTPUT channel received:  channel index = %d, global time = %d msec", channel_index,(long)clock->getCurrentTimeMS());
+		mprintf("ITC18: Call to update an OUTPUT channel received:  channel index = %d, global time = %ld msec", channel_index,(long)clock->getCurrentTimeMS());
 	}
 	((IOChannel_ITC18_AsychOut *)(channels->getRawElement(channel_index)))->notify(data);
 	return true;
@@ -1096,9 +1096,9 @@ bool mITC18_IODevice::setAsychLinesHigh(short asychLinesToSetHigh) {
 		
 		asychLinesStatus |= asychLinesToSetHigh;		//"OR" will cause any new lines to go high
 		ITC18DriverLock->lock();
-		if (VERBOSE_IO_DEVICE) mprintf("About to Set ITC aux outputs.  Current time: %d ms", (long)clock->getCurrentTimeMS());
+		if (VERBOSE_IO_DEVICE) mprintf("About to Set ITC aux outputs.  Current time: %ld ms", (long)clock->getCurrentTimeMS());
 		int e = ITC18_WriteAuxiliaryDigitalOutput(itc, asychLinesStatus); 
-		if (VERBOSE_IO_DEVICE) mprintf("Finished setting ITC aux outputs.  Current time: %d ms", (long)clock->getCurrentTimeMS());
+		if (VERBOSE_IO_DEVICE) mprintf("Finished setting ITC aux outputs.  Current time: %ld ms", (long)clock->getCurrentTimeMS());
 		
 		ITC18DriverLock->unlock();
 		return (e == noErr); 
@@ -1113,9 +1113,9 @@ bool mITC18_IODevice::setAsychLinesLow(short asychLinesToSetLow) {
 		
 		asychLinesStatus &= (~asychLinesToSetLow);	// take complement (~) and then "AND"
 		ITC18DriverLock->lock();
-		if (VERBOSE_IO_DEVICE) mprintf("About to Set ITC aux outputs.  Current time: %d ms", (long)clock->getCurrentTimeMS());
+		if (VERBOSE_IO_DEVICE) mprintf("About to Set ITC aux outputs.  Current time: %ld ms", (long)clock->getCurrentTimeMS());
 		int e = ITC18_WriteAuxiliaryDigitalOutput(itc, asychLinesStatus);
-		if (VERBOSE_IO_DEVICE) mprintf("Finished setting ITC aux outputs.  Current time: %d ms", (long)clock->getCurrentTimeMS());
+		if (VERBOSE_IO_DEVICE) mprintf("Finished setting ITC aux outputs.  Current time: %ld ms", (long)clock->getCurrentTimeMS());
 		ITC18DriverLock->unlock();
 		return (e == noErr);
 	}		
@@ -1171,10 +1171,10 @@ bool mITC18_IODevice::setAsychLinesToSpecifiedPattern(short desiredAsychLinePatt
 		shared_ptr<Clock> clock = Clock::instance();
 		
 		ITC18DriverLock->lock();
-		if (VERBOSE_IO_DEVICE) mprintf("About to Set ITC aux outputs.  Current time: %d ms", (long)clock->getCurrentTimeMS());
+		if (VERBOSE_IO_DEVICE) mprintf("About to Set ITC aux outputs.  Current time: %ld ms", (long)clock->getCurrentTimeMS());
 		int e = ITC18_WriteAuxiliaryDigitalOutput(itc, desiredAsychLinePattern); 
 		asychLinesStatus = desiredAsychLinePattern;		// update what we know about the status of these lines
-		if (VERBOSE_IO_DEVICE) mprintf("Finished setting ITC aux outputs.  Current time: %d ms", (long)clock->getCurrentTimeMS());
+		if (VERBOSE_IO_DEVICE) mprintf("Finished setting ITC aux outputs.  Current time: %ld ms", (long)clock->getCurrentTimeMS());
 		ITC18DriverLock->unlock();
 		return (e == noErr); 
 	}
@@ -1996,15 +1996,15 @@ bool mITC18_IODevice::flushITC18FIFO_all(void) {
 		
 		if (VERBOSE_IO_DEVICE > 1) {
 			shared_ptr<Clock> clock = Clock::instance();
-			mprintf("ITC clock check engaged at global time = %d ms", (long)(clock->getCurrentTimeMS()) );
-			mprintf("Diff between ITC clock and global clock = %d us (+ means itc is leading) time slice = %d us", (long)diff, (long)full_time_slice_us);
+			mprintf("ITC clock check engaged at global time = %ld ms", (long)(clock->getCurrentTimeMS()) );
+			mprintf("Diff between ITC clock and global clock = %ld us (+ means itc is leading) time slice = %ld us", (long)diff, (long)full_time_slice_us);
 		}
 		// this is approximately our resolution to tell if there is a problem.
 		float drift_percent_of_sample_duration = (abs((long)diff))/((long)full_time_slice_us);
 		if ( drift_percent_of_sample_duration > MAX_ALLOWABLE_DRIFT_FRACTION_OF_SAMPLE_DURATION) {
 			if (!alreadyWarnedAboutDrift) {
 				mwarning(M_IODEVICE_MESSAGE_DOMAIN,
-						 "Warning: IODevice: ITC clock differs from system clock by more than %f3 percent of sample duration (diff=%d us; + means itc is leading)",
+						 "Warning: IODevice: ITC clock differs from system clock by more than %f3 percent of sample duration (diff=%ld us; + means itc is leading)",
 						 (100.*MAX_ALLOWABLE_DRIFT_FRACTION_OF_SAMPLE_DURATION), (long)diff);
 				//alreadyWarnedAboutDrift = true;
 			}
@@ -2426,7 +2426,7 @@ void IOChannel_ITC18_input::newSample(bool thisDigitalCheck, MWorksTime time) {
 void IOChannel_ITC18_input::postDataElement(short stemp, MWorksTime timeUS) {  // generic version
     long timeMS = (long)(timeUS/1000.);
     double data = (double)stemp;
-    if (VERBOSE_IO_DEVICE_DATA) mprintf("ITC18 channel:flushChannel: generic value about to be posted. Value = %d  Posted time = %d ms",stemp,timeMS);
+    if (VERBOSE_IO_DEVICE_DATA) mprintf("ITC18 channel:flushChannel: generic value about to be posted. Value = %d  Posted time = %ld ms",stemp,timeMS);
     update((Datum)data,timeUS);		// Base class function (post the data to the event stream)
 }
 
@@ -2525,7 +2525,7 @@ void IOChannel_ITC18_ADC::postDataElement(short stemp, MWorksTime timeUS) {
     long timeMS = (long)(timeUS/1000.);
     double dataV = (multiplierToGetMV*((double)(stemp)))/1000.;	// output in volts
 	
-    if (VERBOSE_IO_DEVICE_DATA) mprintf("ITC18 channel:flushChannel: value about to be posted from ADC hardware port: %d   Value: %d ITCunits = %f volts.  Posted time: %d ms", getHardwarePort(), stemp, dataV, timeMS);
+    if (VERBOSE_IO_DEVICE_DATA) mprintf("ITC18 channel:flushChannel: value about to be posted from ADC hardware port: %hd   Value: %d ITCunits = %f volts.  Posted time: %ld ms", getHardwarePort(), stemp, dataV, timeMS);
     this->update((Datum)dataV,timeUS);		// Base class function (post the data to the event stream)
 	
     // Warn for clipping on analog channels
@@ -2611,7 +2611,7 @@ void IOChannel_ITC18_ADC_waveform::startNewWaveform(MWorksTime spikeTimeUS) {
 	
 	if (VERBOSE_IO_DEVICE) {
 		shared_ptr<Clock> clock = Clock::instance();
-		mprintf("A waveform has just been started on (port %d). CurrentTime = %d ms ", getHardwarePort(), (long)clock->getCurrentTimeMS());  
+		mprintf("A waveform has just been started on (port %d). CurrentTime = %ld ms ", getHardwarePort(), (long)clock->getCurrentTimeMS());
 	}
 	//unlock();		// JJD CHAN LOCK 
 }
@@ -2720,7 +2720,7 @@ int IOChannel_ITC18_ADC_waveform::flushChannel() {
 				nWaveformsPosted++;
                 if (VERBOSE_IO_DEVICE_DATA) {
 					shared_ptr<Clock> clock = Clock::instance();
-					mprintf("A waveform channel (ADC port %d) just posted a complete waveform.  current time: %d ms   Waveform end time = %d ms", getHardwarePort(), (long)clock->getCurrentTimeMS(), (long)(waveform->getEndTime()/1000));  
+					mprintf("A waveform channel (ADC port %hd) just posted a complete waveform.  current time: %ld ms   Waveform end time = %ld ms", getHardwarePort(), (long)clock->getCurrentTimeMS(), (long)(waveform->getEndTime()/1000));
 				}
 				
                 // delete waveform off the list
@@ -2778,7 +2778,7 @@ void IOChannel_ITC18_ADC_waveform::flushWaveforms() {
 		
 		if (VERBOSE_IO_DEVICE_DATA) {
 			shared_ptr<Clock> clock = Clock::instance();
-			mprintf("A waveform channel (ADC port %d) just posted a complete waveform.  current time: %d ms   Waveform end time = %d ms", getHardwarePort(), (long)clock->getCurrentTimeMS(), (long)(waveform->getEndTime()/1000));  
+			mprintf("A waveform channel (ADC port %d) just posted a complete waveform.  current time: %ld ms   Waveform end time = %ld ms", getHardwarePort(), (long)clock->getCurrentTimeMS(), (long)(waveform->getEndTime()/1000));
         }
 		
 		// delete waveform off the list
@@ -2811,7 +2811,7 @@ IOChannel_ITC18_TTL::IOChannel_ITC18_TTL(IOChannelRequest * _request, IOCapabili
 void IOChannel_ITC18_TTL::postDataElement(short stemp, MWorksTime timeUS) {
     long timeMS = (long)(timeUS/1000.);
     bool dataBoolean = (bool)(stemp);  
-    if (VERBOSE_IO_DEVICE_DATA) mprintf("ITC18 channel:flushChannel: value about to be posted from TTL hardward port: %d  Value = %d (digital). Posted time = %d ms", getHardwarePort(), dataBoolean, timeMS);
+    if (VERBOSE_IO_DEVICE_DATA) mprintf("ITC18 channel:flushChannel: value about to be posted from TTL hardward port: %hd  Value = %d (digital). Posted time = %ld ms", getHardwarePort(), dataBoolean, timeMS);
     update((Datum)dataBoolean,timeUS);		// Base class function (post the data to the event stream)
 }
 
@@ -3117,7 +3117,7 @@ bool IOChannel_ITC18_AsychOut_pulsed::pulseStart(MWorksTime pulseDurationUS) {
     
     if (VERBOSE_IO_DEVICE_DATA) {
 		shared_ptr<Clock> clock = Clock::instance();
-		mprintf(M_IODEVICE_MESSAGE_DOMAIN,"IOChannel_ITC18_AsychOut_pulsed::pulseStart.  Pulse duration = %d us  Current time = %d ",(long)pulseDurationUS, (long)clock->getCurrentTimeMS()); 
+		mprintf(M_IODEVICE_MESSAGE_DOMAIN,"IOChannel_ITC18_AsychOut_pulsed::pulseStart.  Pulse duration = %ld us  Current time = %ld ",(long)pulseDurationUS, (long)clock->getCurrentTimeMS());
 	}
 	
 	shared_ptr<Clock> clock = Clock::instance();
@@ -3134,7 +3134,7 @@ bool IOChannel_ITC18_AsychOut_pulsed::pulseStart(MWorksTime pulseDurationUS) {
     long lostTimeUS = (long)(clock->getCurrentTimeUS()) - startTimeUS;
     MWorksTime scheduledPulseTimeUS = m_max((pulseDurationUS - lostTimeUS),0); 
 	
-    if (VERBOSE_IO_DEVICE_DATA) mprintf(M_IODEVICE_MESSAGE_DOMAIN,"IOChannel_ITC18_AsychOut_pulsed::pulseStart.  lost time: %d us   Scheduled lag time:%d us  Current time:%d ",lostTimeUS, (long)scheduledPulseTimeUS, (long)clock->getCurrentTimeMS()); 
+    if (VERBOSE_IO_DEVICE_DATA) mprintf(M_IODEVICE_MESSAGE_DOMAIN,"IOChannel_ITC18_AsychOut_pulsed::pulseStart.  lost time: %ld us   Scheduled lag time:%ld us  Current time:%ld ",lostTimeUS, (long)scheduledPulseTimeUS, (long)clock->getCurrentTimeMS());
 	
     // note that we come back through the usual update channel function,
     //  but we keep our own local schedule node so that we can add and remove at will
@@ -3167,7 +3167,7 @@ bool IOChannel_ITC18_AsychOut_pulsed::pulseEnd() {
     
     if (VERBOSE_IO_DEVICE_DATA) {
 		shared_ptr<Clock> clock = Clock::instance();
-		mprintf(M_IODEVICE_MESSAGE_DOMAIN,"IOChannel_ITC18_AsychOut_pulsed::pulseEnd Current time = %d",(long)clock->getCurrentTimeMS());
+		mprintf(M_IODEVICE_MESSAGE_DOMAIN,"IOChannel_ITC18_AsychOut_pulsed::pulseEnd Current time = %ld",(long)clock->getCurrentTimeMS());
 	}
 	
     bool noError = false;
@@ -3251,8 +3251,8 @@ Datum mWaveform::getWaveformPackage() {
     
 	lock();
 	if (VERBOSE_IO_DEVICE) {
-		mprintf("BUILDING WAVEFORM PACKAGE  n data points vector: %d  Sampling interval: %d us",nsamplesInVector,sampleIntervalUS);
-		mprintf("BUILDING WAVEFORM PACKAGE  timeOfFirstElement: %d ms   spikeTime: %d ms", (long)(timeOfFirstElementInWaveformUS/1000),(long)(spikeTimeUS/1000));
+		mprintf("BUILDING WAVEFORM PACKAGE  n data points vector: %d  Sampling interval: %ld us",nsamplesInVector,sampleIntervalUS);
+		mprintf("BUILDING WAVEFORM PACKAGE  timeOfFirstElement: %ld ms   spikeTime: %ld ms", (long)(timeOfFirstElementInWaveformUS/1000),(long)(spikeTimeUS/1000));
 		
 		/*
 		 for (int i=0; i<nsamplesInVector;i++) {
