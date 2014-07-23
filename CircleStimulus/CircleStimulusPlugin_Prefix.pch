@@ -3,6 +3,7 @@
 //
 
 #ifdef __cplusplus
+    #include <MWorksCore/EyeCalibrators.h>
     #include <MWorksCore/Plugin.h>
     #include <MWorksCore/StandardStimuli.h>
     #include <MWorksCore/StandardStimulusFactory.h>

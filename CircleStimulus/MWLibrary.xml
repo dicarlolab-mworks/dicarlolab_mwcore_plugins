@@ -21,4 +21,32 @@
 		alpha_multiplier=""/>
     </code>
   </MWElement>
+
+  <MWElement name="Circular Fixation Point Stimulus">
+    <!-- XPath 2.0 expression defining nodes of this type -->
+    <match_signature>stimulus[@type="circular_fixation_point"]</match_signature>
+    
+    <isa>Stimulus</isa>
+    
+    <description>
+      A circular fixation point stimulus
+    </description>
+    
+    <!-- Payload -->
+    <code>
+      <stimulus type="circular_fixation_point"
+                tag="New Circular Fixation Point"
+                color="1,1,1"
+                trigger_width=""
+                trigger_watch_x=""
+                trigger_watch_y=""
+                trigger_flag=""
+                x_size=""
+                y_size=""
+                x_position=""
+                y_position=""
+                rotation=""
+                alpha_multiplier=""/>
+    </code>
+  </MWElement>
 </MWElements>

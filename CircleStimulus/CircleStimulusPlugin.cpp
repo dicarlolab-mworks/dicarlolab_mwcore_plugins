@@ -8,6 +8,7 @@
  */
 
 #include "CircleStimulus.h"
+#include "CircularFixationPoint.h"
 
 
 BEGIN_NAMESPACE_MW
@@ -16,7 +17,8 @@ BEGIN_NAMESPACE_MW
 class CircleStimulusPlugin : public Plugin {
     virtual void registerComponents(shared_ptr<ComponentRegistry> registry) {
         registry->registerFactory<StandardStimulusFactory, CircleStimulus>();
-    }	
+        registry->registerFactory<StandardStimulusFactory, CircularFixationPoint>();
+    }
 };
 
 

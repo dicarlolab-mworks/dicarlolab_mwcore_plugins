@@ -43,6 +43,8 @@
 		E12D98D416BC2447004FEF79 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E12D98D316BC2447004FEF79 /* OpenGL.framework */; };
 		E140986B18EC8960003C2B05 /* Circle in CopyFiles */ = {isa = PBXBuildFile; fileRef = E140986918EC893B003C2B05 /* Circle */; };
 		E15D0B1A16C2BD6300F331B1 /* libboost_system.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E15D0B1916C2BD6300F331B1 /* libboost_system.a */; };
+		E19B107B19801C0A00996467 /* CircularFixationPoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E19B107919801C0A00996467 /* CircularFixationPoint.cpp */; };
+		E19B107D198025FF00996467 /* CircularFixationPoint in CopyFiles */ = {isa = PBXBuildFile; fileRef = E19B107C198025F300996467 /* CircularFixationPoint */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +82,7 @@
 			dstSubfolderSpec = 0;
 			files = (
 				E140986B18EC8960003C2B05 /* Circle in CopyFiles */,
+				E19B107D198025FF00996467 /* CircularFixationPoint in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -98,6 +101,9 @@
 		E12D98D316BC2447004FEF79 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		E140986918EC893B003C2B05 /* Circle */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Circle; sourceTree = "<group>"; };
 		E15D0B1916C2BD6300F331B1 /* libboost_system.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_system.a; path = "/Library/Application Support/MWorks/Developer/lib/libboost_system.a"; sourceTree = "<absolute>"; };
+		E19B107919801C0A00996467 /* CircularFixationPoint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CircularFixationPoint.cpp; sourceTree = "<group>"; };
+		E19B107A19801C0A00996467 /* CircularFixationPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircularFixationPoint.h; sourceTree = "<group>"; };
+		E19B107C198025F300996467 /* CircularFixationPoint */ = {isa = PBXFileReference; lastKnownFileType = folder; path = CircularFixationPoint; sourceTree = "<group>"; };
 		E1C78808116FB968004928BF /* Development.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Development.xcconfig; path = "/Library/Application Support/MWorks/Developer/Xcode/Development.xcconfig"; sourceTree = "<absolute>"; };
 		E1C78809116FB968004928BF /* WARNING.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = WARNING.txt; path = "/Library/Application Support/MWorks/Developer/Xcode/WARNING.txt"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
@@ -155,6 +161,8 @@
 			children = (
 				0E287D300E64A5CD005BE396 /* CircleStimulus.h */,
 				0E287D2F0E64A5CD005BE396 /* CircleStimulus.cpp */,
+				E19B107A19801C0A00996467 /* CircularFixationPoint.h */,
+				E19B107919801C0A00996467 /* CircularFixationPoint.cpp */,
 				0E37FBA10E59C3DD008B885D /* CircleStimulusPlugin.cpp */,
 			);
 			name = Classes;
@@ -180,6 +188,7 @@
 			isa = PBXGroup;
 			children = (
 				E140986918EC893B003C2B05 /* Circle */,
+				E19B107C198025F300996467 /* CircularFixationPoint */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -262,6 +271,7 @@
 			files = (
 				0E37FBA30E59C3DD008B885D /* CircleStimulusPlugin.cpp in Sources */,
 				0E287D330E64A5CD005BE396 /* CircleStimulus.cpp in Sources */,
+				E19B107B19801C0A00996467 /* CircularFixationPoint.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
