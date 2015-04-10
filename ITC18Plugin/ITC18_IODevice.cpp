@@ -2000,7 +2000,7 @@ bool mITC18_IODevice::flushITC18FIFO_all(void) {
 			mprintf("Diff between ITC clock and global clock = %ld us (+ means itc is leading) time slice = %ld us", (long)diff, (long)full_time_slice_us);
 		}
 		// this is approximately our resolution to tell if there is a problem.
-		float drift_percent_of_sample_duration = (abs((long)diff))/((long)full_time_slice_us);
+		float drift_percent_of_sample_duration = (std::abs((long)diff))/((long)full_time_slice_us);
 		if ( drift_percent_of_sample_duration > MAX_ALLOWABLE_DRIFT_FRACTION_OF_SAMPLE_DURATION) {
 			if (!alreadyWarnedAboutDrift) {
 				mwarning(M_IODEVICE_MESSAGE_DOMAIN,
