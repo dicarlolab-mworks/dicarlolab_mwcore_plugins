@@ -294,7 +294,6 @@
 		1DEB913B08733D840010E9CD /* Development */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = WhiteNoiseBackground_Prefix.pch;
 				INFOPLIST_FILE = "WhiteNoiseBackground-Info.plist";
