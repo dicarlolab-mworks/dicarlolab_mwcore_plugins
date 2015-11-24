@@ -1,0 +1,131 @@
+---
+
+
+name: Fake Monkey IO Device
+signature: iodevice/fake_monkey
+isa: IODevice
+icon: fakeMonkey
+description: >
+    A fake monkey that has the ability to generate spikes, and continuous
+    eye position
+parameters: 
+  - 
+    name: spike_rate
+  - 
+    name: priority
+  - 
+    name: alt
+
+
+---
+
+
+name: Fake Monkey Eye Channel
+signature: iochannel/eye_movement
+isa: IOChannel
+allowed_parent: Fake Monkey IO Device
+description: >
+    This channel provides fake raw horizontal and vertical eye position
+    data (in degrees).
+parameters: 
+  - 
+    name: eye_v
+  - 
+    name: eye_h
+  - 
+    name: data_interval
+    default: 1ms
+  - 
+    name: update_interval
+    default: 10ms
+
+
+---
+
+
+name: Fake Monkey Juice Channel
+signature: iochannel/juice
+isa: IOChannel
+allowed_parent: Fake Monkey IO Device
+description: This channel allows you to give a fake monkey juice.
+parameters: 
+  - 
+    name: variable
+
+
+---
+
+
+name: Fake Monkey Spike Channel
+signature: iochannel/spike
+isa: IOChannel
+allowed_parent: Fake Monkey IO Device
+description: >
+    This channel generates fake spikes at a Poisson rate of 'spike_rate'
+    spikes per second.
+parameters: 
+  - 
+    name: variable
+
+
+---
+
+
+name: Fake Monkey Fixate
+signature: action/fake_monkey_fixate
+isa: Action
+icon: fakeMonkey
+description: >
+    Causes the fake monkey to fixate at the current eye position for
+    'duration' amount of time
+parameters: 
+  - 
+    name: duration
+    default: 0
+  - 
+    name: fake_monkey
+
+
+---
+
+
+name: Fake Monkey Saccade
+signature: action/fake_monkey_saccade_to_location
+isa: Action
+icon: fakeMonkey
+description: Causes the fake monkey to saccade to the specified location
+parameters: 
+  - 
+    name: h
+    default: 0
+  - 
+    name: v
+    default: 0
+  - 
+    name: fake_monkey
+
+
+---
+
+
+name: Fake Monkey Saccade and Fixate
+signature: action/fake_monkey_saccade_and_fixate
+isa: Action
+icon: fakeMonkey
+description: >
+    Causes the fake monkey to saccade to the specified location and fixate
+    for the specified amount of time
+parameters: 
+  - 
+    name: h
+    default: 0
+  - 
+    name: v
+    default: 0
+  - 
+    name: duration
+    default: 0
+  - 
+    name: fake_monkey
+
+

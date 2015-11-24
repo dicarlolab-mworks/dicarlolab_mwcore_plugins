@@ -1,0 +1,21 @@
+---
+
+
+name: White Noise Background
+signature: stimulus/white_noise_background
+isa: Stimulus
+description: White noise background stimulus
+
+
+---
+
+
+name: Randomize Background
+signature: action/randomize_background
+isa: Action
+description: Randomize a white noise background stimulus
+parameters: 
+  - 
+    name: stimulus
+
+

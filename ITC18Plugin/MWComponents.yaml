@@ -1,0 +1,239 @@
+---
+
+
+name: ITC-18 IO Device
+signature: iodevice/itc18
+isa: IODevice
+icon: smallIOFolder
+description: Used for interfacing to an ITC-18
+parameters: 
+  - 
+    name: priority
+  - 
+    name: alt
+
+
+---
+
+
+name: ITC-18 Analog Input Channel
+signature: iochannel/itc18_analog_input
+isa: IOChannel
+icon: smallIOFolder
+allowed_parent: ITC-18 IO Device
+description: Used for interfacing to an analog channel on an ITC-18
+parameters: 
+  - 
+    name: variable
+  - 
+    name: capability
+    default: ITC18_ADC_INPUT0
+  - 
+    name: data_type
+    default: analog
+  - 
+    name: direction
+    default: input
+  - 
+    name: synchrony
+    default: hardware_timed_synchronous
+  - 
+    name: range_min
+    default: -10
+  - 
+    name: range_max
+    default: 10
+  - 
+    name: resolution
+    default: 16
+  - 
+    name: update_interval
+    default: 3ms
+  - 
+    name: data_interval
+    default: 1ms
+
+
+---
+
+
+name: ITC-18 TTL Input Channel
+signature: iochannel/itc18_ttl_digital_input
+isa: IOChannel
+icon: smallIOFolder
+allowed_parent: ITC-18 IO Device
+description: >
+    Used for interfacing to a TTL input channel on an ITC-18. Possible
+    values for data_type are edge_low_to_high, edge_high_to_low, edge_any,
+    or digital for continuous digital data.
+parameters: 
+  - 
+    name: variable
+  - 
+    name: capability
+    default: ITC18_TTL_INPUT0
+  - 
+    name: data_type
+    default: edge_low_to_high
+  - 
+    name: direction
+    default: input
+  - 
+    name: synchrony
+    default: hardware_timed_synchronous
+  - 
+    name: range_min
+    default: 0
+  - 
+    name: range_max
+    default: 0
+  - 
+    name: resolution
+    default: 1
+  - 
+    name: update_interval
+    default: 3ms
+  - 
+    name: data_interval
+    default: 0.5ms
+
+
+---
+
+
+name: ITC-18 AUX TTL Output Channel
+signature: iochannel/itc18_async_ttl_digital_output
+isa: IOChannel
+icon: smallIOFolder
+allowed_parent: ITC-18 IO Device
+description: >
+    Used for interfacing to an asynchronous auxiliary TTL output channel on
+    an ITC-18. Possible values for data_type are digital,
+    pulse_active_high, pulse_active_low, or digital_uint8.
+parameters: 
+  - 
+    name: variable
+  - 
+    name: capability
+    default: ITC18_TTL_ASYCH_OUT00
+  - 
+    name: data_type
+    default: digital
+  - 
+    name: direction
+    default: output
+  - 
+    name: synchrony
+    default: asynchronous
+  - 
+    name: range_min
+    default: 0
+  - 
+    name: range_max
+    default: 0
+  - 
+    name: resolution
+    default: 1
+  - 
+    name: update_interval
+    default: 3ms
+  - 
+    name: data_interval
+    default: 1ms
+
+
+---
+
+
+name: ITC-18 Triggered Analog Snippet
+signature: iochannel/itc18_triggered_analog_snippet
+isa: IOChannel
+icon: smallIOFolder
+allowed_parent: ITC-18 IO Device
+description: >
+    Used for recording an analog snippet on an ITC-18. A TTL channel is
+    used to trigger the snippet.
+parameters: 
+  - 
+    name: variable
+  - 
+    name: capability
+    default: ITC18_ADC_INPUT0
+  - 
+    name: data_type
+    default: triggered_analog_snippet
+  - 
+    name: direction
+    default: output
+  - 
+    name: synchrony
+    default: hardware_timed_synchronous
+  - 
+    name: range_min
+    default: -10
+  - 
+    name: range_max
+    default: 10
+  - 
+    name: resolution
+    default: 16
+  - 
+    name: update_interval
+    default: 3ms
+  - 
+    name: data_interval
+    default: 70us
+  - 
+    name: TTL_trigger_port
+    default: 0
+  - 
+    name: pre_trigger_interval
+    default: 4ms
+  - 
+    name: post_trigger_interval
+    default: 4ms
+
+
+---
+
+
+name: ITC-18 Word Output Channel
+signature: iochannel/itc18_word_output
+isa: IOChannel
+icon: smallIOFolder
+allowed_parent: ITC-18 IO Device
+description: >
+    Used for sending word output on an ITC-18 (e.g.  to a Plexon system for
+    clock synchronization)
+parameters: 
+  - 
+    name: variable
+  - 
+    name: capability
+    default: ITC18_TTL_AUX_WORD1
+  - 
+    name: data_type
+    default: digital_uint8
+  - 
+    name: direction
+    default: output
+  - 
+    name: synchrony
+    default: asynchronous
+  - 
+    name: range_min
+    default: 0
+  - 
+    name: range_max
+    default: 0
+  - 
+    name: resolution
+    default: 1
+  - 
+    name: update_interval
+    default: 3ms
+  - 
+    name: data_interval
+    default: 1ms
+
+
