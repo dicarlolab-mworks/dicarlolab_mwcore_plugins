@@ -43,6 +43,7 @@
 		E12D98E616BC26F7004FEF79 /* ITC18Plugin.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8D5B49B6048680CD000E48DA /* ITC18Plugin.bundle */; };
 		E15D0B1E16C2BF1B00F331B1 /* libboost_system.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E15D0B1D16C2BF1B00F331B1 /* libboost_system.a */; };
 		E18D8C2E18E1C381005B7DFC /* ITC18 in CopyFiles */ = {isa = PBXBuildFile; fileRef = E18D8C2D18E1C379005B7DFC /* ITC18 */; };
+		E1E07EA71C04F3EC008DD97E /* MWComponents.yaml in Resources */ = {isa = PBXBuildFile; fileRef = E1E07EA61C04F3EC008DD97E /* MWComponents.yaml */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,6 +101,7 @@
 		E1895A39116FBD5700D8CBE0 /* Development.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Development.xcconfig; path = "/Library/Application Support/MWorks/Developer/Xcode/Development.xcconfig"; sourceTree = "<absolute>"; };
 		E1895A3A116FBD5700D8CBE0 /* WARNING.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = WARNING.txt; path = "/Library/Application Support/MWorks/Developer/Xcode/WARNING.txt"; sourceTree = "<absolute>"; };
 		E18D8C2D18E1C379005B7DFC /* ITC18 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ITC18; sourceTree = "<group>"; };
+		E1E07EA61C04F3EC008DD97E /* MWComponents.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MWComponents.yaml; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +145,7 @@
 		089C167CFE841241C02AAC07 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E1E07EA61C04F3EC008DD97E /* MWComponents.yaml */,
 				0E8CFA570EED9CB700647AA5 /* MWLibrary.xml */,
 				8D5B49B7048680CD000E48DA /* Info.plist */,
 				089C167DFE841241C02AAC07 /* InfoPlist.strings */,
@@ -250,6 +253,7 @@
 			files = (
 				8D5B49B0048680CD000E48DA /* InfoPlist.strings in Resources */,
 				0E8CFA580EED9CB700647AA5 /* MWLibrary.xml in Resources */,
+				E1E07EA71C04F3EC008DD97E /* MWComponents.yaml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

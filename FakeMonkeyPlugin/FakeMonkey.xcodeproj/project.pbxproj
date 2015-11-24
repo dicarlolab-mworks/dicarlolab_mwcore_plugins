@@ -57,6 +57,7 @@
 		E12D98DD16BC24F1004FEF79 /* FakeMonkeyPlugin.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8D5B49B6048680CD000E48DA /* FakeMonkeyPlugin.bundle */; };
 		E15D0B1C16C2BE3E00F331B1 /* libboost_system.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E15D0B1B16C2BE3E00F331B1 /* libboost_system.a */; };
 		E18D8C2C18E1C2A7005B7DFC /* FakeMonkey in CopyFiles */ = {isa = PBXBuildFile; fileRef = E18D8C2B18E1C273005B7DFC /* FakeMonkey */; };
+		E1E07EA51C04F3B6008DD97E /* MWComponents.yaml in Resources */ = {isa = PBXBuildFile; fileRef = E1E07EA41C04F3B6008DD97E /* MWComponents.yaml */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -145,6 +146,7 @@
 		E1895A1B116FBBC100D8CBE0 /* Development.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Development.xcconfig; path = "/Library/Application Support/MWorks/Developer/Xcode/Development.xcconfig"; sourceTree = "<absolute>"; };
 		E1895A1C116FBBC100D8CBE0 /* WARNING.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = WARNING.txt; path = "/Library/Application Support/MWorks/Developer/Xcode/WARNING.txt"; sourceTree = "<absolute>"; };
 		E18D8C2B18E1C273005B7DFC /* FakeMonkey */ = {isa = PBXFileReference; lastKnownFileType = folder; path = FakeMonkey; sourceTree = "<group>"; };
+		E1E07EA41C04F3B6008DD97E /* MWComponents.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MWComponents.yaml; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,6 +188,7 @@
 		089C167CFE841241C02AAC07 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E1E07EA41C04F3B6008DD97E /* MWComponents.yaml */,
 				0EDCBB120EE9D8F800432792 /* MWLibrary.xml */,
 				8D5B49B7048680CD000E48DA /* Info.plist */,
 				089C167DFE841241C02AAC07 /* InfoPlist.strings */,
@@ -357,6 +360,7 @@
 			files = (
 				8D5B49B0048680CD000E48DA /* InfoPlist.strings in Resources */,
 				0EDCBB130EE9D8F800432792 /* MWLibrary.xml in Resources */,
+				E1E07EA51C04F3B6008DD97E /* MWComponents.yaml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
