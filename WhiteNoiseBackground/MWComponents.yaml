@@ -10,12 +10,13 @@ description: White noise background stimulus
 ---
 
 
-name: Randomize Background
+name: Randomize White Noise Background
 signature: action/randomize_background
 isa: Action
-description: Randomize a white noise background stimulus
+description: Randomize a `White Noise Background` stimulus
 parameters: 
   - 
     name: stimulus
+    required: yes
 
 

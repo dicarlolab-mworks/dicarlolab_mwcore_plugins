@@ -5,12 +5,9 @@ name: ITC-18 IO Device
 signature: iodevice/itc18
 isa: IODevice
 icon: smallIOFolder
-description: Used for interfacing to an ITC-18
-parameters: 
-  - 
-    name: priority
-  - 
-    name: alt
+description: >
+    Interface to an `ITC-18
+    <http://heka.com/products/products_main.html#acq_itc18>`_
 
 
 ---
@@ -21,37 +18,48 @@ signature: iochannel/itc18_analog_input
 isa: IOChannel
 icon: smallIOFolder
 allowed_parent: ITC-18 IO Device
-description: Used for interfacing to an analog channel on an ITC-18
+description: >
+    Used for interfacing to an analog input channel on an `ITC-18 IO Device`
 parameters: 
   - 
     name: variable
+    required: yes
   - 
     name: capability
-    default: ITC18_ADC_INPUT0
+    required: yes
+    example: ITC18_ADC_INPUT0
   - 
     name: data_type
-    default: analog
+    required: yes
+    example: analog
   - 
     name: direction
-    default: input
+    required: yes
+    example: input
   - 
     name: synchrony
-    default: hardware_timed_synchronous
+    required: yes
+    example: hardware_timed_synchronous
   - 
     name: range_min
-    default: -10
+    required: yes
+    example: -10
   - 
     name: range_max
-    default: 10
+    required: yes
+    example: 10
   - 
     name: resolution
-    default: 16
+    required: yes
+    example: 16
   - 
     name: update_interval
-    default: 3ms
+    required: yes
+    example: 3ms
   - 
     name: data_interval
-    default: 1ms
+    required: yes
+    example: 1ms
 
 
 ---
@@ -63,39 +71,49 @@ isa: IOChannel
 icon: smallIOFolder
 allowed_parent: ITC-18 IO Device
 description: >
-    Used for interfacing to a TTL input channel on an ITC-18. Possible
-    values for data_type are edge_low_to_high, edge_high_to_low, edge_any,
-    or digital for continuous digital data.
+    Used for interfacing to a TTL input channel on an `ITC-18 IO Device`.
+    Possible values for `data_type`_ are edge_low_to_high, edge_high_to_low,
+    edge_any, or digital for continuous digital data.
 parameters: 
   - 
     name: variable
+    required: yes
   - 
     name: capability
-    default: ITC18_TTL_INPUT0
+    required: yes
+    example: ITC18_TTL_INPUT0
   - 
     name: data_type
-    default: edge_low_to_high
+    required: yes
+    example: edge_low_to_high
   - 
     name: direction
-    default: input
+    required: yes
+    example: input
   - 
     name: synchrony
-    default: hardware_timed_synchronous
+    required: yes
+    example: hardware_timed_synchronous
   - 
     name: range_min
-    default: 0
+    required: yes
+    example: 0
   - 
     name: range_max
-    default: 0
+    required: yes
+    example: 0
   - 
     name: resolution
-    default: 1
+    required: yes
+    example: 1
   - 
     name: update_interval
-    default: 3ms
+    required: yes
+    example: 3ms
   - 
     name: data_interval
-    default: 0.5ms
+    required: yes
+    example: 0.5ms
 
 
 ---
@@ -107,39 +125,49 @@ isa: IOChannel
 icon: smallIOFolder
 allowed_parent: ITC-18 IO Device
 description: >
-    Used for interfacing to an asynchronous auxiliary TTL output channel on
-    an ITC-18. Possible values for data_type are digital,
+    Used for interfacing to an asynchronous auxiliary TTL output channel on an
+    `ITC-18 IO Device`.  Possible values for `data_type`_ are digital,
     pulse_active_high, pulse_active_low, or digital_uint8.
 parameters: 
   - 
     name: variable
+    required: yes
   - 
     name: capability
-    default: ITC18_TTL_ASYCH_OUT00
+    required: yes
+    example: ITC18_TTL_ASYCH_OUT00
   - 
     name: data_type
-    default: digital
+    required: yes
+    example: digital
   - 
     name: direction
-    default: output
+    required: yes
+    example: output
   - 
     name: synchrony
-    default: asynchronous
+    required: yes
+    example: asynchronous
   - 
     name: range_min
-    default: 0
+    required: yes
+    example: 0
   - 
     name: range_max
-    default: 0
+    required: yes
+    example: 0
   - 
     name: resolution
-    default: 1
+    required: yes
+    example: 1
   - 
     name: update_interval
-    default: 3ms
+    required: yes
+    example: 3ms
   - 
     name: data_interval
-    default: 1ms
+    required: yes
+    example: 1ms
 
 
 ---
@@ -151,47 +179,60 @@ isa: IOChannel
 icon: smallIOFolder
 allowed_parent: ITC-18 IO Device
 description: >
-    Used for recording an analog snippet on an ITC-18. A TTL channel is
-    used to trigger the snippet.
+    Used for recording an analog snippet on an `ITC-18 IO Device`.  A TTL
+    channel is used to trigger the snippet.
 parameters: 
   - 
     name: variable
+    required: yes
   - 
     name: capability
-    default: ITC18_ADC_INPUT0
+    required: yes
+    example: ITC18_ADC_INPUT0
   - 
     name: data_type
-    default: triggered_analog_snippet
+    required: yes
+    example: triggered_analog_snippet
   - 
     name: direction
-    default: output
+    required: yes
+    example: output
   - 
     name: synchrony
-    default: hardware_timed_synchronous
+    required: yes
+    example: hardware_timed_synchronous
   - 
     name: range_min
-    default: -10
+    required: yes
+    example: -10
   - 
     name: range_max
-    default: 10
+    required: yes
+    example: 10
   - 
     name: resolution
-    default: 16
+    required: yes
+    example: 16
   - 
     name: update_interval
-    default: 3ms
+    required: yes
+    example: 3ms
   - 
     name: data_interval
-    default: 70us
+    required: yes
+    example: 70us
   - 
     name: TTL_trigger_port
-    default: 0
+    required: yes
+    example: 0
   - 
     name: pre_trigger_interval
-    default: 4ms
+    required: yes
+    example: 4ms
   - 
     name: post_trigger_interval
-    default: 4ms
+    required: yes
+    example: 4ms
 
 
 ---
@@ -203,37 +244,47 @@ isa: IOChannel
 icon: smallIOFolder
 allowed_parent: ITC-18 IO Device
 description: >
-    Used for sending word output on an ITC-18 (e.g.  to a Plexon system for
-    clock synchronization)
+    Used for sending word output on an `ITC-18 IO Device` (e.g. to a `Plexon
+    <http://www.plexon.com>`_ system for clock synchronization)
 parameters: 
   - 
     name: variable
+    required: yes
   - 
     name: capability
-    default: ITC18_TTL_AUX_WORD1
+    required: yes
+    example: ITC18_TTL_AUX_WORD1
   - 
     name: data_type
-    default: digital_uint8
+    required: yes
+    example: digital_uint8
   - 
     name: direction
-    default: output
+    required: yes
+    example: output
   - 
     name: synchrony
-    default: asynchronous
+    required: yes
+    example: asynchronous
   - 
     name: range_min
-    default: 0
+    required: yes
+    example: 0
   - 
     name: range_max
-    default: 0
+    required: yes
+    example: 0
   - 
     name: resolution
-    default: 1
+    required: yes
+    example: 1
   - 
     name: update_interval
-    default: 3ms
+    required: yes
+    example: 3ms
   - 
     name: data_interval
-    default: 1ms
+    required: yes
+    example: 1ms
 
 

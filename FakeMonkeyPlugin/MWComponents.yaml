@@ -6,15 +6,12 @@ signature: iodevice/fake_monkey
 isa: IODevice
 icon: fakeMonkey
 description: >
-    A fake monkey that has the ability to generate spikes, and continuous
-    eye position
+    A fake monkey that has the ability to generate spikes and continuous
+    eye position data
 parameters: 
   - 
     name: spike_rate
-  - 
-    name: priority
-  - 
-    name: alt
+    default: 25
 
 
 ---
@@ -26,18 +23,22 @@ isa: IOChannel
 allowed_parent: Fake Monkey IO Device
 description: >
     This channel provides fake raw horizontal and vertical eye position
-    data (in degrees).
+    data (in degrees) from a `Fake Monkey IO Device`
 parameters: 
   - 
-    name: eye_v
-  - 
     name: eye_h
+    required: yes
+  - 
+    name: eye_v
+    required: yes
   - 
     name: data_interval
-    default: 1ms
+    required: yes
+    example: 1ms
   - 
     name: update_interval
-    default: 10ms
+    required: yes
+    example: 10ms
 
 
 ---
@@ -47,10 +48,12 @@ name: Fake Monkey Juice Channel
 signature: iochannel/juice
 isa: IOChannel
 allowed_parent: Fake Monkey IO Device
-description: This channel allows you to give a fake monkey juice.
+description: >
+    This channel allows you to give juice to a `Fake Monkey IO Device`
 parameters: 
   - 
     name: variable
+    required: yes
 
 
 ---
@@ -61,11 +64,13 @@ signature: iochannel/spike
 isa: IOChannel
 allowed_parent: Fake Monkey IO Device
 description: >
-    This channel generates fake spikes at a Poisson rate of 'spike_rate'
-    spikes per second.
+    This channel generates fake spikes from a `Fake Monkey IO Device` at a
+    Poisson rate of ``spike_rate`` spikes per second
+
 parameters: 
   - 
     name: variable
+    required: yes
 
 
 ---
@@ -76,14 +81,15 @@ signature: action/fake_monkey_fixate
 isa: Action
 icon: fakeMonkey
 description: >
-    Causes the fake monkey to fixate at the current eye position for
-    'duration' amount of time
+    Causes a `Fake Monkey IO Device` to fixate at the current eye position for
+    `duration`_ amount of time
 parameters: 
   - 
-    name: duration
-    default: 0
-  - 
     name: fake_monkey
+    required: yes
+  - 
+    name: duration
+    required: yes
 
 
 ---
@@ -93,16 +99,18 @@ name: Fake Monkey Saccade
 signature: action/fake_monkey_saccade_to_location
 isa: Action
 icon: fakeMonkey
-description: Causes the fake monkey to saccade to the specified location
+description: >
+    Causes a `Fake Monkey IO Device` to saccade to the specified location
 parameters: 
   - 
+    name: fake_monkey
+    required: yes
+  - 
     name: h
-    default: 0
+    required: yes
   - 
     name: v
-    default: 0
-  - 
-    name: fake_monkey
+    required: yes
 
 
 ---
@@ -113,19 +121,20 @@ signature: action/fake_monkey_saccade_and_fixate
 isa: Action
 icon: fakeMonkey
 description: >
-    Causes the fake monkey to saccade to the specified location and fixate
-    for the specified amount of time
+    Causes a `Fake Monkey IO Device` to saccade to the specified location and
+    fixate for the specified amount of time
 parameters: 
   - 
+    name: fake_monkey
+    required: yes
+  - 
     name: h
-    default: 0
+    required: yes
   - 
     name: v
-    default: 0
+    required: yes
   - 
     name: duration
-    default: 0
-  - 
-    name: fake_monkey
+    required: yes
 
 
