@@ -117,6 +117,7 @@ void WhiteNoiseBackground::draw(shared_ptr<StimulusDisplay> display) {
     
     glEnd();
 
+    glDisable(GL_TEXTURE_2D);
     glPopClientAttrib();
 }
 
