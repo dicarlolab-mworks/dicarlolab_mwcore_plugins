@@ -11,11 +11,11 @@
     <sounds />
     <stimuli />
     <experiment full_name="DigitalInExample" tag="DigitalInExample">
-        <protocol description="" full_name="Protocol" interruptable="YES" interruptible="YES" nsamples="1" sampling_method="cycles" selection="sequential_ascending" tag="Protocol">
-            <block description="" full_name="Block" interruptable="YES" interruptible="YES" nsamples="1" sampling_method="cycles" selection="sequential_ascending" tag="Block">
+        <protocol description="" full_name="Protocol" interruptible="YES" nsamples="1" sampling_method="cycles" selection="sequential_ascending" tag="Protocol">
+            <block description="" full_name="Block" interruptible="YES" nsamples="1" sampling_method="cycles" selection="sequential_ascending" tag="Block">
                 <trial description="" full_name="Trial" interruptible="YES" nsamples="1" sampling_method="cycles" selection="sequential_ascending" tag="Trial">
-                    <task_system description="" full_name="TS" interruptable="YES" interruptible="YES" tag="TS">
-                        <task_system_state description="" full_name="openITC" interruptable="YES" interruptible="YES" tag="openITC">
+                    <task_system description="" full_name="TS" interruptible="YES" tag="TS">
+                        <task_system_state description="" full_name="openITC" interruptible="YES" tag="openITC">
                             <action device="ITC" full_name="startIO" tag="startIO" type="start_device_IO" />
                             <action duration="20000ms" full_name="StartTrialTimer" tag="StartTrialTimer" timer="trialTimer" type="start_timer" />
                             <transition full_name="goToReadDigitalIn" tag="goToReadDigitalIn" target="ReadDigitalIn" type="direct" />
@@ -29,7 +29,7 @@
                             <transition full_name="goToReadDigitalInTE" tag="goToReadDigitalInTE" target="ReadDigitalIn" timer="readTimer" type="timer_expired" />
                             <transition full_name="goToCloseITCTE" tag="goToCloseITCTE" target="CloseITC" timer="trialTimer" type="timer_expired" />
                         </task_system_state>
-                        <task_system_state description="" full_name="CloseITC" interruptable="YES" interruptible="YES" tag="CloseITC">
+                        <task_system_state description="" full_name="CloseITC" interruptible="YES" tag="CloseITC">
                             <action device="ITC" full_name="stopIO" tag="stopIO" type="stop_device_IO" />
                             <transition full_name="end" tag="end" type="yield" />
                         </task_system_state>

@@ -27,21 +27,21 @@
     <sounds />
     <stimuli />
     <experiment full_name="Super Awesome Happy" tag="It is your boy">
-        <protocol description="" full_name="sup" interruptable="YES" interruptible="YES" nsamples="1" sampling_method="cycles" selection="sequential_ascending" tag="refprot">
-            <block description="" full_name="supsup" interruptable="YES" interruptible="YES" nsamples="3" sampling_method="cycles" selection="sequential_ascending" tag="sup2">
-                <task_system description="" full_name="fullname12" interruptable="YES" interruptible="YES" tag="task_system12">
-                    <task_system_state description="" full_name="fullname13" interruptable="YES" interruptible="YES" tag="task_system_state13">
+        <protocol description="" full_name="sup" interruptible="YES" nsamples="1" sampling_method="cycles" selection="sequential_ascending" tag="refprot">
+            <block description="" full_name="supsup" interruptible="YES" nsamples="3" sampling_method="cycles" selection="sequential_ascending" tag="sup2">
+                <task_system description="" full_name="fullname12" interruptible="YES" tag="task_system12">
+                    <task_system_state description="" full_name="fullname13" interruptible="YES" tag="task_system_state13">
                         <action full_name="fullname_2" tag="Assignment_2" type="assignment" value="1" variable="s" />
                         <action device="sITC" full_name="fullname14" tag="action14" type="start_device_IO" />
                         <action duration="100ms" full_name="fullname15" tag="action15" timer="timer" type="start_timer" />
                         <transition full_name="fullname18" tag="transition18" target="task_system_state14" timer="timer" type="timer_expired" />
                     </task_system_state>
-                    <task_system_state description="" full_name="fullname14" interruptable="YES" interruptible="YES" tag="task_system_state14">
+                    <task_system_state description="" full_name="fullname14" interruptible="YES" tag="task_system_state14">
                         
                         <action duration="5000ms" full_name="fullname16" tag="action16" timer="timer" type="start_timer" />
                         <transition full_name="fullname19" tag="transition19" target="task_system_state15" timer="timer" type="timer_expired" />
                     </task_system_state>
-                    <task_system_state description="" full_name="fullname15" interruptable="YES" interruptible="YES" tag="task_system_state15">
+                    <task_system_state description="" full_name="fullname15" interruptible="YES" tag="task_system_state15">
                         
                         <action full_name="fullname_2" tag="Assignment_2" type="assignment" value="1" variable="e" />
                         <action device="sITC" full_name="fullname19" tag="action19" type="stop_device_IO" />

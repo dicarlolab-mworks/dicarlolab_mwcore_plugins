@@ -16,8 +16,8 @@
 			</folder>
 		</variables>
 	<experiment tag="Ringo_Setup">
-		<protocol tag="calibration protocol" interruptable="YES" selection="sequential_ascending" nsamples="1" sampling_method="cycles" interruptible="YES">
-			<block tag="calibration block" interruptable="YES" selection="sequential_ascending" nsamples="1" sampling_method="cycles"  interruptible="YES">
+		<protocol tag="calibration protocol" selection="sequential_ascending" nsamples="1" sampling_method="cycles" interruptible="YES">
+			<block tag="calibration block" selection="sequential_ascending" nsamples="1" sampling_method="cycles"  interruptible="YES">
 					<task_system tag="calibration start">
 						<task_system_state tag="StartIO_state"  interruptible="YES">
 							<action type="start_device_IO" device="FakeMonkey"/>

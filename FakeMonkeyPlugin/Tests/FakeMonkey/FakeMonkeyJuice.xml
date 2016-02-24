@@ -14,9 +14,9 @@
     <sound tag="reward_sound" type="wav_file" path="./sounds/reward.wav"/>
   </sounds>
   <experiment tag="FakeMonkeyJuice">
-    <protocol tag="protocol" interruptable="YES" selection="sequential_ascending" nsamples="1" sampling_method="cycles" interruptible="YES">
-      <block tag="block" interruptable="YES" selection="sequential_ascending" nsamples="1" sampling_method="cycles" interruptible="YES">
-        <trial tag="trial" interruptable="YES" selection="sequential_ascending" nsamples="10" sampling_method="cycles" interruptible="YES">
+    <protocol tag="protocol" selection="sequential_ascending" nsamples="1" sampling_method="cycles" interruptible="YES">
+      <block tag="block" selection="sequential_ascending" nsamples="1" sampling_method="cycles" interruptible="YES">
+        <trial tag="trial" selection="sequential_ascending" nsamples="10" sampling_method="cycles" interruptible="YES">
           <task_system tag="start_IO">
             <task_system_state tag="start_IO_state" interruptible="YES">
               <action type="start_device_IO" device="Fake_Monkey"/>

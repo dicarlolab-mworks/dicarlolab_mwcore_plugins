@@ -40,10 +40,10 @@
     
     <experiment tag="Metronome" full_name="Metronome Experiment">
 	
-        <protocol tag="tick tock protocol" full_name="Tick Tock Test" interruptable="YES" selection="sequential_ascending" nsamples="1" sampling_method="cycles">
-            <block tag="tick tock block" interruptable="YES" selection="sequential_ascending" nsamples="1" sampling_method="cycles">
+        <protocol tag="tick tock protocol" full_name="Tick Tock Test" selection="sequential_ascending" nsamples="1" sampling_method="cycles">
+            <block tag="tick tock block" selection="sequential_ascending" nsamples="1" sampling_method="cycles">
                
-                <trial tag="tick tock trial" interruptable="YES" selection="sequential_ascending" nsamples="1" sampling_method="cycles">
+                <trial tag="tick tock trial" selection="sequential_ascending" nsamples="1" sampling_method="cycles">
                     
                     <task_system tag="StartIO_TS">
                         <task_system_state tag="StartIO_state">

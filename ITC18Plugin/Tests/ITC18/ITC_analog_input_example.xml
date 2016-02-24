@@ -11,11 +11,11 @@
     <sounds />
     <stimuli />
     <experiment tag="AnalogInExample">
-        <protocol description="" interruptable="YES" interruptible="YES" nsamples="1" sampling_method="cycles" selection="sequential_ascending" tag="Protocol">
-            <block description="" interruptable="YES" interruptible="YES" nsamples="1" sampling_method="cycles" selection="sequential_ascending" tag="Block">
+        <protocol description="" interruptible="YES" nsamples="1" sampling_method="cycles" selection="sequential_ascending" tag="Protocol">
+            <block description="" interruptible="YES" nsamples="1" sampling_method="cycles" selection="sequential_ascending" tag="Block">
                 <trial description="" interruptible="YES" nsamples="1" sampling_method="cycles" selection="sequential_ascending" tag="Trial">
-                    <task_system description="" interruptable="YES" interruptible="YES" tag="TS">
-                        <task_system_state description="" full_name="openITC" interruptable="YES" interruptible="YES" tag="openITC">
+                    <task_system description="" interruptible="YES" tag="TS">
+                        <task_system_state description="" full_name="openITC" interruptible="YES" tag="openITC">
                             <action device="ITC" type="start_device_IO" />
                             <action duration="4000ms" type="wait" />
                             <action device="ITC" type="stop_device_IO" />

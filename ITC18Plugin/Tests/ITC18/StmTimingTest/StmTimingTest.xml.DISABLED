@@ -20,21 +20,21 @@
         <stimulus color="1, 1, 1" full_name="stm1" tag="stm1" type="blank_screen" />
     </stimuli>
     <experiment description="" full_name="stimTimingtest" tag="stimTimingTest">
-        <protocol description="" full_name="protocol" interruptable="YES" interruptible="YES" nsamples="1" sampling_method="cycles" selection="sequential_ascending" tag="protocol">
-            <block description="" full_name="block" interruptable="YES" interruptible="YES" nsamples="100" sampling_method="cycles" selection="sequential_ascending" tag="block">
+        <protocol description="" full_name="protocol" interruptible="YES" nsamples="1" sampling_method="cycles" selection="sequential_ascending" tag="protocol">
+            <block description="" full_name="block" interruptible="YES" nsamples="100" sampling_method="cycles" selection="sequential_ascending" tag="block">
                 <action full_name="sync" tag="syncOn" type="assignment" value="1" variable="sync" />
                 <action device="ITC" tag="Start ITC" type="start_device_IO" />
-                <trial description="" full_name="trial" interruptable="YES" interruptible="YES" nsamples="1" sampling_method="cycles" selection="random_without_replacement" tag="trial">
+                <trial description="" full_name="trial" interruptible="YES" nsamples="1" sampling_method="cycles" selection="random_without_replacement" tag="trial">
                     <range_replicator from="0" step="1" tag="Range Replicator_1" to="4" variable="stim_index">
-                        <task_system description="" full_name="fullname21" interruptable="YES" interruptible="YES" tag="TSS">
-                            <task_system_state description="" full_name="background on" interruptable="YES" interruptible="YES" tag="background on">
+                        <task_system description="" full_name="fullname21" interruptible="YES" tag="TSS">
+                            <task_system_state description="" full_name="background on" interruptible="YES" tag="background on">
                                 <action stimulus="background" tag="QueueBackground" type="queue_stimulus" />
                                 <action full_name="increment display_update" tag="increment display_update" type="assignment" value="display_update+1" variable="display_update" />
                                 <action full_name="display refresh" tag="display refresh" type="update_stimulus_display" />
                                 <action duration="1000ms" full_name="start stm_timer" tag="start stm_timer" timebase="" timer="stm_timer" type="start_timer" />
                                 <transition full_name="go to stm on" tag="go to stm on" target="stm on" timer="stm_timer" type="timer_expired" />
                             </task_system_state>
-                            <task_system_state description="" full_name="stm on" interruptable="YES" interruptible="YES" tag="stm on">
+                            <task_system_state description="" full_name="stm on" interruptible="YES" tag="stm on">
                                 <action stimulus="stm1" tag="QueueStim" type="queue_stimulus" />
                                 <action full_name="increment display_update" tag="increment display_update" type="assignment" value="display_update+1" variable="display_update" />
                                 <action full_name="display refresh" tag="display refresh" type="update_stimulus_display" />
@@ -42,7 +42,7 @@
                                 <action duration="stm_duration" full_name="start stm_timer" tag="start stm_timer" timebase="" timer="stm_timer" type="start_timer" />
                                 <transition full_name="go to trial end" tag="go to trial end" target="trial_end" timer="stm_timer" type="timer_expired" />
                             </task_system_state>
-                            <task_system_state description="" full_name="trial end" interruptable="YES" interruptible="YES" tag="trial_end">
+                            <task_system_state description="" full_name="trial end" interruptible="YES" tag="trial_end">
                                 <action full_name="report message" message="**************TRIAL ENDING**************" tag="report message" type="report" />
                                 <transition full_name="yield" tag="yield" type="yield" />
                             </task_system_state>

@@ -10,9 +10,9 @@
         <variable tag="eye_v" default_value="0" scope="GLOBAL" type="FLOAT" editable="never" logging="never"/>
     </variables>
     <experiment tag="FM Test" full_name="FM Test">
-        <protocol tag="FM Test protocol" interruptable="YES" selection="sequential_ascending" nsamples="1" sampling_method="cycles" description="" interruptible="YES">
-            <block tag="FM Test block" interruptable="YES" selection="sequential_ascending" nsamples="1" sampling_method="cycles" description="" interruptible="YES">
-                <trial tag="FM Test trial" interruptable="YES" selection="sequential_ascending" nsamples="1" sampling_method="cycles" description="" interruptible="YES">
+        <protocol tag="FM Test protocol" selection="sequential_ascending" nsamples="1" sampling_method="cycles" description="" interruptible="YES">
+            <block tag="FM Test block" selection="sequential_ascending" nsamples="1" sampling_method="cycles" description="" interruptible="YES">
+                <trial tag="FM Test trial" selection="sequential_ascending" nsamples="1" sampling_method="cycles" description="" interruptible="YES">
                     <task_system tag="FM Test start">
                         <task_system_state tag="StartIO_state" full_name="StartIO_state" description="" interruptible="YES">
                             <action type="start_device_IO" device="the_fake_monkey"/>
