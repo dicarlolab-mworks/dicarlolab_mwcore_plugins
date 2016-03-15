@@ -9,7 +9,6 @@
 
 #include "FakeMonkeyEyeMovementChannelFactory.h"
 #include "FakeMonkeyEyeMovementChannel.h"
-#include "MWorksCore/ConstantVariable.h"
 
 shared_ptr<mw::Component> mFakeMonkeyEyeMovementChannelFactory::createObject(std::map<std::string, std::string> parameters,
 																		  ComponentRegistry *reg) {

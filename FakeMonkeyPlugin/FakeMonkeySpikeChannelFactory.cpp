@@ -9,7 +9,6 @@
 
 #include "FakeMonkeySpikeChannelFactory.h"
 #include "FakeMonkeySpikeChannel.h"
-#include "MWorksCore/ConstantVariable.h"
 
 shared_ptr<mw::Component> mFakeMonkeySpikeChannelFactory::createObject(std::map<std::string, std::string> parameters,
 																	ComponentRegistry *reg) {
