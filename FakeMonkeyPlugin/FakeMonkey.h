@@ -38,6 +38,7 @@ protected:
 	MWorksTime fixation_duration;
 	
 	shared_ptr<Scheduler> scheduler;
+    shared_ptr<Clock> clock;
 	
 	shared_ptr <Variable> spike_rate;
 	shared_ptr<ScheduleTask> spike_node;

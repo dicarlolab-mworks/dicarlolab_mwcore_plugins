@@ -46,9 +46,11 @@ mFakeMonkey::mFakeMonkey(const boost::shared_ptr<Scheduler> &a_scheduler,
 						 const shared_ptr<Variable> &spike_rate_) {
 	scheduler = a_scheduler;
 	spike_rate = spike_rate_;
+    
+    clock = Clock::instance();
 	
 	// Initialize the rng
-	rng.seed((int)scheduler->getClock()->getSystemTimeNS());
+    rng.seed((int)clock->getSystemTimeNS());
 	
 	monkey_lock = shared_ptr<boost::mutex>(new boost::mutex());
 	
@@ -84,7 +86,7 @@ void mFakeMonkey::addChild(std::map<std::string, std::string> parameters,
 						   shared_ptr<mw::Component> child) {
 	shared_ptr<mFakeMonkeyEyeMovementChannel> eye_movement_channel = boost::dynamic_pointer_cast<mFakeMonkeyEyeMovementChannel,mw::Component>(child);
 	if(eye_movement_channel != 0) {
-		eye_movement_channel->setChannelParams(scheduler->getClock(),
+		eye_movement_channel->setChannelParams(clock,
 											   monkey_lock,
 											   status,
 											   saccade_start_time,
@@ -187,7 +189,7 @@ void mFakeMonkey::spike(){
 		spike_node->cancel();
 	}
 	
-	MWorksTime spike_time = scheduler->getClock()->getCurrentTimeUS();
+	MWorksTime spike_time = clock->getCurrentTimeUS();
 	
 	for(vector<shared_ptr<Variable> >::const_iterator spike_var_iterator = spike_variables.begin();
 		spike_var_iterator != spike_variables.end();
@@ -231,7 +233,7 @@ void mFakeMonkey::startSaccading(){
 		*saccade_target_v = 80 * ((double)rand() / (double)RAND_MAX) - 40; 
 		//mprintf("saccade h: %g, saccade v: %g",saccade_target_h, saccade_target_v);
 	}
-	*saccade_start_time = scheduler->getClock()->getCurrentTimeUS();
+	*saccade_start_time = clock->getCurrentTimeUS();
 	
 	*status = M_FAKE_MONKEY_SACCADING;
 	
