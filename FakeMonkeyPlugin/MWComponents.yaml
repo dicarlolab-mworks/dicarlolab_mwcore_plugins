@@ -6,12 +6,17 @@ signature: iodevice/fake_monkey
 isa: IODevice
 icon: fakeMonkey
 description: >
-    A fake monkey that has the ability to generate spikes and continuous
+    A simulated monkey that has the ability to generate spikes and continuous
     eye position data
 parameters: 
   - 
     name: spike_rate
     default: 25
+    description: >
+        Average rate of spike generation (spikes per second).  The actual times
+        between individual spikes are drawn from an `exponential distribution
+        <https://en.wikipedia.org/wiki/Exponential_distribution>`_ with lambda
+        equal to the specified spike rate.
 
 
 ---
@@ -22,23 +27,34 @@ signature: iochannel/eye_movement
 isa: IOChannel
 allowed_parent: Fake Monkey IO Device
 description: >
-    This channel provides fake raw horizontal and vertical eye position
-    data (in degrees) from a `Fake Monkey IO Device`
+    Provides simulated raw horizontal and vertical eye position data from a
+    `Fake Monkey IO Device`
 parameters: 
   - 
     name: eye_h
     required: yes
+    description: >
+        Variable in which to store simulated horizontal eye position (in
+        degrees)
   - 
     name: eye_v
     required: yes
+    description: >
+        Variable in which to store simulated vertical eye position (in degrees)
   - 
     name: data_interval
     required: yes
     example: 1ms
+    description: >
+        Interval between simulated eye position samples (microseconds)
   - 
     name: update_interval
     required: yes
     example: 10ms
+    description: >
+        Interval between eye position updates (microseconds).  If larger than
+        `data_interval`_, multiple eye positions will be generated during each
+        update.
 
 
 ---
@@ -49,11 +65,15 @@ signature: iochannel/juice
 isa: IOChannel
 allowed_parent: Fake Monkey IO Device
 description: >
-    This channel allows you to give juice to a `Fake Monkey IO Device`
+    Simulates dispensing juice to a `Fake Monkey IO Device`
 parameters: 
   - 
     name: variable
     required: yes
+    description: >
+        Variable used to trigger simulated juice dispensing.  Whenever the
+        variable's value changes, MWorks logs a message (to the event stream and
+        server console) indicating that juice was dispensed.
 
 
 ---
@@ -64,13 +84,13 @@ signature: iochannel/spike
 isa: IOChannel
 allowed_parent: Fake Monkey IO Device
 description: >
-    This channel generates fake spikes from a `Fake Monkey IO Device` at a
-    Poisson rate of ``spike_rate`` spikes per second
-
+    Provides simulated spikes from a `Fake Monkey IO Device`
 parameters: 
   - 
     name: variable
     required: yes
+    description: >
+        Variable to set to ``1`` whenever a new spike is generated
 
 
 ---
@@ -82,14 +102,16 @@ isa: Action
 icon: fakeMonkey
 description: >
     Causes a `Fake Monkey IO Device` to fixate at the current eye position for
-    `duration`_ amount of time
+    a specified duration
 parameters: 
   - 
     name: fake_monkey
     required: yes
+    description: Fake monkey device
   - 
     name: duration
     required: yes
+    description: Fixation duration (microseconds)
 
 
 ---
@@ -105,12 +127,15 @@ parameters:
   - 
     name: fake_monkey
     required: yes
+    description: Fake monkey device
   - 
     name: h
     required: yes
+    description: Horizontal target position (degrees)
   - 
     name: v
     required: yes
+    description: Vertical target position (degrees)
 
 
 ---
@@ -122,19 +147,23 @@ isa: Action
 icon: fakeMonkey
 description: >
     Causes a `Fake Monkey IO Device` to saccade to the specified location and
-    fixate for the specified amount of time
+    fixate for the specified duration
 parameters: 
   - 
     name: fake_monkey
     required: yes
+    description: Fake monkey device
   - 
     name: h
     required: yes
+    description: Horizontal target position (degrees)
   - 
     name: v
     required: yes
+    description: Vertical target position (degrees)
   - 
     name: duration
     required: yes
+    description: Fixation duration (microseconds)
 
 

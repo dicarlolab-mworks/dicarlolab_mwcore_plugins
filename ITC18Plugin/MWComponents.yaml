@@ -4,10 +4,10 @@
 name: ITC-18 IO Device
 signature: iodevice/itc18
 isa: IODevice
-icon: smallIOFolder
 description: >
     Interface to an `ITC-18
-    <http://heka.com/products/products_main.html#acq_itc18>`_
+    <http://heka.com/products/products_main.html#acq_itc18>`_ data acquisition
+    unit
 
 
 ---
@@ -16,7 +16,6 @@ description: >
 name: ITC-18 Analog Input Channel
 signature: iochannel/itc18_analog_input
 isa: IOChannel
-icon: smallIOFolder
 allowed_parent: ITC-18 IO Device
 description: >
     Used for interfacing to an analog input channel on an `ITC-18 IO Device`
@@ -68,12 +67,9 @@ parameters:
 name: ITC-18 TTL Input Channel
 signature: iochannel/itc18_ttl_digital_input
 isa: IOChannel
-icon: smallIOFolder
 allowed_parent: ITC-18 IO Device
 description: >
-    Used for interfacing to a TTL input channel on an `ITC-18 IO Device`.
-    Possible values for `data_type`_ are edge_low_to_high, edge_high_to_low,
-    edge_any, or digital for continuous digital data.
+    Used for interfacing to a TTL input channel on an `ITC-18 IO Device`
 parameters: 
   - 
     name: variable
@@ -85,7 +81,9 @@ parameters:
   - 
     name: data_type
     required: yes
-    example: edge_low_to_high
+    options: [edge_low_to_high, edge_high_to_low, edge_any, digital]
+    description: >
+        Data type.  ``digital`` indicates continuous digital data.
   - 
     name: direction
     required: yes
@@ -122,12 +120,10 @@ parameters:
 name: ITC-18 AUX TTL Output Channel
 signature: iochannel/itc18_async_ttl_digital_output
 isa: IOChannel
-icon: smallIOFolder
 allowed_parent: ITC-18 IO Device
 description: >
     Used for interfacing to an asynchronous auxiliary TTL output channel on an
-    `ITC-18 IO Device`.  Possible values for `data_type`_ are digital,
-    pulse_active_high, pulse_active_low, or digital_uint8.
+    `ITC-18 IO Device`
 parameters: 
   - 
     name: variable
@@ -139,7 +135,7 @@ parameters:
   - 
     name: data_type
     required: yes
-    example: digital
+    options: [digital, pulse_active_high, pulse_active_low, digital_uint8]
   - 
     name: direction
     required: yes
@@ -176,7 +172,6 @@ parameters:
 name: ITC-18 Triggered Analog Snippet
 signature: iochannel/itc18_triggered_analog_snippet
 isa: IOChannel
-icon: smallIOFolder
 allowed_parent: ITC-18 IO Device
 description: >
     Used for recording an analog snippet on an `ITC-18 IO Device`.  A TTL
@@ -241,7 +236,6 @@ parameters:
 name: ITC-18 Word Output Channel
 signature: iochannel/itc18_word_output
 isa: IOChannel
-icon: smallIOFolder
 allowed_parent: ITC-18 IO Device
 description: >
     Used for sending word output on an `ITC-18 IO Device` (e.g. to a `Plexon
