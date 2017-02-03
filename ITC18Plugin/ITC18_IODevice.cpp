@@ -459,11 +459,6 @@ short mITC18_IODevice::setupHardwarePort(IOChannel * chan) {
 		}
 	}
 	return hardwarePort;
-	
-	
-	merror(M_IODEVICE_MESSAGE_DOMAIN,
-		   "ITC18 channel error:  hardware port number could not be determined.");
-	return 0;
 }
 
 
