@@ -1,5 +1,8 @@
 <?xml version="1.0"?>
 <marionette_info>
+  <requirements>
+    <feature name="macos"/>
+  </requirements>
   <permitted_error_messages>
     <message type="starts_with" max_matches="1">ERROR: updating main window display is taking longer than two frames </message>
     <message type="starts_with">WARNING: Scheduled task </message>
