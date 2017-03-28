@@ -2153,7 +2153,7 @@ IOChannel* mITC18_IODevice::makeNewChannel(IOChannelRequest* _request, IOCapabil
 	
     
     // build a subclassed ITC channel depending on the type of behavior your need
-    IOChannel* chan;
+    IOChannel* chan = nullptr;
 	
     switch (itcDataType) {
 			
