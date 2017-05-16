@@ -5,7 +5,6 @@ name: Fake Monkey IO Device
 signature: iodevice/fake_monkey
 isa: IODevice
 platform: macos
-icon: fakeMonkey
 description: >
     A simulated monkey that has the ability to generate spikes and continuous
     eye position data
@@ -104,7 +103,6 @@ name: Fake Monkey Fixate
 signature: action/fake_monkey_fixate
 isa: Action
 platform: macos
-icon: fakeMonkey
 description: >
     Causes a `Fake Monkey IO Device` to fixate at the current eye position for
     a specified duration
@@ -126,7 +124,6 @@ name: Fake Monkey Saccade
 signature: action/fake_monkey_saccade_to_location
 isa: Action
 platform: macos
-icon: fakeMonkey
 description: >
     Causes a `Fake Monkey IO Device` to saccade to the specified location
 parameters: 
@@ -151,7 +148,6 @@ name: Fake Monkey Saccade and Fixate
 signature: action/fake_monkey_saccade_and_fixate
 isa: Action
 platform: macos
-icon: fakeMonkey
 description: >
     Causes a `Fake Monkey IO Device` to saccade to the specified location and
     fixate for the specified duration
