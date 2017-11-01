@@ -5,6 +5,7 @@ name: Fake Monkey IO Device
 signature: iodevice/fake_monkey
 isa: IODevice
 platform: macos
+allowed_child: Fake Monkey Channel
 description: >
     A simulated monkey that has the ability to generate spikes and continuous
     eye position data
@@ -22,11 +23,18 @@ parameters:
 ---
 
 
-name: Fake Monkey Eye Channel
-signature: iochannel/eye_movement
+name: Fake Monkey Channel
+abstract: yes
 isa: IOChannel
 platform: macos
-allowed_parent: Fake Monkey IO Device
+
+
+---
+
+
+name: Fake Monkey Eye Channel
+signature: iochannel/eye_movement
+isa: Fake Monkey Channel
 description: >
     Provides simulated raw horizontal and vertical eye position data from a
     `Fake Monkey IO Device`
@@ -63,9 +71,7 @@ parameters:
 
 name: Fake Monkey Juice Channel
 signature: iochannel/juice
-isa: IOChannel
-platform: macos
-allowed_parent: Fake Monkey IO Device
+isa: Fake Monkey Channel
 description: >
     Simulates dispensing juice to a `Fake Monkey IO Device`
 parameters: 
@@ -83,9 +89,7 @@ parameters:
 
 name: Fake Monkey Spike Channel
 signature: iochannel/spike
-isa: IOChannel
-platform: macos
-allowed_parent: Fake Monkey IO Device
+isa: Fake Monkey Channel
 description: >
     Provides simulated spikes from a `Fake Monkey IO Device`
 parameters: 

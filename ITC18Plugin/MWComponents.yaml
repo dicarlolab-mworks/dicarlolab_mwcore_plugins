@@ -5,6 +5,7 @@ name: ITC-18 IO Device
 signature: iodevice/itc18
 isa: IODevice
 platform: macos
+allowed_child: ITC-18 Channel
 description: >
     Interface to an `ITC-18
     <http://heka.com/products/products_main.html#acq_itc18>`_ data acquisition
@@ -14,11 +15,18 @@ description: >
 ---
 
 
-name: ITC-18 Analog Input Channel
-signature: iochannel/itc18_analog_input
+name: ITC-18 Channel
+abstract: yes
 isa: IOChannel
 platform: macos
-allowed_parent: ITC-18 IO Device
+
+
+---
+
+
+name: ITC-18 Analog Input Channel
+signature: iochannel/itc18_analog_input
+isa: ITC-18 Channel
 description: >
     Used for interfacing to an analog input channel on an `ITC-18 IO Device`
 parameters: 
@@ -68,9 +76,7 @@ parameters:
 
 name: ITC-18 TTL Input Channel
 signature: iochannel/itc18_ttl_digital_input
-isa: IOChannel
-platform: macos
-allowed_parent: ITC-18 IO Device
+isa: ITC-18 Channel
 description: >
     Used for interfacing to a TTL input channel on an `ITC-18 IO Device`
 parameters: 
@@ -122,9 +128,7 @@ parameters:
 
 name: ITC-18 AUX TTL Output Channel
 signature: iochannel/itc18_async_ttl_digital_output
-isa: IOChannel
-platform: macos
-allowed_parent: ITC-18 IO Device
+isa: ITC-18 Channel
 description: >
     Used for interfacing to an asynchronous auxiliary TTL output channel on an
     `ITC-18 IO Device`
@@ -175,9 +179,7 @@ parameters:
 
 name: ITC-18 Triggered Analog Snippet
 signature: iochannel/itc18_triggered_analog_snippet
-isa: IOChannel
-platform: macos
-allowed_parent: ITC-18 IO Device
+isa: ITC-18 Channel
 description: >
     Used for recording an analog snippet on an `ITC-18 IO Device`.  A TTL
     channel is used to trigger the snippet.
@@ -240,9 +242,7 @@ parameters:
 
 name: ITC-18 Word Output Channel
 signature: iochannel/itc18_word_output
-isa: IOChannel
-platform: macos
-allowed_parent: ITC-18 IO Device
+isa: ITC-18 Channel
 description: >
     Used for sending word output on an `ITC-18 IO Device` (e.g. to a `Plexon
     <http://www.plexon.com>`_ system for clock synchronization)
