@@ -47,7 +47,6 @@
 		0ECF987B0E9C73DF00DF3096 /* FakeMonkeySaccadeToLocationFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0ECF987A0E9C73DF00DF3096 /* FakeMonkeySaccadeToLocationFactory.cpp */; };
 		0ECF98E40E9C7D5E00DF3096 /* FakeMonkeyFixate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0ECF98E30E9C7D5E00DF3096 /* FakeMonkeyFixate.cpp */; };
 		0ECF99000E9C7EB200DF3096 /* FakeMonkeyFixateFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0ECF98FF0E9C7EB200DF3096 /* FakeMonkeyFixateFactory.cpp */; };
-		0EDCBB130EE9D8F800432792 /* MWLibrary.xml in Resources */ = {isa = PBXBuildFile; fileRef = 0EDCBB120EE9D8F800432792 /* MWLibrary.xml */; };
 		5C4B0A650DC79212001BC518 /* MWorksCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C4B0A630DC79212001BC518 /* MWorksCore.framework */; };
 		687C7C140E9D425100C76F25 /* FakeMonkeyJuiceNotification.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 687C7C130E9D425100C76F25 /* FakeMonkeyJuiceNotification.cpp */; };
 		688D4D1C0E9D0A2200EC8832 /* FakeMonkeySaccadeAndFixate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 688D4D1B0E9D0A2200EC8832 /* FakeMonkeySaccadeAndFixate.cpp */; };
@@ -128,7 +127,6 @@
 		0ECF98E30E9C7D5E00DF3096 /* FakeMonkeyFixate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FakeMonkeyFixate.cpp; sourceTree = "<group>"; };
 		0ECF98FE0E9C7EB200DF3096 /* FakeMonkeyFixateFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FakeMonkeyFixateFactory.h; sourceTree = "<group>"; };
 		0ECF98FF0E9C7EB200DF3096 /* FakeMonkeyFixateFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FakeMonkeyFixateFactory.cpp; sourceTree = "<group>"; };
-		0EDCBB120EE9D8F800432792 /* MWLibrary.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MWLibrary.xml; sourceTree = "<group>"; };
 		32DBCF630370AF2F00C91783 /* FakeMonkeyPlugin_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FakeMonkeyPlugin_Prefix.pch; sourceTree = "<group>"; };
 		5C4B0A630DC79212001BC518 /* MWorksCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MWorksCore.framework; path = /Library/Frameworks/MWorksCore.framework; sourceTree = "<absolute>"; };
 		687C7C120E9D425100C76F25 /* FakeMonkeyJuiceNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FakeMonkeyJuiceNotification.h; sourceTree = "<group>"; };
@@ -185,7 +183,6 @@
 			isa = PBXGroup;
 			children = (
 				E1E07EA41C04F3B6008DD97E /* MWComponents.yaml */,
-				0EDCBB120EE9D8F800432792 /* MWLibrary.xml */,
 				8D5B49B7048680CD000E48DA /* Info.plist */,
 				089C167DFE841241C02AAC07 /* InfoPlist.strings */,
 			);
@@ -366,7 +363,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D5B49B0048680CD000E48DA /* InfoPlist.strings in Resources */,
-				0EDCBB130EE9D8F800432792 /* MWLibrary.xml in Resources */,
 				E1E07EA51C04F3B6008DD97E /* MWComponents.yaml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
