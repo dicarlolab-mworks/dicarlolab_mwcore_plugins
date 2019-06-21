@@ -139,10 +139,10 @@
 		689708DB0E5A03BB00CE38EA /* FakeMonkeyFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FakeMonkeyFactory.cpp; sourceTree = "<group>"; };
 		8D5B49B6048680CD000E48DA /* FakeMonkeyPlugin.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FakeMonkeyPlugin.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D5B49B7048680CD000E48DA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E1895A1B116FBBC100D8CBE0 /* Development.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Development.xcconfig; path = "/Library/Application Support/MWorks/Developer/Xcode/Development.xcconfig"; sourceTree = "<absolute>"; };
-		E1895A1C116FBBC100D8CBE0 /* WARNING.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = WARNING.txt; path = "/Library/Application Support/MWorks/Developer/Xcode/WARNING.txt"; sourceTree = "<absolute>"; };
 		E18D8C2B18E1C273005B7DFC /* FakeMonkey */ = {isa = PBXFileReference; lastKnownFileType = folder; path = FakeMonkey; sourceTree = "<group>"; };
 		E1E07EA41C04F3B6008DD97E /* MWComponents.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MWComponents.yaml; sourceTree = "<group>"; };
+		E1F7696422BD4C0100024441 /* macOS_Plugin.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = macOS_Plugin.xcconfig; sourceTree = "<group>"; };
+		E1F7696522BD4C0100024441 /* macOS.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = macOS.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -282,11 +282,12 @@
 		E1895A19116FBBC100D8CBE0 /* External Configs */ = {
 			isa = PBXGroup;
 			children = (
-				E1895A1B116FBBC100D8CBE0 /* Development.xcconfig */,
-				E1895A1C116FBBC100D8CBE0 /* WARNING.txt */,
+				E1F7696522BD4C0100024441 /* macOS.xcconfig */,
+				E1F7696422BD4C0100024441 /* macOS_Plugin.xcconfig */,
 			);
 			name = "External Configs";
-			sourceTree = "<group>";
+			path = "/Library/Application Support/MWorks/Developer/Xcode";
+			sourceTree = "<absolute>";
 		};
 		E18D8C2A18E1C25F005B7DFC /* Tests */ = {
 			isa = PBXGroup;
@@ -423,6 +424,7 @@
 /* Begin XCBuildConfiguration section */
 		E12D98D716BC24E0004FEF79 /* Development */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E1F7696522BD4C0100024441 /* macOS.xcconfig */;
 			buildSettings = {
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -430,6 +432,7 @@
 		};
 		E17B9D8B119CA15500EEBF5D /* Development */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E1F7696522BD4C0100024441 /* macOS.xcconfig */;
 			buildSettings = {
 				PRODUCT_NAME = Everything;
 			};
@@ -437,19 +440,18 @@
 		};
 		E1895A24116FBC1200D8CBE0 /* Development */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E1895A1B116FBBC100D8CBE0 /* Development.xcconfig */;
 			buildSettings = {
 			};
 			name = Development;
 		};
 		E1895A25116FBC1200D8CBE0 /* Development */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E1F7696422BD4C0100024441 /* macOS_Plugin.xcconfig */;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = FakeMonkeyPlugin_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
 				PRODUCT_NAME = FakeMonkeyPlugin;
-				WRAPPER_EXTENSION = bundle;
 			};
 			name = Development;
 		};

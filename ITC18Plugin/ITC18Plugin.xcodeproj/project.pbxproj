@@ -94,10 +94,10 @@
 		5C4B0A630DC79212001BC518 /* MWorksCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MWorksCore.framework; path = /Library/Frameworks/MWorksCore.framework; sourceTree = "<absolute>"; };
 		8D5B49B6048680CD000E48DA /* ITC18Plugin.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ITC18Plugin.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D5B49B7048680CD000E48DA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E1895A39116FBD5700D8CBE0 /* Development.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Development.xcconfig; path = "/Library/Application Support/MWorks/Developer/Xcode/Development.xcconfig"; sourceTree = "<absolute>"; };
-		E1895A3A116FBD5700D8CBE0 /* WARNING.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = WARNING.txt; path = "/Library/Application Support/MWorks/Developer/Xcode/WARNING.txt"; sourceTree = "<absolute>"; };
 		E18D8C2D18E1C379005B7DFC /* ITC18 */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ITC18; sourceTree = "<group>"; };
 		E1E07EA61C04F3EC008DD97E /* MWComponents.yaml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MWComponents.yaml; sourceTree = "<group>"; };
+		E1F7696622BD4CDD00024441 /* macOS_Plugin.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = macOS_Plugin.xcconfig; sourceTree = "<group>"; };
+		E1F7696722BD4CDD00024441 /* macOS.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = macOS.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,11 +175,12 @@
 		E1895A37116FBD5700D8CBE0 /* External Configs */ = {
 			isa = PBXGroup;
 			children = (
-				E1895A39116FBD5700D8CBE0 /* Development.xcconfig */,
-				E1895A3A116FBD5700D8CBE0 /* WARNING.txt */,
+				E1F7696722BD4CDD00024441 /* macOS.xcconfig */,
+				E1F7696622BD4CDD00024441 /* macOS_Plugin.xcconfig */,
 			);
 			name = "External Configs";
-			sourceTree = "<group>";
+			path = "/Library/Application Support/MWorks/Developer/Xcode";
+			sourceTree = "<absolute>";
 		};
 		E18D8C0518E1BECF005B7DFC /* Tests */ = {
 			isa = PBXGroup;
@@ -301,6 +302,7 @@
 /* Begin XCBuildConfiguration section */
 		E12D98E016BC26E2004FEF79 /* Development */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E1F7696722BD4CDD00024441 /* macOS.xcconfig */;
 			buildSettings = {
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -308,6 +310,7 @@
 		};
 		E17B9DA5119CA20500EEBF5D /* Development */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E1F7696722BD4CDD00024441 /* macOS.xcconfig */;
 			buildSettings = {
 				PRODUCT_NAME = Everything;
 			};
@@ -315,19 +318,18 @@
 		};
 		E1895A44116FBD9E00D8CBE0 /* Development */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E1895A39116FBD5700D8CBE0 /* Development.xcconfig */;
 			buildSettings = {
 			};
 			name = Development;
 		};
 		E1895A45116FBD9E00D8CBE0 /* Development */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E1F7696622BD4CDD00024441 /* macOS_Plugin.xcconfig */;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ITC18Plugin_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
 				PRODUCT_NAME = ITC18Plugin;
-				WRAPPER_EXTENSION = bundle;
 			};
 			name = Development;
 		};
