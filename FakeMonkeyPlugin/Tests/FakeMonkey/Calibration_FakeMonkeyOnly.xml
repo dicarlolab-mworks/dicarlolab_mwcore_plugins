@@ -97,8 +97,8 @@
                                     </task_system_state>
                                     <task_system_state tag="cal prefixation" full_name="cal prefixation" description="" interruptible="YES">
                                         <action tag="start prefixation_timer" full_name="start prefixation_timer" type="start_timer" timer="prefixation_timer" duration="1500ms"/>
-                                        <transition tag="go to cal ignore" full_name="go to cal ignore" target="cal ignore" type="timer_expired" timer="prefixation_timer"/>
 										<action tag="monkey looks" full_name="monkey looks" type="fake_monkey_saccade_to_location" fake_monkey="s1_Fake_Monkey" h="fixation_pos_x" v="fixation_pos_y"/>
+                                        <transition tag="go to cal ignore" full_name="go to cal ignore" target="cal ignore" type="timer_expired" timer="prefixation_timer"/>
                                         <transition tag="go to cal acquire" full_name="go to cal acquire" target="cal acquire" type="conditional" condition="(eye_in_window == 1) #AND (saccade == 0)"/>
                                     </task_system_state>
                                     <task_system_state tag="cal acquire" full_name="cal acquire" description="" interruptible="YES">
