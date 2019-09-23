@@ -329,6 +329,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ITC18Plugin_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.mit.dicarlolab.ITC18Plugin;
 				PRODUCT_NAME = ITC18Plugin;
 			};
 			name = Development;

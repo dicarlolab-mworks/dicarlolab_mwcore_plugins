@@ -451,6 +451,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = FakeMonkeyPlugin_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.mit.dicarlolab.FakeMonkeyPlugin;
 				PRODUCT_NAME = FakeMonkeyPlugin;
 			};
 			name = Development;
