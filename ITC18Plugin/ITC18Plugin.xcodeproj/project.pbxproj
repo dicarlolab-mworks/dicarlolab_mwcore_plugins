@@ -121,19 +121,19 @@
 				32C88E010371C26100C91783 /* Other Sources */,
 				089C167CFE841241C02AAC07 /* Resources */,
 				E18D8C0518E1BECF005B7DFC /* Tests */,
-				089C1671FE841209C02AAC07 /* Frameworks & Libraries */,
+				089C1671FE841209C02AAC07 /* Frameworks */,
 				19C28FB8FE9D52D311CA2CBB /* Products */,
 			);
 			name = ITC18Plugin;
 			sourceTree = "<group>";
 		};
-		089C1671FE841209C02AAC07 /* Frameworks & Libraries */ = {
+		089C1671FE841209C02AAC07 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				5C4B0A630DC79212001BC518 /* MWorksCore.framework */,
 				0E0903150E59CBA20039E38A /* ITC.framework */,
 			);
-			name = "Frameworks & Libraries";
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		089C167CFE841241C02AAC07 /* Resources */ = {
@@ -326,6 +326,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E1F7696622BD4CDD00024441 /* macOS_Plugin.xcconfig */;
 			buildSettings = {
+				ARCHS = x86_64;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ITC18Plugin_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
